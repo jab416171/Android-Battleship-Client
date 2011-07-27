@@ -4,6 +4,8 @@ Working copy is the local file on your drive that you modify.
 Staged copy is a snapshot of your working files at the time you ran git add
 Master copy is a snapshot of the staged files after you pushed them
 
+Commands that output to the console use less, so you can use up and down to scroll or q to get back to a shell.
+
 git pull
 update your local working copy
 
