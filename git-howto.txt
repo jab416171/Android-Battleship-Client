@@ -1,6 +1,66 @@
-git pull: update your local working copy
-git commit -m 'commit message': create a commit message
-git add filename: add files to the staging area
-git push -u origin master: upload the files in the staging area to the server
+In git, there are 3 copies of each file.
+Working copy, staged copy, and master copy.
+Working copy is the local file on your drive that you modify.
+Staged copy is a snapshot of your working files at the time you ran git add
+Master copy is a snapshot of the staged files after you pushed them
+
+git pull
+update your local working copy
+
+git commit -m 'commit message'
+marks a snapshot of all files in your staging area for commit
+--amend adds your staging area to the commit (if you modify a file after running commit but before adding push)
+
+git add filename
+add current status of files to the staging area 
+ Git stages a file exactly as it is when you run the git add command. 
+ If you commit now, the version of the file as it was when you last ran the git add command is how it will go into the commit, not the version of the file as it looks in your working directory when you run git commit.
+(supports wildcards, such as * and *.java)	
+(this tracks the file, so git knows to include it on the next push)
+
+git reset HEAD file
+unstages a file
+
+git checkout -- file
+reverts a file to the master copy
+
+git push -u origin master
+upload the files in the staging area to the server
 (you can just say git push)
+
+git config --global core.editor emacs
+(configure text editor, uses Vim by default)
+
+git status
+shows the status of your working directory, what files have been modified, untracked files, etc.
+
+git diff
+shows unstaged changes
+an argument of --staged will show you the difference between your working copy and the master, for files that you have staged
+
+git rm
+removes a file and marks it for deletion for your next push
+git rm --cached readme.txt
+keeps a local copy on your disk, but stops tracking it until you readd it.
+arguments can be files, directories, and file-glob patterns 
+
+git mv
+used for moving or renaming
+
+git log
+shows a history of all the commits in reverse chronolgical order
+
+
+
+
+.gitignore (file)
+*.[oa] 
+# ignores any files with the file extension .o or .a
+# < used for comments
+# end pattern with a forward slash to specify a directory
+# !negate a pattern
+bin/ #ignore all files in the bin/ directory
+
+
+
 http://progit.org/book/ch1-3.html
