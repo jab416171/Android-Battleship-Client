@@ -2,3 +2,4 @@ git pull: update your local working copy
 git commit -m 'commit message': create a commit message
 git add filename: add files to the staging area
 git push -u origin master: upload the files in the staging area to the server
+http://progit.org/book/ch1-3.html
