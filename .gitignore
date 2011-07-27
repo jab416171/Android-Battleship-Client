@@ -35,5 +35,5 @@ Thumbs.db
 
 # Generated directories #
 #########################
-bin/
-gen/
+bin/*
+gen/*
