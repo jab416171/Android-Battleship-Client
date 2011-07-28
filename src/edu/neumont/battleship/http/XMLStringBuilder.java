@@ -1,4 +1,4 @@
-package edu.neumont.battleship;
+package edu.neumont.battleship.http;
 
 public class XMLStringBuilder {
 	// public static String methodName() {

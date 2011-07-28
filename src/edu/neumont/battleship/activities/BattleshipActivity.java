@@ -1,4 +1,4 @@
-package edu.neumont.battleship;
+package edu.neumont.battleship.activities;
 
 import edu.neumont.battleship.R;
 import android.app.Activity;

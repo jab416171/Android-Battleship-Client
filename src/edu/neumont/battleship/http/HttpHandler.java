@@ -1,4 +1,4 @@
-package edu.neumont.battleship;
+package edu.neumont.battleship.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
