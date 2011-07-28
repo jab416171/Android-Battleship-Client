@@ -5,6 +5,6 @@ public class XMLResponse {
 	
 	public XMLResponse(String rawXML) {
 		// TODO make this object useful
-		this.rawXML = rawMXL;
+		this.rawXML = rawXML;
 	}
 }
