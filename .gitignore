@@ -6,8 +6,6 @@
 *.exe
 *.o
 *.so
-*.lock.*
-.*
 
 # Packages #
 ############
@@ -41,3 +39,11 @@ Thumbs.db
 #########################
 bin/*
 gen/*
+
+
+#OpenOffice temp files
+*.lock.*
+# Hidden files and directories
+.*
+# Word temp files
+*~$*

@@ -1,5 +1,5 @@
 package edu.neumont.battleship;
 
 public enum Opponent {
-Edison, Human
+Edison, Geeves, Robby, Human;
 }
