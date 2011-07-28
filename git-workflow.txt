@@ -1,0 +1,16 @@
+git pull 	// downloads the latest source
+refresh the project in Eclipse 
+Edit classes
+
+git add . 	// git add(space)period - adds all files to be included on your next commit
+		// alternatively, git add <filename>
+
+git status 	// shows the status 
+
+		// if anything is red or not in the 'changes to be committed' section,
+		// correct this by using git add or git rm
+
+git commit -m 'commit message' 
+		// makes a commit
+
+git push 	// uploads the commit to the server

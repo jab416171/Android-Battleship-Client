@@ -1,0 +1,16 @@
+Notes about ADB
+
+Make sure ADB is on your path. it's in android-sdk-windows/platform-tools/adb.exe
+In a command prompt: 
+adb devices
+if it just says list of devices attached with nothing underneath it, it means your phone was not recognized.
+Either install the drivers, enable USB Debugging, or try reconnecting or rebooting the phone.
+
+adb logcat
+Shows everything that every application is printing (Sometimes necessary to see stack traces)
+
+adb logcat Battleship:V *:S
+Shows everything our application printed through Log.i() or Log.e() or Log.anything
+
+
+Eclipse has logcat built in, you can create a filter to get the output of the second command.

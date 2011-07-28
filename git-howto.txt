@@ -1,3 +1,5 @@
+Notes about git
+
 In git, there are 3 copies of each file.
 Working copy, staged copy, and master copy.
 Working copy is the local file on your drive that you modify.
