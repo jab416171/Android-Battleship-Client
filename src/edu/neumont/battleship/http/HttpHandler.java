@@ -16,7 +16,7 @@ import java.net.URLConnection;
 import android.util.Log;
 
 public class HttpHandler {
-	public static final String connectionURL = "http://joe-bass.com:8080/BattleshipServer";
+	public static final String connectionURL = "http://joe-bass.com:8800/BattleshipServer";
 
 	/**
 	 * Sends an HTTP GET request to a url
