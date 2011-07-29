@@ -28,11 +28,11 @@ public class XMLStringBuilder {
 		xml.append("</request>");
 		return xml.toString();
 	}
-	
+
 	public static String forfeit() {
 		return emptyRequest();
 	}
-	
+
 	public static String requestGameState() {
 		return emptyRequest();
 	}

@@ -1,6 +1,12 @@
+/**
+ * From: http://www.aviransplace.com/2008/01/08/make-http-post-or-get-request-from-java/
+ */
+
 package edu.neumont.battleship.http;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,14 +15,18 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 
 import android.util.Log;
+import edu.neumont.battleship.BattleshipActivity;
 
 public class HttpHandler {
-	public static final String connectionURL = "http://joe-bass.com:8800/BattleshipServer";
+	public static final String connectionURL = "http://joe-bass.com:8800/BattleshipServer/GameRequest";
+	public static final String TAG = BattleshipActivity.TAG;
 
 	/**
 	 * Sends an HTTP GET request to a url
@@ -30,8 +40,10 @@ public class HttpHandler {
 	 *            question mark (?) to the request - DO NOT add it yourself
 	 * @return - The response from the end point
 	 */
-	public static String sendGetRequest(String endpoint, String requestParameters) {
-		Log.i("LunchClient","in get request, endpoint is " + endpoint + " params: " + requestParameters);
+	public static String sendGetRequest(String endpoint,
+			String requestParameters) {
+		Log.i(TAG, "in get request, endpoint is " + endpoint + " params: "
+				+ requestParameters);
 		String result = null;
 		if (endpoint != null) {
 			if (!endpoint.startsWith("http://"))
@@ -41,12 +53,14 @@ public class HttpHandler {
 				// Send data
 				String urlStr = endpoint;
 				if (requestParameters != null && requestParameters.length() > 0) {
-					urlStr += "?" + requestParameters;
+					urlStr += URLEncoder.encode("?" + requestParameters);
 				}
 				URL url = new URL(urlStr);
+				Log.i(TAG,url.toString());
 				URLConnection conn = url.openConnection();
+				InputStream is = conn.getInputStream();
 				// Get the response
-				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 				StringBuffer sb = new StringBuffer();
 				String line;
 				while ((line = rd.readLine()) != null) {
@@ -55,7 +69,7 @@ public class HttpHandler {
 				rd.close();
 				result = sb.toString();
 			} catch (Exception e) {
-				e.printStackTrace();
+				Log.e(TAG, "Exception: ", e);
 			}
 		}
 		return result;
@@ -71,20 +85,24 @@ public class HttpHandler {
 	 * 
 	 * @throws Exception
 	 */
-	public static void postData(Reader data, URL endpoint, Writer output) throws Exception {
+	public static void postData(Reader data, URL endpoint, Writer output)
+			throws Exception {
 		HttpURLConnection urlc = null;
 		try {
 			urlc = (HttpURLConnection) endpoint.openConnection();
 			try {
 				urlc.setRequestMethod("POST");
 			} catch (ProtocolException e) {
-				throw new Exception("Shouldn't happen: HttpURLConnection doesn't support POST??", e);
+				throw new Exception(
+						"Shouldn't happen: HttpURLConnection doesn't support POST??",
+						e);
 			}
 			urlc.setDoOutput(true);
 			urlc.setDoInput(true);
 			urlc.setUseCaches(false);
 			urlc.setAllowUserInteraction(false);
-			urlc.setRequestProperty("Content-type", "text/xml; charset=" + "UTF-8");
+			urlc.setRequestProperty("Content-type", "text/xml; charset="
+					+ "UTF-8");
 			OutputStream out = urlc.getOutputStream();
 			try {
 				Writer writer = new OutputStreamWriter(out, "UTF-8");
@@ -108,7 +126,8 @@ public class HttpHandler {
 					in.close();
 			}
 		} catch (IOException e) {
-			throw new Exception("Connection error (is server running at " + endpoint + " ?): " + e);
+			throw new Exception("Connection error (is server running at "
+					+ endpoint + " ?): " + e);
 		} finally {
 			if (urlc != null)
 				urlc.disconnect();
@@ -127,7 +146,45 @@ public class HttpHandler {
 		writer.flush();
 	}
 
+	public static void postData(Reader reader, Writer writer)
+			throws MalformedURLException, Exception {
+		postData(reader, new URL(HttpHandler.connectionURL), writer);
+	}
+
 	public static String sendGetRequest(String requestParameters) {
 		return sendGetRequest(HttpHandler.connectionURL, requestParameters);
+	}
+
+	public static String postData(String target, String content)
+			throws Exception {
+		Log.v(TAG,"About to post");
+		Log.v(TAG,"URL: " + target + "content: "
+				+ content);
+		String response = "";
+		URL url = new URL(target);
+		URLConnection conn = url.openConnection();
+		// Set connection parameters.
+		conn.setDoInput(true);
+		conn.setDoOutput(true);
+		conn.setUseCaches(false);
+		// Make server believe we are form data...
+		conn.setRequestProperty("Content-Type",
+				"application/xml");
+		DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+		// Write out the bytes of the content string to the stream.
+		out.writeBytes(content);
+		out.flush();
+		out.close();
+		// Read response from the input stream.
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				conn.getInputStream()));
+		String temp;
+		while ((temp = in.readLine()) != null) {
+			response += temp + "\n";
+		}
+		temp = null;
+		in.close();
+		System.out.println("Server response:\n'" + response + "'");
+		return response;
 	}
 }
