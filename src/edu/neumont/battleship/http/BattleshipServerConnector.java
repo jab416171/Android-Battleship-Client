@@ -2,15 +2,16 @@ package edu.neumont.battleship.http;
 
 import edu.neumont.battleship.BattleshipActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 public class BattleshipServerConnector {
 	public static final String TAG = BattleshipActivity.TAG;
 
-	public static XMLResponse newGame(String playerID, Opponent opponent) {
+	public static XMLResponse newGame(String playerID, Opponent opponent, TextView tv) {
 		try {
 			return new XMLResponse(HttpHandler.postData(
 					HttpHandler.connectionURL + "NewGame",
-					XMLStringBuilder.newGame(playerID, opponent)));
+					XMLStringBuilder.newGame(playerID, opponent,tv)));
 		} catch (Exception e) {
 			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 		}
@@ -29,11 +30,11 @@ public class BattleshipServerConnector {
 	}
 
 	public static XMLResponse placeShip(String coordinates,
-			Direction direction, ShipType ship) {
+			Direction direction, ShipType ship, TextView tv) {
 		try {
 			return new XMLResponse(HttpHandler.postData(
 					HttpHandler.connectionURL + "PlaceShip",
-					XMLStringBuilder.placeShip(coordinates, direction, ship)));
+					XMLStringBuilder.placeShip(coordinates, direction, ship,tv)));
 		} catch (Exception e) {
 			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 		}
