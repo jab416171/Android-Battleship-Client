@@ -7,22 +7,22 @@ public class XMLStringBuilder {
 	// return xml.toString();
 	// }
 
-	public static String newGame(String playerID, Opponent robot) {
+	public static String newGame(String playerID, Opponent opponent) {
 		StringBuilder xml = new StringBuilder();
 		xml.append("<request>");
 		xml.append("<playerID>");
 		xml.append(playerID);
 		xml.append("</playerID>");
-		if (robot != Opponent.Human) {
+		if (opponent != Opponent.Human) {
 			xml.append("<robot>");
-			xml.append(robot.toString());
+			xml.append(opponent.toString());
 			xml.append("</robot>");
 		}
 		xml.append("</request>");
 		return xml.toString();
 	}
 
-	public static String emptyRequest() {
+	private static String emptyRequest() {
 		StringBuilder xml = new StringBuilder();
 		xml.append("<request>");
 		xml.append("</request>");

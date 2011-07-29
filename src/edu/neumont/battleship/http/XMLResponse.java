@@ -5,6 +5,7 @@ public class XMLResponse {
 	private int gameID;
 	private String result;
 	private String winner;
+	private ResponseType type;
 	
 	
 	// Do we want to make a game object?
@@ -14,6 +15,15 @@ public class XMLResponse {
 		// TODO make this object useful
 		this.rawXML = rawXML;
 	}
+
+
+	public String getRawXML() {
+		return rawXML;
+	}
+	
+	
+	
+	
 }
 // incomplete...
 enum ResponseType {
