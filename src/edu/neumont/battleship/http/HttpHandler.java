@@ -25,7 +25,7 @@ import android.util.Log;
 import edu.neumont.battleship.BattleshipActivity;
 
 public class HttpHandler {
-	public static final String connectionURL = "http://joe-bass.com:8800/BattleshipServer/GameRequest";
+	public static final String connectionURL = "http://joe-bass.com:8800/BattleshipServer/GameRequest/";
 	public static final String TAG = BattleshipActivity.TAG;
 
 	/**

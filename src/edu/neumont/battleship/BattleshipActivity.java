@@ -1,8 +1,5 @@
 package edu.neumont.battleship;
 
-import java.io.StringReader;
-import java.io.StringWriter;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +18,7 @@ public class BattleshipActivity extends Activity {
 		Log.v(TAG, "in oncreate");
 
 		try {
-			String response = HttpHandler.postData(HttpHandler.connectionURL,XMLStringBuilder.newGame("Joe", Opponent.Edison));
+			String response = HttpHandler.postData(HttpHandler.connectionURL+"NewGame",XMLStringBuilder.newGame("Joe", Opponent.Edison));
 			Log.i(TAG, "Posted, here's response: "); 
 			Log.i(TAG,response);
 
