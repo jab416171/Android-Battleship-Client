@@ -184,7 +184,7 @@ public class HttpHandler {
 		}
 		temp = null;
 		in.close();
-		System.out.println("Server response:\n'" + response + "'");
+		//System.out.println("Server response:\n'" + response + "'");
 		return response;
 	}
 }
