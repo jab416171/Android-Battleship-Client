@@ -47,3 +47,5 @@ gen/*
 .*
 # Word temp files
 *~$*
+# backup files
+*.bak
