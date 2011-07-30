@@ -23,10 +23,7 @@ public class BattleshipActivity extends Activity {
 		Log.v(TAG, "in oncreate");
 
 		try {
-			// String response =
-			// HttpHandler.postData(HttpHandler.connectionURL+"NewGame",XMLStringBuilder.newGame("Joe",
-			// Opponent.Edison));
-			// I want to do this:
+			
 			XMLResponse response = BattleshipServerConnector.newGame("Joe",
 					Opponent.Edison,tv);
 			Log.i(TAG, "Posted, here's response: ");
