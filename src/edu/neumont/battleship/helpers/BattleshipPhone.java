@@ -1,8 +1,6 @@
- 
+package edu.neumont.battleship.helpers;
 
 import java.net.*;
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -59,7 +57,7 @@ public class BattleshipPhone {
 
     
     
-    private Map<String, Map<String, Map<String, String>>> store;
+    private Map<String, Map<String, Map<String, String>>> store = new HashMap<String, Map<String, Map<String, String>>>();
 
     private static final String SET_COOKIE = "Set-Cookie";
     private static final String COOKIE_VALUE_DELIMITER = ";";
@@ -82,32 +80,32 @@ public class BattleshipPhone {
     
     
     private void save() {
-        if( save ) {
-            try {
-                XMLEncoder encoder = new XMLEncoder(new FileOutputStream(file()));
-                encoder.writeObject(store);
-                encoder.flush();
-                encoder.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+//        if( save ) {
+//            try {
+//                XMLEncoder encoder = new XMLEncoder(new FileOutputStream(file()));
+//                encoder.writeObject(store);
+//                encoder.flush();
+//                encoder.close();
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
     
     @SuppressWarnings("unchecked")
     private void restore() {
-        File f = new File(file());
-        if( f.exists() && save ) {
-            try {
-                XMLDecoder decoder = new XMLDecoder(new FileInputStream(f));
-                store = (Map<String, Map<String, Map<String, String>>>)decoder.readObject();
-            } catch( Exception e ) {
-                e.printStackTrace();
-            }
-        }
-        
-        if( store == null )
-            store = new HashMap<String, Map<String, Map<String, String>>>();
+//        File f = new File(file());
+//        if( f.exists() && save ) {
+//            try {
+//                XMLDecoder decoder = new XMLDecoder(new FileInputStream(f));
+//                store = (Map<String, Map<String, Map<String, String>>>)decoder.readObject();
+//            } catch( Exception e ) {
+//                e.printStackTrace();
+//            }
+//        }
+//        
+//        if( store == null )
+//            store = new HashMap<String, Map<String, Map<String, String>>>();
         
     }
 

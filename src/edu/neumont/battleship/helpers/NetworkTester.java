@@ -1,3 +1,5 @@
+package edu.neumont.battleship.helpers;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -7,20 +9,24 @@ import java.util.*;
 public class NetworkTester {
 
 	private String ID;
-	private boolean gamePlayed = true;
-
+	private boolean play = true;
+	
+	public static void main(String[] args) {
+		new NetworkTester();
+	}
+	
 	/**
 	 * Constructor for objects of class NetworkTester
 	 */
 	public NetworkTester() {
-		Game();
+		RunGame();
 	}
 
-	public void Game() {
-		while (gamePlayed == true) {
+	public void RunGame() {
+		Scanner scan = new Scanner(System.in);
+		while (play == true) {
 			try {
-				System.out
-						.println("Battleship: Type the number of the item you would like.");
+				System.out.println("Battleship: Type the number of the item you would like.");
 				System.out.println("1 - New Game");
 				System.out.println("2 - Game List");
 				System.out.println("3 - Fire");
@@ -29,46 +35,42 @@ public class NetworkTester {
 				System.out.println("6 - Join");
 				System.out.println("7 - Forfeit");
 				System.out.println("8 - Quit");
-				Scanner scan = new Scanner(System.in);
-				String input1 = scan.nextLine();
+				String input = scan.nextLine();
 
-				if (input1.equals("1")) {
+				if (input.equals("1")) {
 					newGame();
-				}
-				if (input1.equals("2")) {
+				} else if (input.equals("2")) {
 					gameList();
-				}
-				if (input1.equals("3")) {
+				} else if (input.equals("3")) {
 					fire();
-				}
-				if (input1.equals("4")) {
+				} else if (input.equals("4")) {
 					placeShip();
-				}
-				if (input1.equals("5")) {
+				} else  if (input.equals("5")) {
 					update();
-				}
-				if (input1.equals("6")) {
+				} else if (input.equals("6")) {
 					join();
-				}
-				if (input1.equals("7")) {
+				} else if (input.equals("7")) {
 					forfeit();
-				}
-				if (input1.equals("8")) {
-					System.exit(0);
+				} else if (input.equals("8")) {
+					play = false;
+				} else
+				{
+					System.out.println("Didn't understand input");
 				}
 			}
 
 			catch (IOException e) {
-				System.out.println("There was an error.");
+				e.printStackTrace();
 			}
 
 		}
 	}
 
 	public void newGame() throws IOException {
-		String result = BattleshipPhone
-				.call("NewGame",
-						"<request><type>New Game</type><playerID>Scout</playerID><robot>Edison</robot></request>");
+		String result = BattleshipPhone.call(
+				"NewGame",
+				"<request><type>New Game</type><playerID>Scout</playerID><robot>Edison</robot></request>"
+		);
 		System.out.println(result);
 		int start = result.indexOf("<gameID>") + 8;
 
@@ -78,26 +80,27 @@ public class NetworkTester {
 	}
 
 	public void gameList() throws IOException {
-		String result = BattleshipPhone.call("GameList",
+		String result = BattleshipPhone.call(
+				"GameList",
 				"<request><type>game list</type></request>");
 		System.out.println(result);
 	}
 
 	public void placeShip() throws IOException {
-		String result = BattleshipPhone
-				.call("PlaceShip",
-						"<request><type>Place</type><gameID>"
-								+ ID
-								+ "</gameID><playerID>Scout</playerID><coordinates>B1</coordinates><direction>DOWN</direction><ship>Carrier</ship></request>");
+		String result = BattleshipPhone.call(
+				"PlaceShip",
+				"<request><type>Place</type><gameID>"
+					+ ID
+					+ "</gameID><playerID>Scout</playerID><coordinates>B1</coordinates><direction>DOWN</direction><ship>Carrier</ship></request>");
 		System.out.println(result);
 	}
 
 	public void fire() throws IOException {
-		String result = BattleshipPhone
-				.call("Fire",
-						"<request><type>Fire</type><gameID>"
-								+ ID
-								+ "</gameID><playerID>Scout</playerID><coordinates>A1</coordinates></request>");
+		String result = BattleshipPhone.call(
+				"Fire",
+				"<request><type>Fire</type><gameID>"
+					+ ID
+					+ "</gameID><playerID>Scout</playerID><coordinates>A1</coordinates></request>");
 		System.out.println(result);
 	}
 

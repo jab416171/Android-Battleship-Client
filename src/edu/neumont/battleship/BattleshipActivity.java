@@ -12,7 +12,7 @@ import edu.neumont.battleship.http.XMLResponse;
 
 public class BattleshipActivity extends Activity {
 	public static String TAG;
-
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
