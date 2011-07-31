@@ -1,4 +1,4 @@
-package edu.neumont.battleship.testers;
+package edu.neumont.battleship.testharness;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -38,7 +38,9 @@ import java.util.StringTokenizer;
 public class ServerComm
 {
 	private static final String HOST = "http://joe-bass.com:8800/BattleshipServer";
-	
+	private Map<String, List<Cookie>> allDomainsCookies = new HashMap<String, List<Cookie>>();
+	private static final char DOT = '.';
+	private static ServerComm instance = new ServerComm();
 	// private boolean save = true;
 	
 	private ServerComm()
@@ -133,12 +135,6 @@ public class ServerComm
 		conn.setDoOutput(true);
 		return conn;
 	}
-	
-	private Map<String, List<Cookie>> allDomainsCookies = new HashMap<String, List<Cookie>>();
-	
-	private static final char DOT = '.';
-	
-	private static ServerComm instance = new ServerComm();
 	
 	// /**
 	// * @return where to save cookies to;
