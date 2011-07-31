@@ -1,5 +1,8 @@
 package edu.neumont.battleship.http;
 
+import model.Direction;
+import model.PlayerType;
+import model.ShipType;
 import edu.neumont.battleship.BattleshipActivity;
 import android.util.Log;
 import android.widget.TextView;

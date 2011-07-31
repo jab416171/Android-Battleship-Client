@@ -1,13 +1,13 @@
 package edu.neumont.battleship;
 
+import model.Direction;
+import model.PlayerType;
+import model.ShipType;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import edu.neumont.battleship.http.BattleshipServerConnector;
-import edu.neumont.battleship.http.Direction;
-import edu.neumont.battleship.http.PlayerType;
-import edu.neumont.battleship.http.ShipType;
 import edu.neumont.battleship.http.XMLResponse;
 
 public class BattleshipActivity extends Activity {

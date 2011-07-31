@@ -1,6 +1,9 @@
 package edu.neumont.battleship.http;
 
-public enum ShipType {
+import java.io.Serializable;
+
+public enum ShipType implements Serializable 
+{
 	Carrier(5), Battleship(4), Submarine(3), Cruiser(3), PatrolBoat(2);
 
 	private int size;
@@ -12,15 +15,9 @@ public enum ShipType {
 		return this.size;
 	}
 
-	/**
-	 * @param size
-	 *            the size to set
-	 */
-	public void setSize(int size) {
+	private ShipType(int size)
+	{
 		this.size = size;
 	}
-
-	private ShipType(int size) {
-		this.size = size;
-	}
+	
 }

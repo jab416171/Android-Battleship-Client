@@ -1,6 +1,7 @@
-package edu.neumont.battleship.http;
+package model;
 
-public class Ship {
+public class Ship implements XmlWritable 
+{
 	private ShipType shipType;
 	private Coordinate coordinate;
 	private Direction direction;
@@ -11,7 +12,14 @@ public class Ship {
 	
 	public String toXML()
 	{
-		return "";
+		/*
+		 	<coordinates>B1</coordinates>
+			<direction>DOWN</direction>
+			<ship>Carrier</ship>
+		 */
+		return coordinate.toXML() +"\r\n" + 
+			direction.toXML() +"\r\n" +
+			shipType.toXML();
 	}
 	
 	public ShipType getShipType() {
