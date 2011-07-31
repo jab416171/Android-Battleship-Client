@@ -1,14 +1,14 @@
 package edu.neumont.battleship;
 
-import model.Direction;
-import model.PlayerType;
-import model.ShipType;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import edu.neumont.battleship.http.BattleshipServerConnector;
 import edu.neumont.battleship.http.XMLResponse;
+import edu.neumont.battleship.model.Direction;
+import edu.neumont.battleship.model.PlayerType;
+import edu.neumont.battleship.model.ShipType;
 
 public class BattleshipActivity extends Activity {
 	public static String TAG;

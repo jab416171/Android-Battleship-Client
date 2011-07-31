@@ -1,8 +1,8 @@
 package edu.neumont.battleship.http;
 
-import model.Direction;
-import model.PlayerType;
-import model.ShipType;
+import edu.neumont.battleship.model.Direction;
+import edu.neumont.battleship.model.PlayerType;
+import edu.neumont.battleship.model.ShipType;
 import android.widget.TextView;
 
 public class XMLStringBuilder {
