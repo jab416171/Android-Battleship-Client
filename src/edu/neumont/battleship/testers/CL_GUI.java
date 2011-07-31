@@ -2,8 +2,6 @@ package edu.neumont.battleship.testers;
 
 import java.util.Scanner;
 
-import android.util.Log;
-import edu.neumont.battleship.BattleshipActivity;
 
 public class CL_GUI
 {
@@ -12,7 +10,6 @@ public class CL_GUI
 	private Scanner scan = new Scanner(System.in);
 	private String gameId;
 	private String playerName;
-	private static final String TAG = BattleshipActivity.TAG;
 	
 	public static void main(String[] args)
 	{
@@ -81,7 +78,7 @@ public class CL_GUI
 			
 			catch (Exception e)
 			{
-				Log.e(TAG, "Exception in NetworkTester", e);
+				e.printStackTrace();
 			}
 			
 		}
