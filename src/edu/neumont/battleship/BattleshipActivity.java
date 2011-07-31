@@ -1,8 +1,11 @@
 package edu.neumont.battleship;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import edu.neumont.battleship.http.BattleshipServerConnector;
 import edu.neumont.battleship.http.XMLResponse;
@@ -21,6 +24,16 @@ public class BattleshipActivity extends Activity {
 		TAG = getText(R.string.app_name).toString();
 		TextView tv = (TextView) findViewById(R.id.textview);
 		Log.v(TAG, "in oncreate");
+		
+		//set up button to go to Home
+		Button next = (Button) findViewById(R.id.button1);
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	Log.i(TAG, "button1 was pressed!");
+                Intent myIntent = new Intent(view.getContext(), BattleshipHome.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
 
 		try {
 			
@@ -36,6 +49,7 @@ public class BattleshipActivity extends Activity {
 			tv.setText(tv.getText()+response.getRawXML());
 
 			Log.i(TAG, "this is useless code");
+			
 		} catch (Exception e) {
 			Log.e(TAG, "Exception", e);
 		}

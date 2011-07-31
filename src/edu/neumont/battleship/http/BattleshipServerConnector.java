@@ -11,15 +11,10 @@ public class BattleshipServerConnector {
 	public static final String TAG = BattleshipActivity.TAG;
 
 	public static XMLResponse newGame(String playerID, PlayerType opponent,
-			TextView tv) {
-		try {
+			TextView tv) throws Exception {
 			return new XMLResponse(HttpHandler.postData(
 					HttpHandler.connectionURL + "NewGame",
 					XMLStringBuilder.newGame(playerID, opponent, tv)));
-		} catch (Exception e) {
-			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
-		}
-		return null;
 	}
 
 	public static XMLResponse joinGame(String playerID, String gameID) {
