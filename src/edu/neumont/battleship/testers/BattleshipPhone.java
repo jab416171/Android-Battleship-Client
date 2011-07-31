@@ -1,4 +1,4 @@
-package edu.neumont.battleship.helpers;
+package edu.neumont.battleship.testers;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;

@@ -5,7 +5,6 @@ import edu.neumont.battleship.model.Direction;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.model.ShipType;
 import android.util.Log;
-import android.widget.TextView;
 
 public class BattleshipServerConnector {
 	public static final String TAG = BattleshipActivity.TAG;
