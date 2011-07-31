@@ -15,9 +15,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -36,7 +38,8 @@ import java.util.StringTokenizer;
 public class ServerComm
 {
 	private static final String HOST = "http://joe-bass.com:8800/BattleshipServer";
-//	private boolean save = true;
+	
+	// private boolean save = true;
 	
 	private ServerComm()
 	{
@@ -45,8 +48,8 @@ public class ServerComm
 	
 	private ServerComm(boolean save)
 	{
-//		this.save = save;
-//		restore();
+		// this.save = save;
+		// restore();
 	}
 	
 	public static String call(String requestType) throws IOException
@@ -131,62 +134,63 @@ public class ServerComm
 		return conn;
 	}
 	
-	private Map<String, Map<String, Map<String, String>>> cookies = new HashMap<String, Map<String, Map<String, String>>>();
+	private Map<String, List<Cookie>> allDomainsCookies = new HashMap<String, List<Cookie>>();
 	
 	private static final char DOT = '.';
 	
 	private static ServerComm instance = new ServerComm();
 	
-//	/**
-//	 * @return where to save cookies to;
-//	 */
-//	private String file()
-//	{
-//		return "cookies.out";
-//	}
-//	
-//	/**
-//	 * writes the cookies as XML to file()
-//	 */
-//	private void save()
-//	{
-//		if (save)
-//		{
-//			try
-//			{
-//				XMLEncoder encoder = new XMLEncoder(new FileOutputStream(file()));
-//				encoder.writeObject(cookies);
-//				encoder.flush();
-//				encoder.close();
-//			} catch (FileNotFoundException e)
-//			{
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-//	
-//	/**
-//	 * reads the cookies from file()
-//	 */
-//	@SuppressWarnings("unchecked")
-//	private void restore()
-//	{
-//		File f = new File(file());
-//		if (f.exists() && save)
-//		{
-//			try
-//			{
-//				XMLDecoder decoder = new XMLDecoder(new FileInputStream(f));
-//				cookies = (Map<String, Map<String, Map<String, String>>>) decoder.readObject();
-//			} catch (Exception e)
-//			{
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		if (cookies == null)
-//			cookies = new HashMap<String, Map<String, Map<String, String>>>();
-//	}
+	// /**
+	// * @return where to save cookies to;
+	// */
+	// private String file()
+	// {
+	// return "cookies.out";
+	// }
+	//
+	// /**
+	// * writes the cookies as XML to file()
+	// */
+	// private void save()
+	// {
+	// if (save)
+	// {
+	// try
+	// {
+	// XMLEncoder encoder = new XMLEncoder(new FileOutputStream(file()));
+	// encoder.writeObject(cookies);
+	// encoder.flush();
+	// encoder.close();
+	// } catch (FileNotFoundException e)
+	// {
+	// e.printStackTrace();
+	// }
+	// }
+	// }
+	//
+	// /**
+	// * reads the cookies from file()
+	// */
+	// @SuppressWarnings("unchecked")
+	// private void restore()
+	// {
+	// File f = new File(file());
+	// if (f.exists() && save)
+	// {
+	// try
+	// {
+	// XMLDecoder decoder = new XMLDecoder(new FileInputStream(f));
+	// cookies = (Map<String, Map<String, Map<String, String>>>)
+	// decoder.readObject();
+	// } catch (Exception e)
+	// {
+	// e.printStackTrace();
+	// }
+	// }
+	//
+	// if (cookies == null)
+	// cookies = new HashMap<String, Map<String, Map<String, String>>>();
+	// }
 	
 	private void storeCookies(URLConnection conn) throws IOException
 	{
@@ -194,74 +198,40 @@ public class ServerComm
 		// let's determine the domain from where these cookies are being sent
 		String domain = getDomainFromHost(conn.getURL().getHost());
 		
-		Map<String, Map<String, String>> domainStore; // this is where we will
-														// store cookies for
-														// this domain
+		List<Cookie> domainsCookies; // this is where we will
+										// store cookies for
+										// this domain
 		
 		// now let's check the store to see if we have an entry for this domain
-		if (cookies.containsKey(domain))
+		if (allDomainsCookies.containsKey(domain))
 		{
 			// we do, so lets retrieve it from the store
-			domainStore = cookies.get(domain);
+			domainsCookies = allDomainsCookies.get(domain);
 		} else
 		{
 			// we don't, so let's create it and put it in the store
-			domainStore = new HashMap<String, Map<String, String>>();
-			cookies.put(domain, domainStore);
+			domainsCookies = new ArrayList<Cookie>();
+			allDomainsCookies.put(domain, domainsCookies);
 		}
 		
 		// OK, now we are ready to get the cookies out of the URLConnection
 		
 		String headerName = null;
 		// loop through each header
-		for (int i = 1; (headerName = conn.getHeaderFieldKey(i)) != null; i++)
+		for (int headerIdx = 1; (headerName = conn.getHeaderFieldKey(headerIdx)) != null; headerIdx++)
 		{
 			// if this header is a cookie...
 			if (headerName.equalsIgnoreCase(Cookie.SET_COOKIE))
 			{
-				// pull the cookie form the header
-				Map<String, String> cookie = new HashMap<String, String>();
-				// get ready to parse the cookie
-				StringTokenizer st = new StringTokenizer(conn.getHeaderField(i),
-						Cookie.COOKIE_VALUE_DELIMITER);
+				//parse the cookie
+				Cookie cookie = new Cookie(conn.getHeaderField(headerIdx));
+				// store the cookie in the domain's cookies list
+				domainsCookies.add(cookie);
 				
-				// the specification dictates that the first name/value pair
-				// in the string is the cookie name and value, so let's handle
-				// them as a special case:
-				
-				if (st.hasMoreTokens())
-				{
-					// get the next key/value pair
-					String token = st.nextToken();
-					// get the index of the separator
-					int seperatorIdx = token.indexOf(Cookie.NAME_VALUE_SEPARATOR);
-					// retrieve the key and value from the token
-					String name = token.substring(0, seperatorIdx);
-					String value = token.substring(seperatorIdx + 1, token.length());
-					
-					// store the in the 'cookie' dictionary
-					cookie.put(name, value);
-					// store the cookie in the domainStore
-					domainStore.put(name, cookie);
-				}
-				// same as in above 'if' statement
-				while (st.hasMoreTokens())
-				{
-					String token = st.nextToken();
-					if (token.length() > 0)
-					{
-						if (token.indexOf(Cookie.NAME_VALUE_SEPARATOR) >= 0)
-						{
-							cookie.put(token.substring(0, token.indexOf(Cookie.NAME_VALUE_SEPARATOR))
-									.toLowerCase(), token.substring(
-									token.indexOf(Cookie.NAME_VALUE_SEPARATOR) + 1, token.length()));
-						}
-					}
-				}
 			}
 		}
 		
-//		save();
+		// save();
 	}
 	
 	private void setCookies(URLConnection conn) throws IOException
@@ -270,29 +240,17 @@ public class ServerComm
 		// cookies
 		URL url = conn.getURL();
 		String domain = getDomainFromHost(url.getHost());
-		String path = url.getPath();
+//		String path = url.getPath();
 		
-		Map<String, Map<String, String>> domainStore = cookies.get(domain);
-		if (domainStore == null)
+		List<Cookie> domainsCookies = allDomainsCookies.get(domain);
+		if (domainsCookies == null)
 			return;
+		//where to write all of the cookies
 		StringBuffer cookieStringBuffer = new StringBuffer();
-		
-		Iterator<String> cookieNames = domainStore.keySet().iterator();
-		while (cookieNames.hasNext())
+		for (Cookie cookie : domainsCookies)
 		{
-			String cookieName = (String) cookieNames.next();
-			Map<String, String> cookie = domainStore.get(cookieName);
-			// check cookie to ensure path matches and cookie is not expired
-			// if all is cool, add cookie to header string
-			if (arePathsEqual((String) cookie.get(Cookie.PATH), path)
-					&& !isExpired((String) cookie.get(Cookie.EXPIRES)))
-			{
-				cookieStringBuffer.append(cookieName);
-				cookieStringBuffer.append("=");
-				cookieStringBuffer.append((String) cookie.get(cookieName));
-				if (cookieNames.hasNext())
-					cookieStringBuffer.append(Cookie.SET_COOKIE_SEPARATOR);
-			}
+			cookieStringBuffer.append(cookie.toHttpHeader());
+			cookieStringBuffer.append(Cookie.SET_COOKIE_SEPARATOR);
 		}
 		try
 		{
@@ -316,46 +274,48 @@ public class ServerComm
 		}
 	}
 	
-	/**
-	 * parses the parameter according to 'dateFormat'
-	 * @param cookieExpires A date string 
-	 * @return if cookieExpires is before today
-	 */
-	private boolean isExpired(String cookieExpires)
-	{
-		//no expire data
-		if (cookieExpires == null)
-			return false;
-		// get current date
-		Date now = new Date();
-		try
-		{
-			Date cookieExpireDate = Cookie.dateFormat.parse(cookieExpires);
-			return cookieExpireDate.before(now);
-		} catch (java.text.ParseException pe)
-		{
-			pe.printStackTrace();
-			return true;
-		}
-	}
-	
-	private boolean arePathsEqual(String cookiePath, String targetPath)
-	{
-		if (cookiePath == null)
-		{
-			return true;
-		} else if (cookiePath.equals("/"))
-		{
-			return true;
-		} else if (targetPath.regionMatches(0, cookiePath, 0, cookiePath.length()))
-		{
-			return true;
-		} else
-		{
-			return false;
-		}
-		
-	}
+//	/**
+//	 * parses the parameter according to 'dateFormat'
+//	 * 
+//	 * @param cookieExpires
+//	 *            A date string
+//	 * @return if cookieExpires is before today
+//	 */
+//	private boolean isExpired(String cookieExpires)
+//	{
+//		// no expire data
+//		if (cookieExpires == null)
+//			return false;
+//		// get current date
+//		Date now = new Date();
+//		try
+//		{
+//			Date cookieExpireDate = Cookie.dateFormat.parse(cookieExpires);
+//			return cookieExpireDate.before(now);
+//		} catch (java.text.ParseException pe)
+//		{
+//			pe.printStackTrace();
+//			return true;
+//		}
+//	}
+//	
+//	private boolean arePathsEqual(String cookiePath, String targetPath)
+//	{
+//		if (cookiePath == null)
+//		{
+//			return true;
+//		} else if (cookiePath.equals("/"))
+//		{
+//			return true;
+//		} else if (targetPath.regionMatches(0, cookiePath, 0, cookiePath.length()))
+//		{
+//			return true;
+//		} else
+//		{
+//			return false;
+//		}
+//		
+//	}
 	
 	/**
 	 * Returns a string representation of stored cookies organized by domain.
@@ -363,6 +323,6 @@ public class ServerComm
 	@Override
 	public String toString()
 	{
-		return cookies.toString();
+		return allDomainsCookies.toString();
 	}
 }
