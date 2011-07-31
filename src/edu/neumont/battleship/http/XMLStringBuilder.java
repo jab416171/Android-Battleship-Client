@@ -9,19 +9,20 @@ public class XMLStringBuilder {
 	// return xml.toString();
 	// }
 
-	public static String newGame(String playerID, Opponent opponent, TextView tv) {
+	public static String newGame(String playerID, PlayerType opponent,
+			TextView tv) {
 		StringBuilder xml = new StringBuilder();
 		xml.append("<request>");
 		xml.append("<playerID>");
 		xml.append(playerID);
 		xml.append("</playerID>");
-		if (opponent != Opponent.Human) {
+		if (opponent != PlayerType.Human) {
 			xml.append("<robot>");
 			xml.append(opponent.toString());
 			xml.append("</robot>");
 		}
 		xml.append("</request>");
-		tv.setText(tv.getText()+xml.toString());
+		tv.setText(tv.getText() + xml.toString());
 		return xml.toString();
 	}
 
@@ -67,7 +68,7 @@ public class XMLStringBuilder {
 		xml.append(ship.toString());
 		xml.append("</ship>");
 		xml.append("</request>");
-		tv.setText(tv.getText()+xml.toString());
+		tv.setText(tv.getText() + xml.toString());
 		return xml.toString();
 	}
 

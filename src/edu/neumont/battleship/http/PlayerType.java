@@ -1,5 +1,5 @@
 package edu.neumont.battleship.http;
 
-public enum Opponent {
+public enum PlayerType {
 	Edison, Geeves, Robby, Human;
 }

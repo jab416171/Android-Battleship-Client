@@ -6,7 +6,7 @@ import android.util.Log;
 import android.widget.TextView;
 import edu.neumont.battleship.http.BattleshipServerConnector;
 import edu.neumont.battleship.http.Direction;
-import edu.neumont.battleship.http.Opponent;
+import edu.neumont.battleship.http.PlayerType;
 import edu.neumont.battleship.http.ShipType;
 import edu.neumont.battleship.http.XMLResponse;
 
@@ -25,7 +25,7 @@ public class BattleshipActivity extends Activity {
 		try {
 			
 			XMLResponse response = BattleshipServerConnector.newGame("Joe",
-					Opponent.Edison,tv);
+					PlayerType.Edison,tv);
 			Log.i(TAG, "Posted, here's response: ");
 			Log.i(TAG, response.getRawXML() + "");
 			tv.setText("\r\n"+tv.getText()+response.getRawXML());

@@ -55,11 +55,12 @@ public class HttpHandler {
 					urlStr += URLEncoder.encode("?" + requestParameters);
 				}
 				URL url = new URL(urlStr);
-				Log.i(TAG,url.toString());
+				Log.i(TAG, url.toString());
 				URLConnection conn = url.openConnection();
 				InputStream is = conn.getInputStream();
 				// Get the response
-				BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+				BufferedReader rd = new BufferedReader(
+						new InputStreamReader(is));
 				StringBuffer sb = new StringBuffer();
 				String line;
 				while ((line = rd.readLine()) != null) {
@@ -156,19 +157,23 @@ public class HttpHandler {
 
 	public static String postData(String target, String content)
 			throws Exception {
-		Log.v(TAG,"About to post");
-		Log.v(TAG,"URL: " + target + "content: "
-				+ content);
+		Log.v(TAG, "About to post");
+		Log.v(TAG, "URL: " + target + "content: " + content);
 		String response = "";
 		URL url = new URL(target);
 		URLConnection conn = url.openConnection();
+		// Map<String, List<String>> m = conn.getHeaderFields();
+		// for (Entry<String,List<String>> e : m.entrySet()) {
+		// Log.i(TAG,"Key: "+e.getKey());
+		// Log.i(TAG,"Value: "+Arrays.toString(e.getValue().toArray()));
+		//
+		// }
 		// Set connection parameters.
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
 		conn.setUseCaches(false);
 		// Make server believe we are form data...
-		conn.setRequestProperty("Content-Type",
-				"application/xml");
+		conn.setRequestProperty("Content-Type", "application/xml");
 		DataOutputStream out = new DataOutputStream(conn.getOutputStream());
 		// Write out the bytes of the content string to the stream.
 		out.writeBytes(content);
@@ -183,7 +188,7 @@ public class HttpHandler {
 		}
 		temp = null;
 		in.close();
-		//System.out.println("Server response:\n'" + response + "'");
+		// System.out.println("Server response:\n'" + response + "'");
 		return response;
 	}
 }
