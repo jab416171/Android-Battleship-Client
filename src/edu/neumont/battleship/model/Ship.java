@@ -12,11 +12,6 @@ public class Ship implements XmlWritable
 	
 	public String toXML()
 	{
-		/*
-		 	<coordinates>B1</coordinates>
-			<direction>DOWN</direction>
-			<ship>Carrier</ship>
-		 */
 		return coordinate.toXML() +"\r\n" + 
 			direction.toXML() +"\r\n" +
 			shipType.toXML();

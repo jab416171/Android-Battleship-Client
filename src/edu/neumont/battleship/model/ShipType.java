@@ -18,6 +18,10 @@ public enum ShipType implements Serializable, XmlWritable
 	{
 		return toString().toUpperCase();
 	}
+	public static ShipType fromXML(String xml)
+	{
+		return Enum.valueOf(ShipType.class, xml);
+	}
 	
 	/**
 	 * @return the size
@@ -25,4 +29,5 @@ public enum ShipType implements Serializable, XmlWritable
 	public int getSize() {
 		return this.size;
 	}
+
 }

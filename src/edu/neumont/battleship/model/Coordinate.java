@@ -2,7 +2,7 @@ package edu.neumont.battleship.model;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Coordinate implements XmlWritable, XmlReadable<Coordinate>
+public class Coordinate implements XmlWritable
 {
 	private int row;
 	private int col;
@@ -26,7 +26,7 @@ public class Coordinate implements XmlWritable, XmlReadable<Coordinate>
 	{
 		return "<coordinates>"+getLetter()+row+"</coordinates>";
 	}
-	public Coordinate fromXML(String xml)
+	public Coordinate(String xml)
 	{
 		throw new NotImplementedException();
 	}
