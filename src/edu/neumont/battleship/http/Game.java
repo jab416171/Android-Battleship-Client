@@ -6,6 +6,7 @@ public class Game {
 	private Player localPlayer;
 	private Player remotePlayer;
 	private GameState state;
+	private Player winner;
 
 	public Game() {
 		// TODO Auto-generated constructor stub
@@ -49,6 +50,14 @@ public class Game {
 
 	public void setState(GameState state) {
 		this.state = state;
+	}
+
+	public Player getWinner() {
+		return winner;
+	}
+
+	public void setWinner(Player winner) {
+		this.winner = winner;
 	}
 
 }
