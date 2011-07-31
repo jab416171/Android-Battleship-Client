@@ -38,12 +38,12 @@ public class BattleshipActivity extends Activity {
 		try {
 			
 			XMLResponse response = BattleshipServerConnector.newGame("Joe",
-					PlayerType.Edison,tv);
+					PlayerType.Edison);
 			Log.i(TAG, "Posted, here's response: ");
 			Log.i(TAG, response.getRawXML() + "");
 			tv.setText("\r\n"+tv.getText()+response.getRawXML());
 			response = BattleshipServerConnector.placeShip("A1",
-					Direction.DOWN, ShipType.Battleship,tv);
+					Direction.DOWN, ShipType.Battleship);
 			Log.i(TAG, "Posted, here's response: ");
 			Log.i(TAG, response.getRawXML() + "");
 			tv.setText(tv.getText()+response.getRawXML());

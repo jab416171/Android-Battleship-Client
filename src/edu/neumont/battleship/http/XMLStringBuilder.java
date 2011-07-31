@@ -3,7 +3,6 @@ package edu.neumont.battleship.http;
 import edu.neumont.battleship.model.Direction;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.model.ShipType;
-import android.widget.TextView;
 
 public class XMLStringBuilder {
 	// public static String methodName() {
@@ -12,8 +11,7 @@ public class XMLStringBuilder {
 	// return xml.toString();
 	// }
 
-	public static String newGame(String playerID, PlayerType opponent,
-			TextView tv) {
+	public static String newGame(String playerID, PlayerType opponent) {
 		StringBuilder xml = new StringBuilder();
 		xml.append("<request>");
 		xml.append("<playerID>");
@@ -25,7 +23,6 @@ public class XMLStringBuilder {
 			xml.append("</robot>");
 		}
 		xml.append("</request>");
-		tv.setText(tv.getText() + xml.toString());
 		return xml.toString();
 	}
 
@@ -58,7 +55,7 @@ public class XMLStringBuilder {
 	}
 
 	public static String placeShip(String coordinates, Direction direction,
-			ShipType ship, TextView tv) {
+			ShipType ship) {
 		StringBuilder xml = new StringBuilder();
 		xml.append("<request>");
 		xml.append("<coordinates>");
@@ -71,7 +68,6 @@ public class XMLStringBuilder {
 		xml.append(ship.toString());
 		xml.append("</ship>");
 		xml.append("</request>");
-		tv.setText(tv.getText() + xml.toString());
 		return xml.toString();
 	}
 

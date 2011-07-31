@@ -10,11 +10,10 @@ import android.widget.TextView;
 public class BattleshipServerConnector {
 	public static final String TAG = BattleshipActivity.TAG;
 
-	public static XMLResponse newGame(String playerID, PlayerType opponent,
-			TextView tv) throws Exception {
+	public static XMLResponse newGame(String playerID, PlayerType opponent) throws Exception {
 			return new XMLResponse(HttpHandler.postData(
 					HttpHandler.connectionURL + "NewGame",
-					XMLStringBuilder.newGame(playerID, opponent, tv)));
+					XMLStringBuilder.newGame(playerID, opponent)));
 	}
 
 	public static XMLResponse joinGame(String playerID, String gameID) {
@@ -29,12 +28,12 @@ public class BattleshipServerConnector {
 	}
 
 	public static XMLResponse placeShip(String coordinates, 
-			Direction direction, ShipType ship, TextView tv) 
+			Direction direction, ShipType ship) 
 	{
 		try {
 			return new XMLResponse(HttpHandler.postData(
 					HttpHandler.connectionURL + "PlaceShip", XMLStringBuilder
-							.placeShip(coordinates, direction, ship, tv)));
+							.placeShip(coordinates, direction, ship)));
 		} catch (Exception e) {
 			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 		}
