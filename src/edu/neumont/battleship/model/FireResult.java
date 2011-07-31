@@ -12,8 +12,13 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+import edu.neumont.battleship.BattleshipActivity;
+
+import android.util.Log;
+
 public class FireResult
 {
+	public static final String TAG = BattleshipActivity.TAG;
 	private int gameId;
 	private FireStatus status;
 	private ShipType shipType;
@@ -52,7 +57,7 @@ public class FireResult
 			// end ridiculous-ness--^
 		} catch (Exception e)
 		{
-			e.printStackTrace();
+			Log.e(TAG,"Exception in FireResult",e);
 		}
 	}
 

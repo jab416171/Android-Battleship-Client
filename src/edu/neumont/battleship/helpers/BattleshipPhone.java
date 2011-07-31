@@ -1,12 +1,29 @@
 package edu.neumont.battleship.helpers;
 
-import java.net.*;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.*;
-import java.util.*;
-import java.text.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import edu.neumont.battleship.BattleshipActivity;
+
+import android.util.Log;
 
 /**
  * The BattleshipPhone class is a helper class for communicating with the battleship server.
@@ -20,6 +37,7 @@ public class BattleshipPhone {
 //     private static final String HOST = "http://tics.neumont.edu:8080/BattleshipServer";
     private static final String HOST = "http://joe-bass.com:8800/BattleshipServer";
     private boolean save = true;
+    private static final String TAG = BattleshipActivity.TAG;
     
     public static String call( String requestType ) throws IOException {
         return call(requestType, null);
@@ -88,7 +106,7 @@ public class BattleshipPhone {
                 encoder.flush();
                 encoder.close();
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                Log.e(TAG,"Exception in BattleshipPhone",e);
             }
         }
     }
@@ -101,7 +119,7 @@ public class BattleshipPhone {
                 XMLDecoder decoder = new XMLDecoder(new FileInputStream(f));
                 store = (Map<String, Map<String, Map<String, String>>>)decoder.readObject();
             } catch( Exception e ) {
-                e.printStackTrace();
+                Log.e(TAG,"Exception in BattleshipPhone",e);
             }
         }
         
@@ -232,7 +250,7 @@ public class BattleshipPhone {
         try {
             return (now.compareTo(dateFormat.parse(cookieExpires))) <= 0;
         } catch (java.text.ParseException pe) {
-            pe.printStackTrace();
+            Log.e(TAG,"Exception in BattleshipPhone",pe);
             return false;
         }
     }

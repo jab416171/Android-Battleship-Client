@@ -69,7 +69,7 @@ public class HttpHandler {
 				rd.close();
 				result = sb.toString();
 			} catch (Exception e) {
-				Log.e(TAG, "Exception: ", e);
+				Log.e(TAG, "Exception in HttpHandler: ", e);
 			}
 		}
 		return result;

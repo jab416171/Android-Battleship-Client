@@ -1,6 +1,5 @@
 package edu.neumont.battleship.model;
 
-import edu.neumont.battleship.http.Cookie;
 
 public class Game {
 	private int gameId;

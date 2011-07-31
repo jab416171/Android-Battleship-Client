@@ -51,7 +51,7 @@ public class BattleshipActivity extends Activity {
 			Log.i(TAG, "this is useless code");
 			
 		} catch (Exception e) {
-			Log.e(TAG, "Exception", e);
+			Log.e(TAG, "Exception in BattleshipActivity", e);
 		}
 	}
 
