@@ -1,9 +1,9 @@
 package edu.neumont.battleship.model;
 
-public enum GameStatus implements XmlReadable<GameStatus>{
+public enum GameStatus {
 	WaitingFor2nd, WaitingForShips, InProgress, Finished, Forfeited, TimedOut;
 
-	public GameStatus fromXML(String xml)
+	public static GameStatus fromXML(String xml)
 	{
 		return Enum.valueOf(GameStatus.class, xml);
 	}

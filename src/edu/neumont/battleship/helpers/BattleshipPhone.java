@@ -51,7 +51,6 @@ public class BattleshipPhone {
         
         result.flush();
         result.close();
-        result = null;
         return inner.toString();
     }
 

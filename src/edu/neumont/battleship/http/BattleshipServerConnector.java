@@ -33,8 +33,9 @@ public class BattleshipServerConnector {
 		return null;
 	}
 
-	public static XMLResponse placeShip(String coordinates,
-			Direction direction, ShipType ship, TextView tv) {
+	public static XMLResponse placeShip(String coordinates, 
+			Direction direction, ShipType ship, TextView tv) 
+	{
 		try {
 			return new XMLResponse(HttpHandler.postData(
 					HttpHandler.connectionURL + "PlaceShip", XMLStringBuilder
