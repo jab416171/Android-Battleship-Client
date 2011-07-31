@@ -22,14 +22,14 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 /**
- * The BattleshipPhone class is a helper class for communicating with the
+ * The ServerComm class is a helper class for communicating with the
  * battleship server. The only method you need to worry about is
  * <code>call</code>. As an example, you could write the following code: String
- * result = BattleshipPhone.call( "NewGame",
+ * result = ServerComm.call( "NewGame",
  * "<request><playerID>[[Your Name]]</playerID><robot>Edison</robot></request>"
  * ); // process the xml result here
  */
-public class BattleshipPhone
+public class ServerComm
 {
 	// private static final String HOST =
 	// "http://tics.neumont.edu:8080/BattleshipServer";
@@ -95,7 +95,7 @@ public class BattleshipPhone
 	private static final char DOT = '.';
 	
 	private DateFormat dateFormat;
-	private static BattleshipPhone instance = new BattleshipPhone();
+	private static ServerComm instance = new ServerComm();
 	
 	private String file()
 	{
@@ -141,14 +141,14 @@ public class BattleshipPhone
 			store = new HashMap<String, Map<String, Map<String, String>>>();
 	}
 	
-	private BattleshipPhone(boolean save)
+	private ServerComm(boolean save)
 	{
 		this.save = save;
 		dateFormat = new SimpleDateFormat(DATE_FORMAT);
 		restore();
 	}
 	
-	private BattleshipPhone()
+	private ServerComm()
 	{
 		this(false);
 	}
