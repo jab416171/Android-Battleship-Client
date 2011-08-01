@@ -2,15 +2,25 @@ package edu.neumont.battleship.model;
 
 public class Player
 {
-	private int id;
+	private String id;
 	private PlayerType type;
+	private Board board;
 	
-	public int getId()
+	public Player(){}
+	
+	public Player(String id, PlayerType type)
+	{
+		this.id = id;
+		this.type = type;
+		board = new Board();
+	}
+	
+	public String getId()
 	{
 		return id;
 	}
 	
-	public void setId(int id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}
@@ -23,5 +33,15 @@ public class Player
 	public void setType(PlayerType type)
 	{
 		this.type = type;
+	}
+
+	public Board getBoard()
+	{
+		return board;
+	}
+
+	public void setBoard(Board board)
+	{
+		this.board = board;
 	}
 }

@@ -1,6 +1,7 @@
 package edu.neumont.battleship.testharness;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class HardCodedXML implements IGameLogic
 {
@@ -19,8 +20,8 @@ public class HardCodedXML implements IGameLogic
 	public String newGame(String playerName, String robot) throws IOException
 	{
 		String result = ServerComm.call("NewGame",
-				"<request><type>New Game</type><playerID>" + playerName
-						+ "</playerID><robot>" + robot + "</robot></request>");
+				"<request><type>New Game</type><playerID>" + playerName +
+						"</playerID><robot>" + robot + "</robot></request>");
 		System.out.println(result);
 		int start = result.indexOf("<gameID>") + 8;
 		

@@ -37,12 +37,12 @@ public class CL_GUI
 			try
 			{
 				System.out.println("1 - New Game");
-				System.out.println("2 - Game List");
+				System.out.println("2 - Join");
 				System.out.println("3 - Fire");
 				System.out.println("4 - Place Ship");
 				System.out.println("5 - Update");
-				System.out.println("6 - Join");
-				System.out.println("7 - Forfeit");
+				System.out.println("6 - Forfeit");
+				System.out.println("7 - Game List");
 				System.out.println("8 - Quit");
 				String input = scan.nextLine();
 				
@@ -51,7 +51,7 @@ public class CL_GUI
 					gameId = logic.newGame(playerName, "Edison");
 				} else if (input.equals("2"))
 				{
-					logic.gameList();
+					logic.join(gameId, playerName);
 				} else if (input.equals("3"))
 				{
 					logic.fire(gameId, playerName, getCoords());
@@ -63,10 +63,10 @@ public class CL_GUI
 					logic.update(gameId, playerName);
 				} else if (input.equals("6"))
 				{
-					logic.join(gameId, playerName);
+					logic.forfeit(gameId, playerName);
 				} else if (input.equals("7"))
 				{
-					logic.forfeit(gameId, playerName);
+					logic.gameList();
 				} else if (input.equals("8"))
 				{
 					play = false;
@@ -123,7 +123,7 @@ public class CL_GUI
 		String ans;
 		do
 		{
-			System.out.println("(Carrier, Battleship, Submarie, Curiser, PatrolBoat)");
+			System.out.println("(Carrier, Battleship, Submarie, cRuiser, PatrolBoat)");
 			System.out.print("Enter ship: ");
 			ans = scan.nextLine();
 			// System.out.println();

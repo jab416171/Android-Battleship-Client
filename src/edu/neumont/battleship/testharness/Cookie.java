@@ -96,6 +96,8 @@ public class Cookie
 	
 	public boolean isExpired()
 	{
+		if(expiration == null)
+			return false;
 		return new Date().before(expiration);
 	}
 	
