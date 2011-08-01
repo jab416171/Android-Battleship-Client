@@ -1,0 +1,9 @@
+Glen
+working on test harness (edu.neumont.battleship.testharness)
+getting XML to be generated from our model
+
+
+Joe
+
+Brent
+
