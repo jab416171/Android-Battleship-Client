@@ -3,7 +3,7 @@ package edu.neumont.battleship.testharness;
 import java.util.Scanner;
 
 
-public class CL_GUI
+public class CLUI
 {
 	
 	private IGameLogic logic;
@@ -14,10 +14,10 @@ public class CL_GUI
 	public static void main(String[] args)
 	{
 		//changed this --v to change the logic
-		new CL_GUI(new HardCodedXML()).RunGame();
+		new CLUI(new HardCodedXML()).RunGame();
 	}
 	
-	public CL_GUI(IGameLogic logic)
+	public CLUI(IGameLogic logic)
 	{
 		this.logic = logic;
 	}
