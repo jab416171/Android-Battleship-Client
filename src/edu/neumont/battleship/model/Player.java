@@ -15,6 +15,11 @@ public class Player
 		board = new Board();
 	}
 	
+	public void setShip(Ship ship)
+	{
+		board.setShip(ship);
+	}
+	
 	public String getId()
 	{
 		return id;

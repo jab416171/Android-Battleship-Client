@@ -55,7 +55,7 @@ public class ModelGeneratedXML implements IGameLogic
 		s.setDirection(Direction.fromXML(direction));
 		s.setShipType(ShipType.fromXML(ship));
 		
-		game.getLocalPlayer().getBoard().setShip(s);
+		game.getLocalPlayer().setShip(s);
 		
 		String result = ServerComm.call("PlaceShip",
 			"<request><type>Place</type>"+
