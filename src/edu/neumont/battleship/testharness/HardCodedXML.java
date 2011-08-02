@@ -3,7 +3,7 @@ package edu.neumont.battleship.testharness;
 import java.io.IOException;
 import java.util.Random;
 
-public class HardCodedXML implements IGameLogic
+public class HardCodedXML implements GameLogic
 {
 	
 	public HardCodedXML()

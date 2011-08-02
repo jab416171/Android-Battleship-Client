@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class CLUI
 {
 	
-	private IGameLogic logic;
+	private GameLogic logic;
 	private Scanner scan = new Scanner(System.in);
 	private String gameId;
 	private String playerName;
@@ -17,7 +17,7 @@ public class CLUI
 		new CLUI(new HardCodedXML()).RunGame();
 	}
 	
-	public CLUI(IGameLogic logic)
+	public CLUI(GameLogic logic)
 	{
 		this.logic = logic;
 	}
