@@ -2,27 +2,28 @@ package edu.neumont.battleship.testharness;
 
 import java.util.Scanner;
 
-
 public class CLUI
 {
-	
+
 	private GameLogic logic;
 	private Scanner scan = new Scanner(System.in);
 	private String gameId;
 	private String playerName;
-	
+
 	public static void main(String[] args)
 	{
-		//changed this --v to change the logic
+		// changed this --v to change the logic
 		new CLUI(new HardCodedXML()).RunGame();
 	}
-	
+
 	public CLUI(GameLogic logic)
 	{
 		this.logic = logic;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see edu.neumont.battleship.testers.IGameLogic#RunGame()
 	 */
 	public void RunGame()
@@ -31,7 +32,7 @@ public class CLUI
 		System.out.print("Name?: ");
 		playerName = scan.nextLine();
 		System.out.println();
-		
+
 		while (play == true)
 		{
 			try
@@ -45,7 +46,7 @@ public class CLUI
 				System.out.println("7 - Game List");
 				System.out.println("8 - Quit");
 				String input = scan.nextLine();
-				
+
 				if (input.equals("1"))
 				{
 					gameId = logic.newGame(playerName, "Edison");
@@ -75,17 +76,15 @@ public class CLUI
 					System.out.println("Didn't understand input");
 				}
 			}
-			
+
 			catch (Exception e)
 			{
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
-	
-	
-	
+
 	private String getCoords()
 	{
 		String ans;
@@ -97,7 +96,7 @@ public class CLUI
 		} while (ans.length() < 2 || ans.toCharArray()[0] < 97 || ans.toCharArray()[0] > 106 || ans.toCharArray()[1] < 49 || ans.toCharArray()[1] > 57);
 		return ans;
 	}
-	
+
 	private String getDirection() throws Exception
 	{
 		String ans;
@@ -117,7 +116,7 @@ public class CLUI
 			return "LEFT";
 		throw new Exception("All directions should be accounted for");
 	}
-	
+
 	private String getShip() throws Exception
 	{
 		String ans;
