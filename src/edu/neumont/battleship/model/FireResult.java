@@ -1,6 +1,7 @@
 package edu.neumont.battleship.model;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,11 +11,9 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-
-import edu.neumont.battleship.BattleshipActivity;
 
 import android.util.Log;
+import edu.neumont.battleship.BattleshipActivity;
 
 public class FireResult
 {
@@ -34,7 +33,7 @@ public class FireResult
 		// but it's the only way I could get XPath to work--v
 
 		// get an input stream from the xml
-		InputSource is = new InputSource(new ByteArrayInputStream(xml.getBytes()));
+		InputStream is = new ByteArrayInputStream(xml.getBytes());
 		try
 		{
 			// load up the DOM
