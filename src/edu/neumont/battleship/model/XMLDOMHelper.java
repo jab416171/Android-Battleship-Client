@@ -16,43 +16,21 @@ import org.xml.sax.SAXException;
 
 public class XMLDOMHelper
 {
-	public static Document getDocument(InputStream is)
+	public static Document getDocument(InputStream is) throws ParserConfigurationException, SAXException, IOException
 	{
-		try
-		{
+		
 			DocumentBuilderFactory domfactory = DocumentBuilderFactory.newInstance();
 			domfactory.setNamespaceAware(true); // never forget this!
 			DocumentBuilder builder = domfactory.newDocumentBuilder();
 			Document doc = builder.parse(is);
 			return doc;
-		} catch (ParserConfigurationException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SAXException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		
 	}
 
-	public static XPathExpression getXpathExpression(String s)
+	public static XPathExpression getXpathExpression(String s) throws XPathExpressionException
 	{
 		XPathFactory factory = XPathFactory.newInstance();
 		XPath xpath = factory.newXPath();
-		try
-		{
-			return xpath.compile(s);
-		} catch (XPathExpressionException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return xpath.compile(s);
 	}
 }
