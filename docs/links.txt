@@ -1,2 +1,5 @@
 http://whygitisbetterthanx.com
 http://progit.org/book/ch1-3.html
+
+Common Android icons can be found in:
+android-sdk-windows\platforms\android-7\data\res

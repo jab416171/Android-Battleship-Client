@@ -1,20 +1,15 @@
 package edu.neumont.battleship.model;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-
-import edu.neumont.battleship.BattleshipActivity;
 
 import android.util.Log;
+import edu.neumont.battleship.BattleshipActivity;
 
 public class FireResult
 {
@@ -34,21 +29,16 @@ public class FireResult
 		// but it's the only way I could get XPath to work--v
 
 		// get an input stream from the xml
-		InputSource is = new InputSource(new ByteArrayInputStream(xml.getBytes()));
+		InputStream is = new ByteArrayInputStream(xml.getBytes());
 		try
 		{
 			// load up the DOM
-			DocumentBuilderFactory domfactory = DocumentBuilderFactory.newInstance();
-			domfactory.setNamespaceAware(true); // never forget this!
-			DocumentBuilder builder = domfactory.newDocumentBuilder();
-			Document doc = builder.parse(is);
+			Document doc = XMLDOMHelper.getDocument(is);
 
 			// create the XPath
-			XPathFactory factory = XPathFactory.newInstance();
-			XPath xpath = factory.newXPath();
-			XPathExpression gameIdExpr = xpath.compile("//gameID/text()");
-			XPathExpression statusExpr = xpath.compile("//result/text()");
-			XPathExpression shipTypeExpr = xpath.compile("//ship/text()");
+			XPathExpression gameIdExpr = XMLDOMHelper.getXpathExpression("//gameID/text()");
+			XPathExpression statusExpr = XMLDOMHelper.getXpathExpression("//result/text()");
+			XPathExpression shipTypeExpr = XMLDOMHelper.getXpathExpression("//ship/text()");
 
 			// evaluate
 			gameId = Integer.parseInt((String) gameIdExpr.evaluate(doc, XPathConstants.STRING));
@@ -57,7 +47,7 @@ public class FireResult
 			// end ridiculous-ness--^
 		} catch (Exception e)
 		{
-			Log.e(TAG,"Exception in FireResult",e);
+			Log.e(TAG, "Exception in FireResult", e);
 		}
 	}
 

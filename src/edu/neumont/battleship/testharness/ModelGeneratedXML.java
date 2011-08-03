@@ -10,7 +10,7 @@ import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.model.Ship;
 import edu.neumont.battleship.model.ShipType;
 
-public class ModelGeneratedXML implements IGameLogic
+public class ModelGeneratedXML implements GameLogic
 {
 	private Game game;
 	public ModelGeneratedXML()

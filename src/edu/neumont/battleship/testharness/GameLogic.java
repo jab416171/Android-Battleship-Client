@@ -2,7 +2,7 @@ package edu.neumont.battleship.testharness;
 
 import java.io.IOException;
 
-public interface IGameLogic
+public interface GameLogic
 {
 	
 	
