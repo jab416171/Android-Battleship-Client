@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.ProgressBar;
 
-public class BattleshipHome extends Activity
+public class BattleshipSpinningCircle extends Activity
 {
 	
 	/**

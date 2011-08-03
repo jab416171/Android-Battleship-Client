@@ -30,7 +30,7 @@ public class BattleshipActivity extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	Log.i(TAG, "button1 was pressed!");
-                Intent myIntent = new Intent(view.getContext(), BattleshipHome.class);
+                Intent myIntent = new Intent(view.getContext(), BattleshipSpinningCircle.class);
                 startActivityForResult(myIntent, 0);
             }
         });
