@@ -20,10 +20,11 @@
 	<TextView android:text="@string/entername" android:id="@+id/tventername"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 	<EditText android:id="@+id/edentername" android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content" android:inputType="text">
 		<requestFocus></requestFocus>
 	</EditText>
 	<Button android:text="@string/submit" android:id="@+id/button1"
-		android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="submit"></Button>
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:onClick="submit"></Button>
 
 </LinearLayout>
