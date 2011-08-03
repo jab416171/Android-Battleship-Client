@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    android:id="@+id/textview"
-    />
-<Button
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:text="@string/button1_text"
-	android:id="@+id/button1"></Button>
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<Button android:text="@string/joingamebutton"
+		android:layout_height="wrap_content" android:id="@+id/joingame"
+		android:layout_width="wrap_content" android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true" android:layout_marginBottom="162dp"
+		android:onClick="joingame"
+		></Button>
+	<Button android:text="@string/newgamebutton"
+		android:layout_height="wrap_content" android:id="@+id/newgame"
+		android:layout_width="wrap_content" android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true" android:layout_marginTop="103dp"
+		android:onClick="newgame"
+		></Button>
+</RelativeLayout>

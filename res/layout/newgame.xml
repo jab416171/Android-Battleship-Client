@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<RadioGroup android:id="@+id/rgplayers"
+		android:layout_width="wrap_content" android:layout_height="wrap_content">
+		<RadioButton android:layout_height="wrap_content"
+			android:text="@string/human" android:id="@+id/radioH"
+			android:layout_width="wrap_content" android:checked="true"></RadioButton>
+		<RadioButton android:layout_height="wrap_content"
+			android:text="@string/edison" android:id="@+id/radioE"
+			android:layout_width="wrap_content"></RadioButton>
+		<RadioButton android:layout_height="wrap_content"
+			android:text="@string/geeves" android:id="@+id/radioG"
+			android:layout_width="wrap_content"></RadioButton>
+		<RadioButton android:layout_height="wrap_content"
+			android:text="@string/robby" android:id="@+id/radioR"
+			android:layout_width="wrap_content"></RadioButton>
+	</RadioGroup>
+	<TextView android:text="@string/entername" android:id="@+id/tventername"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	<EditText android:id="@+id/edentername" android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<requestFocus></requestFocus>
+	</EditText>
+	<Button android:text="@string/submit" android:id="@+id/button1"
+		android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="submit"></Button>
+
+</LinearLayout>
