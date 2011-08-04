@@ -27,7 +27,7 @@
 		android:layout_height="wrap_content" android:inputType="text">
 		<requestFocus></requestFocus>
 	</EditText>
-	<Button android:text="@string/submit" android:id="@+id/button1"
+	<Button android:text="@string/submit" android:id="@+id/submitnewgame"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:onClick="submit"></Button>
 
