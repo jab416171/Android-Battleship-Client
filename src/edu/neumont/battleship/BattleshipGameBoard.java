@@ -18,28 +18,40 @@ import edu.neumont.battleship.testharness.HardCodedXML;
 public class BattleshipGameBoard extends Activity
 {
 	public static final String TAG = BattleshipActivity.TAG;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-	    setContentView(R.layout.gameboard);
-
-	    GridView gridview = (GridView) findViewById(R.id.gvboard);
-	    gridview.setAdapter(new BoardImageAdapter(this));
-
-	    gridview.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	            Toast.makeText(BattleshipGameBoard.this, "" + position, Toast.LENGTH_SHORT).show();
-	        }
-	    });
-
+		setContentView(R.layout.gameboard);
+		
+		setupUI();
+		
+		joingame();
+	}
+	
+	private void setupUI()
+	{
+		GridView gridview = (GridView) findViewById(R.id.gvboard);
+		gridview.setAdapter(new BoardImageAdapter(this));
+		
+		gridview.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+			{
+				Toast.makeText(BattleshipGameBoard.this, "" + position, Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+	
+	private void joingame()
+	{
 		GameLogic logic = new HardCodedXML();
 		Intent starter = getIntent();
 		Bundle extras = starter.getExtras();
 		String playerName = extras.getString("playerName");
-		if(playerName==null) {
-			playerName="Joe";
+		if (playerName == null)
+		{
+			playerName = "Joe";
 		}
 		String selectedGame = null;
 		if (extras.getString("selectedGame") != null)
@@ -50,35 +62,36 @@ public class BattleshipGameBoard extends Activity
 		{
 			Log.i(TAG, "selected game was null");
 		}
-
+		
 		if (selectedGame != null) // we're joining a game
-		{ 
+		{
 			try
 			{
 				logic.join(selectedGame, playerName);
 			} catch (IOException e)
 			{
-				Log.e(TAG,"Exception in GameBoard",e);
+				Log.e(TAG, "Exception in GameBoard", e);
 			}
-		} else // we're making a new game
-		{ 
+		} else
+			// we're making a new game
+		{
 			PlayerType opponent = (PlayerType) extras.getSerializable("opponent");
 			try
 			{
 				selectedGame = logic.newGame(playerName, opponent.toString());
 			} catch (IOException e)
 			{
-				Log.e(TAG,"Exception in GameBoard",e);
+				Log.e(TAG, "Exception in GameBoard", e);
 			}
 		}
 		
 		try
 		{
-			Log.i(TAG,logic.update(selectedGame, playerName));
+			Log.i(TAG, logic.update(selectedGame, playerName));
 		} catch (IOException e)
 		{
 			
-			Log.e(TAG,"Exception in GameBoard",e);
+			Log.e(TAG, "Exception in GameBoard", e);
 		}
 	}
 }

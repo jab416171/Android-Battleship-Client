@@ -1,6 +1,7 @@
 package edu.neumont.battleship;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +54,7 @@ public class BattleshipNewGame extends Activity
 			Intent intent = new Intent(BattleshipNewGame.this, BattleshipGameBoard.class);
 			intent.putExtra("opponent", opponent);
 			startActivity(intent);
+			
 		}
 		// TODO finish this method
 	}
