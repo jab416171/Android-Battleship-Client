@@ -9,6 +9,11 @@ import android.util.Log;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.testharness.GameLogic;
 import edu.neumont.battleship.testharness.HardCodedXML;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
+import android.widget.Toast;
 
 public class BattleshipGameBoard extends Activity
 {
@@ -18,6 +23,20 @@ public class BattleshipGameBoard extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+	}
+}
+		
+	    setContentView(R.layout.gameboard);
+
+	    GridView gridview = (GridView) findViewById(R.id.gvboard);
+	    gridview.setAdapter(new BoardImageAdapter(this));
+
+	    gridview.setOnItemClickListener(new OnItemClickListener() {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	            Toast.makeText(BattleshipGameBoard.this, "" + position, Toast.LENGTH_SHORT).show();
+	        }
+	    });
+
 		GameLogic logic = new HardCodedXML();
 		Intent starter = getIntent();
 		Bundle extras = starter.getExtras();

@@ -5,27 +5,32 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import edu.neumont.battleship.model.PlayerType;
 
 public class BattleshipNewGame extends Activity
 {
 	public static final String TAG = BattleshipActivity.TAG;
+	private int selectedRadioButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.newgame);
+		//the default radio button selected
+		selectedRadioButton = R.id.radioH;
+		
 	}
+	
 
 	public void submit(View view)
 	{
 		Log.v(TAG,"Submit button in NewGame was clicked!");
-		RadioGroup rg = (RadioGroup) findViewById(R.id.rgplayers);
-		int selectedPlayer = rg.getCheckedRadioButtonId();
+//		View v = findViewById(R.id.rgplayers);
+//		RadioGroup rg = (RadioGroup) v;
+//		int selectedPlayer = rg.getCheckedRadioButtonId();
 		PlayerType opponent = null;
-		switch (selectedPlayer)
+		switch (selectedRadioButton)
 		{
 		case R.id.radioH:
 			opponent = PlayerType.Human;
@@ -41,6 +46,7 @@ public class BattleshipNewGame extends Activity
 			break;
 		default:
 			opponent = null;
+			Log.e(TAG, "oppenent is null");
 		}
 		if (opponent != null)
 		{
@@ -49,6 +55,12 @@ public class BattleshipNewGame extends Activity
 			startActivity(intent);
 		}
 		// TODO finish this method
+	}
+
+	public void RGClicked(View v)
+	{
+		selectedRadioButton = ((RadioButton) v).getId();
+		Log.i(TAG,"selectedRadioButton: "+selectedRadioButton);
 	}
 
 }

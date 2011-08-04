@@ -32,7 +32,7 @@ public class BattleshipJoinGame extends ListActivity
 	{
 		// TODO Auto-generated method stub
 		// TODO This should actually get the list of games from the server
-		return new String[]{"Game1","Game2","Game3"};
+		return new String[]{"fake game", "fake game 2", "fake game 3"};
 	}
 
 	@Override
