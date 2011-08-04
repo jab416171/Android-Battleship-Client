@@ -1,5 +1,7 @@
 package edu.neumont.battleship;
 
+import java.util.Random;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +12,20 @@ import android.widget.ImageView;
 public class BoardImageAdapter extends BaseAdapter
 {
 	private Context context;
+	private static Random gen;
 	
 	 // references to our images
-	private final int tempMultiplier = 50;
     private Integer[] thumbIds = {
-            R.drawable.ic_menu_refresh, R.drawable.icon,
+//            R.drawable.ic_menu_refresh, R.drawable.icon,
+    		R.drawable.battleshiptile1
     };
+    private final int tempMultiplier = 100/thumbIds.length;
 
 	
 	public BoardImageAdapter(Context c)
 	{
 		context = c;
+		gen = new Random();
 	}
 
 	public int getCount()
@@ -53,7 +58,7 @@ public class BoardImageAdapter extends BaseAdapter
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(thumbIds[position%2]);
+        imageView.setImageResource(thumbIds[gen.nextInt(thumbIds.length)]);
         return imageView;
 
 	}
