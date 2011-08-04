@@ -1,5 +1,7 @@
 package edu.neumont.battleship.model;
 
-public enum PlayerType {
+import java.io.Serializable;
+
+public enum PlayerType implements Serializable{
 	Edison, Geeves, Robby, Human;
 }

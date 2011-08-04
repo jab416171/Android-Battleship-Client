@@ -45,6 +45,7 @@ public class BattleshipNewGame extends Activity
 		if (opponent != null)
 		{
 			Intent intent = new Intent(BattleshipNewGame.this, BattleshipGameBoard.class);
+			intent.putExtra("opponent", opponent);
 			startActivity(intent);
 		}
 		// TODO finish this method

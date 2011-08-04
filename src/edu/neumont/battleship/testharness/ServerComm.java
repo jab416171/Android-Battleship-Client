@@ -1,27 +1,15 @@
 package edu.neumont.battleship.testharness;
 
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * The ServerComm class is a helper class for communicating with the
@@ -54,7 +42,7 @@ public class ServerComm
 		// restore();
 	}
 	
-	public static String call(String requestType) throws IOException
+	public static String call(RequestType requestType) throws IOException
 	{
 		return call(requestType, null);
 	}
@@ -67,9 +55,9 @@ public class ServerComm
 	 * @return the response body
 	 * @throws IOException
 	 */
-	public static String call(String requestType, String requestBody) throws IOException
+	public static String call(RequestType requestType, String requestBody) throws IOException
 	{
-		URLConnection conn = getConnection(requestType);
+		URLConnection conn = getConnection(requestType.toString());
 		instance.setCookies(conn);
 		
 		// write the body

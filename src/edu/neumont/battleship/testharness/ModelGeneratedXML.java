@@ -29,7 +29,7 @@ public class ModelGeneratedXML implements GameLogic
 		//first chance to set the players name
 		game.getLocalPlayer().setId(playerName);
 		
-		String result = ServerComm.call("NewGame",
+		String result = ServerComm.call(RequestType.NewGame,
 				"<request><type>New Game</type><playerID>" + playerName
 						+ "</playerID><robot>" + robot + "</robot></request>");
 		System.out.println(result);
@@ -39,15 +39,15 @@ public class ModelGeneratedXML implements GameLogic
 		return result.substring(start, end);
 	}
 	
-	public void gameList() throws IOException
+	public String gameList() throws IOException
 	{
-		String result = ServerComm.call("GameList",
+		String result = ServerComm.call(RequestType.GameList,
 				"<request><type>game list</type></request>");
-		System.out.println(result);
+		return result;
 		
 	}
 	
-	public void placeShip(String game_Id, String playerName, String coords,
+	public String placeShip(String game_Id, String playerName, String coords,
 			String direction, String ship) throws Exception
 	{
 		Ship s = new Ship();
@@ -57,46 +57,48 @@ public class ModelGeneratedXML implements GameLogic
 		
 		game.getLocalPlayer().setShip(s);
 		
-		String result = ServerComm.call("PlaceShip",
+		String result = ServerComm.call(RequestType.PlaceShip,
 			"<request><type>Place</type>"+
 				"<gameID>"+game.getGameId()+"</gameID>"+
 				"<playerID>"+game.getLocalPlayer().getId()+"</playerID>"+
 				s.toXML()+
 			"</request>");
 		
-		System.out.println(result);
-		
+		return result;
 	}
 	
-	public void fire(String game_Id, String playerName, String coords)
+	public String fire(String game_Id, String playerName, String coords)
 			throws IOException
 	{
 		
-		String result = ServerComm.call("Fire",
+		String result = ServerComm.call(RequestType.Fire,
 				"<request><type>Fire</type><gameID>" + game_Id
 				+ "</gameID><playerID>" + playerName
 				+ "</playerID><coordinates>" + coords
 				+ "</coordinates></request>");
-		System.out.println(result);
+		return result;
 		
 	}
 	
-	public void update(String game_Id, String playerName) throws IOException
+	public String update(String game_Id, String playerName) throws IOException
 	{
+		String result = "";
 		// TODO Auto-generated method stub
-		
+		return result;
 	}
 	
-	public void join(String game_ID, String playerName) throws IOException
+	public String join(String game_ID, String playerName) throws IOException
 	{
+		String result = "";
 		// TODO Auto-generated method stub
-		
+		return result;
 	}
 	
-	public void forfeit(String game_Id, String playerName) throws IOException
+	public String forfeit(String game_Id, String playerName) throws IOException
 	{
+		String result = "";
 		// TODO Auto-generated method stub
-		
+		return result;
 	}
 	
 }

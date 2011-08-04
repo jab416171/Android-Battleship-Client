@@ -1,7 +1,6 @@
 package edu.neumont.battleship.testharness;
 
 import java.io.IOException;
-import java.util.Random;
 
 public class HardCodedXML implements GameLogic
 {
@@ -19,11 +18,13 @@ public class HardCodedXML implements GameLogic
 	 */
 	public String newGame(String playerName, String robot) throws IOException
 	{
-		String result = ServerComm.call("NewGame",
+		String r = robot.equals("Human")?"":"<robot>" + robot + "</robot>";
+		
+		String result = ServerComm.call(RequestType.NewGame,
 				"<request><type>New Game</type><playerID>" + playerName +
-						"</playerID><robot>" + robot + "</robot></request>");
+						"</playerID>"+r+"</request>");
 		System.out.println(result);
-		int start = result.indexOf("<gameID>") + 8;
+		int start = result.indexOf("<gameID>") + "<gameID>".length();
 		
 		int end = result.indexOf("</gameID>");
 		return result.substring(start, end);
@@ -35,11 +36,11 @@ public class HardCodedXML implements GameLogic
 	 * 
 	 * @see edu.neumont.battleship.testers.IGameLogic#gameList()
 	 */
-	public void gameList() throws IOException
+	public String gameList() throws IOException
 	{
-		String result = ServerComm.call("GameList",
+		String result = ServerComm.call(RequestType.GameList,
 				"<request><type>game list</type></request>");
-		System.out.println(result);
+		return result;
 	}
 	
 	/*
@@ -49,16 +50,16 @@ public class HardCodedXML implements GameLogic
 	 * edu.neumont.battleship.testers.IGameLogic#placeShip(java.lang.String,
 	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public void placeShip(String game_Id, String playerName, String coords,
+	public String placeShip(String game_Id, String playerName, String coords,
 			String direction, String ship) throws Exception
 	{
-		String result = ServerComm.call("PlaceShip",
+		String result = ServerComm.call(RequestType.PlaceShip,
 				"<request><type>Place</type><gameID>" + game_Id
 						+ "</gameID><playerID>" + playerName
 						+ "</playerID><coordinates>" + coords
 						+ "</coordinates><direction>" + direction
 						+ "</direction><ship>" + ship + "</ship></request>");
-		System.out.println(result);
+		return result;
 	}
 	
 	/*
@@ -66,15 +67,15 @@ public class HardCodedXML implements GameLogic
 	 * 
 	 * @see edu.neumont.battleship.testers.IGameLogic#fire()
 	 */
-	public void fire(String game_Id, String playerName, String coords)
+	public String fire(String game_Id, String playerName, String coords)
 			throws IOException
 	{
-		String result = ServerComm.call("Fire",
+		String result = ServerComm.call(RequestType.Fire,
 				"<request><type>Fire</type><gameID>" + game_Id
 						+ "</gameID><playerID>" + playerName
 						+ "</playerID><coordinates>" + coords
 						+ "</coordinates></request>");
-		System.out.println(result);
+		return result;
 	}
 	
 	/*
@@ -83,13 +84,13 @@ public class HardCodedXML implements GameLogic
 	 * @see edu.neumont.battleship.testers.IGameLogic#update(java.lang.String,
 	 * java.lang.String)
 	 */
-	public void update(String game_Id, String playerName) throws IOException
+	public String update(String game_Id, String playerName) throws IOException
 	{
-		String result = ServerComm.call("Update",
+		String result = ServerComm.call(RequestType.Update,
 				"<request><type>Update</type><gameID>" + game_Id
 						+ "</gameID><playerID>" + playerName
 						+ "</playerID></request>");
-		System.out.println(result);
+		return result;
 	}
 	
 	/*
@@ -98,13 +99,13 @@ public class HardCodedXML implements GameLogic
 	 * @see edu.neumont.battleship.testers.IGameLogic#join(java.lang.String,
 	 * java.lang.String)
 	 */
-	public void join(String game_Id, String playerName) throws IOException
+	public String join(String game_Id, String playerName) throws IOException
 	{
-		String result = ServerComm.call("Join",
+		String result = ServerComm.call(RequestType.Join,
 				"<request><type>Join</type><playerID>" + playerName
 						+ "</playerID><gameID>" + game_Id
 						+ "</gameID></request>");
-		System.out.println(result);
+		return result;
 	}
 	
 	/*
@@ -113,12 +114,12 @@ public class HardCodedXML implements GameLogic
 	 * @see edu.neumont.battleship.testers.IGameLogic#forfeit(java.lang.String,
 	 * java.lang.String)
 	 */
-	public void forfeit(String game_Id, String playerName) throws IOException
+	public String forfeit(String game_Id, String playerName) throws IOException
 	{
-		String result = ServerComm.call("Forfeit",
+		String result = ServerComm.call(RequestType.Forfeit,
 				"<request><type>Forfeit</type><gameID>" + game_Id
 						+ "</gameID><playerID>" + playerName
 						+ "</playerID></request>");
-		System.out.println(result);
+		return result;
 	}
 }

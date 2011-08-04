@@ -1,12 +1,15 @@
 package edu.neumont.battleship;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class BattleshipJoinGame extends ListActivity
 {
@@ -29,7 +32,7 @@ public class BattleshipJoinGame extends ListActivity
 	{
 		// TODO Auto-generated method stub
 		// TODO This should actually get the list of games from the server
-		return new String[0];
+		return new String[]{"Game1","Game2","Game3"};
 	}
 
 	@Override
@@ -50,5 +53,13 @@ public class BattleshipJoinGame extends ListActivity
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id)
+	{
+		Intent intent = new Intent(BattleshipJoinGame.this,BattleshipGameBoard.class);
+		intent.putExtra("selectedGame", l.getItemAtPosition(position).toString());
+		startActivity(intent);
 	}
 }
