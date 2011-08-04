@@ -22,7 +22,6 @@ public class CLUI
 	}
 
 	/*
-	 * (non-Javadoc)
 	 * 
 	 * @see edu.neumont.battleship.testers.IGameLogic#RunGame()
 	 */

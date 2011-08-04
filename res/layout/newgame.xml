@@ -2,20 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
+	<TextView android:text="@string/chooseopponent" android:id="@+id/tvchooseopponent"
+		android:layout_width="wrap_content" android:layout_height="wrap_content" />
 	<RadioGroup android:id="@+id/rgplayers"
-		android:layout_width="wrap_content" android:layout_height="wrap_content">
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		
+		>
 		<RadioButton android:layout_height="wrap_content"
 			android:text="@string/human" android:id="@+id/radioH"
-			android:layout_width="wrap_content" android:checked="true"></RadioButton>
+			android:layout_width="wrap_content" android:checked="true" android:onClick="RGClicked"></RadioButton>
 		<RadioButton android:layout_height="wrap_content"
 			android:text="@string/edison" android:id="@+id/radioE"
-			android:layout_width="wrap_content"></RadioButton>
+			android:layout_width="wrap_content" android:onClick="RGClicked"></RadioButton>
 		<RadioButton android:layout_height="wrap_content"
 			android:text="@string/geeves" android:id="@+id/radioG"
-			android:layout_width="wrap_content"></RadioButton>
+			android:layout_width="wrap_content" android:onClick="RGClicked"></RadioButton>
 		<RadioButton android:layout_height="wrap_content"
 			android:text="@string/robby" android:id="@+id/radioR"
-			android:layout_width="wrap_content"></RadioButton>
+			android:layout_width="wrap_content" android:onClick="RGClicked"></RadioButton>
 	</RadioGroup>
 	<TextView android:text="@string/entername" android:id="@+id/tventername"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>

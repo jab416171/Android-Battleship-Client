@@ -5,6 +5,7 @@
     <string name="newgamebutton">New Game</string>
     <string name="joingamebutton">Join Game</string>
     <string name="refresh">Refresh</string>
+    <string name="chooseopponent">Choose your opponent:</string>
     <string name="entername">Enter your name</string>
     <string name="submit">Submit</string>
     <string name="human">Human</string>
