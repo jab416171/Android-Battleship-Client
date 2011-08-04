@@ -76,11 +76,10 @@ public class ServerComm
 		writeToConn(requestBody, conn);
 		
 		// read the response
-		StringBuilder sb = readFromConn(conn);
+		String sb = readFromConn(conn);
 		
 		instance.storeCookies(conn);
-		
-		return sb.toString();
+		return sb;
 	}
 	
 	/**
@@ -89,7 +88,7 @@ public class ServerComm
 	 * @return a StringBuilder with the response
 	 * @throws IOException
 	 */
-	private static StringBuilder readFromConn(URLConnection conn) throws IOException
+	private static String readFromConn(URLConnection conn) throws IOException
 	{
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		StringBuilder sb = new StringBuilder(conn.getContentLength());
@@ -100,7 +99,7 @@ public class ServerComm
 			sb.append("\r\n");
 		}
 		in.close();
-		return sb;
+		return sb.toString();
 	}
 	
 	/**
