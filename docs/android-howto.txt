@@ -1,1 +1,10 @@
 Notes about the Android API
+
+To go from one activity to another:
+	Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+	startActivity(intent);
+	
+'Clean' your project if you have compile errors about R. This will delete and re-generate the R file. The R file is the mapping between XML and code.
+
+Make sure you refresh and clean your project after doing a git pull.
+
