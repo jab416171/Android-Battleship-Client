@@ -16,10 +16,10 @@ public class BoardImageAdapter extends BaseAdapter
 	
 	 // references to our images
     private Integer[] thumbIds = {
-//            R.drawable.ic_menu_refresh, R.drawable.icon,
-    		R.drawable.battleshiptile1
+            R.drawable.ic_menu_refresh, R.drawable.icon,
+            R.drawable.battleshiptile1,
     };
-    private final int tempMultiplier = 100/thumbIds.length;
+    private final double tempMultiplier = 100.0/thumbIds.length;
 
 	
 	public BoardImageAdapter(Context c)
@@ -30,7 +30,7 @@ public class BoardImageAdapter extends BaseAdapter
 
 	public int getCount()
 	{
-		return thumbIds.length * tempMultiplier;
+		return (int) (thumbIds.length * tempMultiplier);
 	}
 
 	public Object getItem(int idx)
