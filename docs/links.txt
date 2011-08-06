@@ -13,5 +13,8 @@ http://j.mp/androidassetstudio
 Android Developer Tools
 http://tools.android.com
 
+Code Style Guidelines (Should we all follow this?)
+https://source.android.com/source/code-style.html
+
 Common Android icons can be found in:
 android-sdk-windows\platforms\android-7\data\res
