@@ -26,6 +26,8 @@ import edu.neumont.battleship.BattleshipActivity;
 public class HttpHandler {
 	public static final String connectionURL = "http://joe-bass.com:8800/BattleshipServer/GameRequest/";
 	public static final String TAG = BattleshipActivity.TAG;
+	private static final boolean LOCAL_LOGV = false;
+	private static final boolean LOCAL_LOGD = false;
 
 	/**
 	 * Sends an HTTP GET request to a url
@@ -41,8 +43,10 @@ public class HttpHandler {
 	 */
 	public static String sendGetRequest(String endpoint,
 			String requestParameters) {
-		Log.i(TAG, "in get request, endpoint is " + endpoint + " params: "
+		if (LOCAL_LOGD) {
+			Log.d(TAG, "in get request, endpoint is " + endpoint + " params: "
 				+ requestParameters);
+		}
 		String result = null;
 		if (endpoint != null) {
 			if (!endpoint.startsWith("http://"))
@@ -55,7 +59,9 @@ public class HttpHandler {
 					urlStr += URLEncoder.encode("?" + requestParameters);
 				}
 				URL url = new URL(urlStr);
-				Log.i(TAG, url.toString());
+				if (LOCAL_LOGD) {
+					Log.d(TAG, url.toString());
+				}
 				URLConnection conn = url.openConnection();
 				InputStream is = conn.getInputStream();
 				// Get the response
@@ -157,17 +163,21 @@ public class HttpHandler {
 
 	public static String postData(String target, String content)
 			throws Exception {
-		Log.v(TAG, "About to post");
-		Log.v(TAG, "URL: " + target + "content: " + content);
+		if (LOCAL_LOGV) {
+			Log.v(TAG, "About to post");
+			Log.v(TAG, "URL: " + target + "content: " + content);
+		}
 		String response = "";
 		URL url = new URL(target);
 		URLConnection conn = url.openConnection();
-		// Map<String, List<String>> m = conn.getHeaderFields();
-		// for (Entry<String,List<String>> e : m.entrySet()) {
-		// Log.i(TAG,"Key: "+e.getKey());
-		// Log.i(TAG,"Value: "+Arrays.toString(e.getValue().toArray()));
+		// 	Map<String, List<String>> m = conn.getHeaderFields();
+		// 	for (Entry<String,List<String>> e : m.entrySet()) {
+		//	 	if (LOCAL_LOGD) {
+		//	 		Log.d(TAG,"Key: "+e.getKey());
+		//	 		Log.d(TAG,"Value: "+Arrays.toString(e.getValue().toArray()));
+		//	 	}
 		//
-		// }
+		// 	}
 		// Set connection parameters.
 		conn.setDoInput(true);
 		conn.setDoOutput(true);

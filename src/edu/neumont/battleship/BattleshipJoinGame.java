@@ -14,6 +14,7 @@ import android.widget.ListView;
 public class BattleshipJoinGame extends ListActivity
 {
 	public static final String TAG = BattleshipActivity.TAG;
+	private static final boolean LOCAL_LOGV = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -23,7 +24,9 @@ public class BattleshipJoinGame extends ListActivity
 
 	private void refresh()
 	{
-		Log.v(TAG,"Menu Item Refresh was clicked!");
+		if (LOCAL_LOGV) {
+			Log.v(TAG,"Menu Item Refresh was clicked!");
+		}
 		String[] games = getGames();
 		this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, games));
 	}

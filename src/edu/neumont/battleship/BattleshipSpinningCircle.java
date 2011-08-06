@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 public class BattleshipSpinningCircle extends Activity
 {
 	
+	private static final boolean LOCAL_LOGV = false;
 	/**
 	 * The name of the app
 	 * Used for logging
@@ -20,7 +21,9 @@ public class BattleshipSpinningCircle extends Activity
 		super.onCreate(savedInstanceState);
 		//get the name of the app
 		TAG = getText(R.string.app_name).toString();
-		Log.v(TAG, "in OnCreated!");
+		if (LOCAL_LOGV) {
+			Log.v(TAG, "in OnCreated!");
+		}
 		
 		setContentView(R.layout.home);
 		
@@ -53,12 +56,16 @@ public class BattleshipSpinningCircle extends Activity
 	@Override
 	protected void onPause() {
 		super.onPause();
-		Log.v(TAG, "in onPause");
+		if (LOCAL_LOGV) {
+			Log.v(TAG, "in onPause");
+		}
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		Log.v(TAG, "in onDestroy");
+		if (LOCAL_LOGV) {
+			Log.v(TAG, "in onDestroy");
+		}
 	}
 }

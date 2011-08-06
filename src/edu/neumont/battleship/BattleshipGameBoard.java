@@ -18,6 +18,7 @@ import edu.neumont.battleship.testharness.HardCodedXML;
 public class BattleshipGameBoard extends Activity
 {
 	public static final String TAG = BattleshipActivity.TAG;
+	private static final boolean LOCAL_LOGD = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -57,10 +58,14 @@ public class BattleshipGameBoard extends Activity
 		if (extras.getString("selectedGame") != null)
 		{
 			selectedGame = extras.getString("selectedGame");
-			Log.i(TAG, selectedGame);
+			if (LOCAL_LOGD) {
+				Log.d(TAG, selectedGame);
+			}
 		} else
 		{
-			Log.i(TAG, "selected game was null");
+			if (LOCAL_LOGD) {
+				Log.d(TAG, "selected game was null");
+			}
 		}
 		
 		if (selectedGame != null) // we're joining a game
@@ -87,7 +92,9 @@ public class BattleshipGameBoard extends Activity
 		
 		try
 		{
-			Log.i(TAG, logic.update(selectedGame, playerName));
+			if (LOCAL_LOGD) {
+				Log.d(TAG, logic.update(selectedGame, playerName));
+			}
 		} catch (IOException e)
 		{
 			

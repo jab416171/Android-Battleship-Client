@@ -12,6 +12,8 @@ import edu.neumont.battleship.model.PlayerType;
 public class BattleshipNewGame extends Activity
 {
 	public static final String TAG = BattleshipActivity.TAG;
+	private static final boolean LOCAL_LOGV = false;
+	private static final boolean LOCAL_LOGD = false;
 	private int selectedRadioButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -26,7 +28,9 @@ public class BattleshipNewGame extends Activity
 
 	public void submit(View view)
 	{
-		Log.v(TAG,"Submit button in NewGame was clicked!");
+		if (LOCAL_LOGV) {
+			Log.v(TAG,"Submit button in NewGame was clicked!");
+		}
 //		View v = findViewById(R.id.rgplayers);
 //		RadioGroup rg = (RadioGroup) v;
 //		int selectedPlayer = rg.getCheckedRadioButtonId();
@@ -62,7 +66,9 @@ public class BattleshipNewGame extends Activity
 	public void RGClicked(View v)
 	{
 		selectedRadioButton = ((RadioButton) v).getId();
-		Log.i(TAG,"selectedRadioButton: "+selectedRadioButton);
+		if (LOCAL_LOGD) {
+			Log.d(TAG,"selectedRadioButton: "+selectedRadioButton);
+		}
 	}
 
 }
