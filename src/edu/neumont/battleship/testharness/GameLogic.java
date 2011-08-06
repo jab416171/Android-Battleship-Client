@@ -16,7 +16,7 @@ public interface GameLogic
 	
 	public abstract String update(String game_Id, String playerName) throws IOException;
 	
-	public abstract String join(String game_ID, String playerName) throws IOException;
+	public abstract String join(String game_Id, String playerName) throws IOException;
 	
 	public abstract String forfeit(String game_Id, String playerName) throws IOException;
 	

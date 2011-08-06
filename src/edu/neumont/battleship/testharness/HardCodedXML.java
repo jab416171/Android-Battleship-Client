@@ -18,16 +18,23 @@ public class HardCodedXML implements GameLogic
 	 */
 	public String newGame(String playerName, String robot) throws IOException
 	{
-		String r = robot.equals("Human")?"":"<robot>" + robot + "</robot>";
+		StringBuilder request = new StringBuilder();
+		String robotString = "";
+		if(!robot.equals("Human")) {
+			robotString = "<robot>" + robot + "</robot>";
+		}
 		
-		String result = ServerComm.call(RequestType.NewGame,
-				"<request><type>New Game</type><playerID>" + playerName +
-						"</playerID>"+r+"</request>");
-		System.out.println(result);
-		int start = result.indexOf("<gameID>") + "<gameID>".length();
+		request.append("<request><type>New Game</type><playerID>");
+		request.append(playerName);
+		request.append("</playerID>");
+		request.append(robotString);
+		request.append("</request>");
+		String response = ServerComm.call(RequestType.NewGame,request.toString());
+		// System.out.println(result);
 		
-		int end = result.indexOf("</gameID>");
-		return result.substring(start, end);
+		int start = response.indexOf("<gameID>") + "<gameID>".length();
+		int end = response.indexOf("</gameID>");
+		return response.substring(start, end);
 		
 	}
 	
@@ -38,9 +45,9 @@ public class HardCodedXML implements GameLogic
 	 */
 	public String gameList() throws IOException
 	{
-		String result = ServerComm.call(RequestType.GameList,
+		String response = ServerComm.call(RequestType.GameList,
 				"<request><type>game list</type></request>");
-		return result;
+		return response;
 	}
 	
 	/*
@@ -53,13 +60,21 @@ public class HardCodedXML implements GameLogic
 	public String placeShip(String game_Id, String playerName, String coords,
 			String direction, String ship) throws Exception
 	{
-		String result = ServerComm.call(RequestType.PlaceShip,
-				"<request><type>Place</type><gameID>" + game_Id
-						+ "</gameID><playerID>" + playerName
-						+ "</playerID><coordinates>" + coords
-						+ "</coordinates><direction>" + direction
-						+ "</direction><ship>" + ship + "</ship></request>");
-		return result;
+		StringBuilder request = new StringBuilder();
+		request.append("<request><type>Place</type><gameID>");
+		request.append(game_Id);
+		request.append("</gameID><playerID>");
+		request.append(playerName);
+		request.append("</playerID><coordinates>");
+		request.append(coords);
+		request.append("</coordinates><direction>");
+		request.append(direction);
+		request.append("</direction><ship>");
+		request.append(ship);
+		request.append("</ship></request>");
+		
+		String response = ServerComm.call(RequestType.PlaceShip,request.toString());
+		return response;
 	}
 	
 	/*
@@ -70,12 +85,16 @@ public class HardCodedXML implements GameLogic
 	public String fire(String game_Id, String playerName, String coords)
 			throws IOException
 	{
-		String result = ServerComm.call(RequestType.Fire,
-				"<request><type>Fire</type><gameID>" + game_Id
-						+ "</gameID><playerID>" + playerName
-						+ "</playerID><coordinates>" + coords
-						+ "</coordinates></request>");
-		return result;
+		StringBuilder request = new StringBuilder();
+		request.append("<request><type>Fire</type><gameID>");
+		request.append(game_Id);
+		request.append("</gameID><playerID>");
+		request.append(playerName);
+		request.append("</playerID><coordinates>");
+		request.append(coords);
+		request.append("</coordinates></request>");
+		String response = ServerComm.call(RequestType.Fire,request.toString());
+		return response;
 	}
 	
 	/*
@@ -86,11 +105,14 @@ public class HardCodedXML implements GameLogic
 	 */
 	public String update(String game_Id, String playerName) throws IOException
 	{
-		String result = ServerComm.call(RequestType.Update,
-				"<request><type>Update</type><gameID>" + game_Id
-						+ "</gameID><playerID>" + playerName
-						+ "</playerID></request>");
-		return result;
+		StringBuilder request = new StringBuilder();
+		request.append("<request><type>Update</type><gameID>");
+		request.append(game_Id);
+		request.append("</gameID><playerID>");
+		request.append(playerName);
+		request.append("</playerID></request>");
+		String response = ServerComm.call(RequestType.Update,request.toString());
+		return response;
 	}
 	
 	/*
@@ -101,11 +123,14 @@ public class HardCodedXML implements GameLogic
 	 */
 	public String join(String game_Id, String playerName) throws IOException
 	{
-		String result = ServerComm.call(RequestType.Join,
-				"<request><type>Join</type><playerID>" + playerName
-						+ "</playerID><gameID>" + game_Id
-						+ "</gameID></request>");
-		return result;
+		StringBuilder request = new StringBuilder();
+		request.append("<request><type>Join</type><playerID>");
+		request.append(playerName);
+		request.append("</playerID><gameID>");
+		request.append(game_Id);
+		request.append("</gameID></request>");
+		String response = ServerComm.call(RequestType.Join,request.toString());
+		return response;
 	}
 	
 	/*
@@ -116,10 +141,13 @@ public class HardCodedXML implements GameLogic
 	 */
 	public String forfeit(String game_Id, String playerName) throws IOException
 	{
-		String result = ServerComm.call(RequestType.Forfeit,
-				"<request><type>Forfeit</type><gameID>" + game_Id
-						+ "</gameID><playerID>" + playerName
-						+ "</playerID></request>");
-		return result;
+		StringBuilder request = new StringBuilder();
+		request.append("<request><type>Forfeit</type><gameID>");
+		request.append(game_Id);
+		request.append("</gameID><playerID>");
+		request.append(playerName);
+		request.append("</playerID></request>");
+		String response = ServerComm.call(RequestType.Forfeit,request.toString());
+		return response;
 	}
 }
