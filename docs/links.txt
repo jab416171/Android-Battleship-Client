@@ -1,7 +1,14 @@
+git workflows and other things:
 http://whygitisbetterthanx.com
+
+git book:
 http://progit.org/book/ch1-3.html
+
 Menu icon information:
 http://developer.android.com/guide/practices/ui_guidelines/icon_design_menu.html
+
+android asset studio, icon generators
+http://j.mp/androidassetstudio
 
 Common Android icons can be found in:
 android-sdk-windows\platforms\android-7\data\res
