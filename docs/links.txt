@@ -16,5 +16,8 @@ http://tools.android.com
 Code Style Guidelines (Should we all follow this?)
 https://source.android.com/source/code-style.html
 
+Monkey - generates pseudorandom streams of user events
+http://developer.android.com/guide/developing/tools/monkey.html
+
 Common Android icons can be found in:
 android-sdk-windows\platforms\android-7\data\res
