@@ -20,7 +20,7 @@ public class HardCodedXML implements GameLogic
 	{
 		StringBuilder request = new StringBuilder();
 		String robotString = "";
-		if(!robot.equals("Human")) {
+		if(!"Human".equals(robot)) {
 			robotString = "<robot>" + robot + "</robot>";
 		}
 		
