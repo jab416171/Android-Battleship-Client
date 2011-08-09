@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.Toast;
 import edu.neumont.battleship.model.PlayerType;
 
 public class BattleshipNewGame extends Activity
@@ -15,25 +16,23 @@ public class BattleshipNewGame extends Activity
 	private static final boolean LOCAL_LOGV = false;
 	private static final boolean LOCAL_LOGD = false;
 	private int selectedRadioButton;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.newgame);
-		//the default radio button selected
+		// the default radio button selected
 		selectedRadioButton = R.id.radioH;
 		
 	}
 	
-
 	public void submit(View view)
 	{
-		if (LOCAL_LOGV) {
-			Log.v(TAG,"Submit button in NewGame was clicked!");
+		if (LOCAL_LOGV)
+		{
+			Log.v(TAG, "Submit button in NewGame was clicked!");
 		}
-//		View v = findViewById(R.id.rgplayers);
-//		RadioGroup rg = (RadioGroup) v;
-//		int selectedPlayer = rg.getCheckedRadioButtonId();
 		PlayerType opponent = null;
 		switch (selectedRadioButton)
 		{
@@ -56,19 +55,22 @@ public class BattleshipNewGame extends Activity
 		if (opponent != null)
 		{
 			Intent intent = new Intent(BattleshipNewGame.this, BattleshipGameBoard.class);
-			intent.putExtra("opponent", opponent);
+			SharedPrefsManager.setString(getString(R.string.opponenttype), opponent.toString());
 			startActivity(intent);
 			
+		} else
+		{
+			Toast.makeText(BattleshipNewGame.this, "Opponent was null!", Toast.LENGTH_SHORT).show();
 		}
-		// TODO finish this method
 	}
-
+	
 	public void RGClicked(View v)
 	{
 		selectedRadioButton = ((RadioButton) v).getId();
-		if (LOCAL_LOGD) {
-			Log.d(TAG,"selectedRadioButton: "+selectedRadioButton);
+		if (LOCAL_LOGD)
+		{
+			Log.d(TAG, "selectedRadioButton: " + selectedRadioButton);
 		}
 	}
-
+	
 }

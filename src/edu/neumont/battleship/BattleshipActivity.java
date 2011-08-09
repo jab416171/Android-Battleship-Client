@@ -41,6 +41,7 @@ public class BattleshipActivity extends Activity
 		EditText tv = (EditText) findViewById(R.id.edentername);
 		if (tv.getText() != null && tv.getText().length() > 0)
 		{
+			SharedPrefsManager.setString(getString(R.string.username), tv.getText().toString());
 			Intent intent = new Intent(BattleshipActivity.this, cls);
 			startActivity(intent);
 		} else

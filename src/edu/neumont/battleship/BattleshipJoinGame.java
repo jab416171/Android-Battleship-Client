@@ -62,7 +62,7 @@ public class BattleshipJoinGame extends ListActivity
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
 		Intent intent = new Intent(BattleshipJoinGame.this,BattleshipGameBoard.class);
-		intent.putExtra("selectedGame", l.getItemAtPosition(position).toString());
+		SharedPrefsManager.setString(getString(R.string.selectedgame), l.getItemAtPosition(position).toString());
 		startActivity(intent);
 	}
 }

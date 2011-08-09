@@ -47,26 +47,12 @@ public class BattleshipGameBoard extends Activity
 	private void joingame()
 	{
 		GameLogic logic = new HardCodedXML();
-		Intent starter = getIntent();
-		Bundle extras = starter.getExtras();
-		String playerName = extras.getString("playerName");
+		String playerName = SharedPrefsManager.getString(R.string.username, "Player1");
 		if (playerName == null)
 		{
 			playerName = "Joe";
 		}
-		String selectedGame = null;
-		if (extras.getString("selectedGame") != null)
-		{
-			selectedGame = extras.getString("selectedGame");
-			if (LOCAL_LOGD) {
-				Log.d(TAG, selectedGame);
-			}
-		} else
-		{
-			if (LOCAL_LOGD) {
-				Log.d(TAG, "selected game was null");
-			}
-		}
+		String selectedGame = SharedPrefsManager.getString(R.string.selectedgame, null);
 		
 		if (selectedGame != null) // we're joining a game
 		{
@@ -78,9 +64,9 @@ public class BattleshipGameBoard extends Activity
 				Log.e(TAG, "Exception in GameBoard", e);
 			}
 		} else
-			// we're making a new game
+		// we're making a new game
 		{
-			PlayerType opponent = (PlayerType) extras.getSerializable("opponent");
+			PlayerType opponent = PlayerType.valueOf(SharedPrefsManager.getString(R.string.opponenttype, "Human"));
 			try
 			{
 				selectedGame = logic.newGame(playerName, opponent.toString());
@@ -92,7 +78,8 @@ public class BattleshipGameBoard extends Activity
 		
 		try
 		{
-			if (LOCAL_LOGD) {
+			if (LOCAL_LOGD)
+			{
 				Log.d(TAG, logic.update(selectedGame, playerName));
 			}
 		} catch (IOException e)
