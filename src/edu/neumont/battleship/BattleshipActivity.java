@@ -20,6 +20,7 @@ public class BattleshipActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		TAG = getText(R.string.app_name).toString();
+		new SharedPrefsManager(BattleshipActivity.this);
 		if (LOCAL_LOGV) {
 			Log.v(TAG, "in oncreate");
 		}
