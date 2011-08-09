@@ -1,11 +1,11 @@
 package edu.neumont.battleship;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 import edu.neumont.battleship.model.PlayerType;
@@ -24,6 +24,7 @@ public class BattleshipNewGame extends Activity
 		setContentView(R.layout.newgame);
 		// the default radio button selected
 		selectedRadioButton = R.id.radioH;
+		
 		
 	}
 	

@@ -1,5 +1,6 @@
 package edu.neumont.battleship;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -9,14 +10,16 @@ import android.util.Log;
 public class SharedPrefsManager
 {
 	private static SharedPreferences preferences;
-	private static final Editor editor = preferences.edit();
+	private static Editor editor;
 	private static final String TAG = BattleshipActivity.TAG;
 	private static Context context;
+	public static final String PREFS_NAME = "battleshippreferences";
 	
 	public SharedPrefsManager(final Context context)
 	{
-		preferences = PreferenceManager.getDefaultSharedPreferences(context);
-		this.context=context;
+		preferences = context.getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
+		editor = preferences.edit();	
+		SharedPrefsManager.context=context;
 	}
 	
 	public static String getString(final int id, final String defValue) {
