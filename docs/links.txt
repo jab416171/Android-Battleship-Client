@@ -19,5 +19,8 @@ https://source.android.com/source/code-style.html
 Monkey - generates pseudorandom streams of user events
 http://developer.android.com/guide/developing/tools/monkey.html
 
+How to thread
+http://developer.android.com/resources/articles/painless-threading.html
+
 Common Android icons can be found in:
 android-sdk-windows\platforms\android-7\data\res
