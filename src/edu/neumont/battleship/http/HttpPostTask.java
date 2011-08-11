@@ -15,6 +15,7 @@ public class HttpPostTask extends AsyncTask<String, Void, String>
 		{
 			e.printStackTrace();
 		}
+		// call publishProgress() to make onProgressUpdate(Void... values) be called
 		return null;
 	}
 	
