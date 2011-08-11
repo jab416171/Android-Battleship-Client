@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<!-- General strings -->
     <string name="app_name">Battleship</string>
     <string name="newgamebutton">New Game</string>
     <string name="joingamebutton">Join Game</string>
@@ -8,12 +10,15 @@
     <string name="submit">Submit</string>
     <string name="chooseopponent">Choose your opponent:</string>
     
+    <!-- AI names -->
     <string name="human">Human</string>
     <string name="edison">Edison</string>
     <string name="geeves">Geeves</string>
     <string name="robby">Robby</string>
     
+    <!-- Used for the sharedprefs -->
     <string name="username">username</string>
     <string name="selectedgame">selectedgame</string>
     <string name="opponenttype">opponenttype</string>
+    
 </resources>
