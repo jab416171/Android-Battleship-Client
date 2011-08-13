@@ -3,7 +3,6 @@ package edu.neumont.battleship;
 import java.io.IOException;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,10 +47,6 @@ public class BattleshipGameBoard extends Activity
 	{
 		GameLogic logic = new HardCodedXML();
 		String playerName = SharedPrefsManager.getString(R.string.username, "Player1");
-		if (playerName == null)
-		{
-			playerName = "Joe";
-		}
 		String selectedGame = SharedPrefsManager.getString(R.string.selectedgame, null);
 		
 		if (selectedGame != null) // we're joining a game
@@ -66,7 +61,8 @@ public class BattleshipGameBoard extends Activity
 		} else
 		// we're making a new game
 		{
-			PlayerType opponent = PlayerType.valueOf(SharedPrefsManager.getString(R.string.opponenttype, "Human"));
+			PlayerType opponent = PlayerType.valueOf(SharedPrefsManager.getString(
+					R.string.opponenttype, "Human"));
 			try
 			{
 				selectedGame = logic.newGame(playerName, opponent.toString());
