@@ -53,16 +53,15 @@ public class BattleshipActivity extends Activity
 			startActivity(intent);
 		} else
 		{
-			final AlertDialog ad = new AlertDialog.Builder(BattleshipActivity.this).create();
-			ad.setTitle(R.string.entername);
-			ad.setButton("OK", new OnClickListener() {
-				
-				public void onClick(DialogInterface dialog, int which)
-				{
-					ad.dismiss();
-				}
-			});
-			ad.show();
+			new AlertDialog.Builder(BattleshipActivity.this)
+		    .setTitle(R.string.entername)
+		    .setPositiveButton("OK", new OnClickListener() {
+			public void onClick(DialogInterface dialog, int which)
+			{
+				dialog.dismiss();
+			}
+		    }).show();
+		    
 //			Toast.makeText(BattleshipActivity.this, R.string.entername, Toast.LENGTH_SHORT).show();
 		}
 	}
