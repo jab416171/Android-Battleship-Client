@@ -43,7 +43,7 @@ public class BattleshipActivity extends Activity
 		nextView(view, BattleshipJoinGame.class);
 	}
 	
-	public void nextView(View view, Class cls)
+	private void nextView(View view, Class<? extends Activity> cls)
 	{
 		EditText tv = (EditText) findViewById(R.id.edentername);
 		if (tv.getText() != null && tv.getText().length() > 0)
