@@ -1,7 +1,11 @@
 package edu.neumont.battleship;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +53,17 @@ public class BattleshipActivity extends Activity
 			startActivity(intent);
 		} else
 		{
-			Toast.makeText(BattleshipActivity.this, R.string.entername, Toast.LENGTH_SHORT).show();
+			final AlertDialog ad = new AlertDialog.Builder(BattleshipActivity.this).create();
+			ad.setTitle(R.string.entername);
+			ad.setButton("OK", new OnClickListener() {
+				
+				public void onClick(DialogInterface dialog, int which)
+				{
+					ad.dismiss();
+				}
+			});
+			ad.show();
+//			Toast.makeText(BattleshipActivity.this, R.string.entername, Toast.LENGTH_SHORT).show();
 		}
 	}
 	
