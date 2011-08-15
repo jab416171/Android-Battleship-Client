@@ -1,7 +1,7 @@
 package edu.neumont.battleship;
 
 import edu.neumont.battleship.http.HttpHandler;
-import edu.neumont.battleship.http.HttpPostTask;
+import edu.neumont.battleship.http.RefreshTask;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -48,20 +48,21 @@ public class BattleshipActivity extends Activity
 	public void ping(View view)
 	{
 		TextView tv = (TextView) findViewById(R.id.tvPing);
-//		HttpPostTask task = new HttpPostTask();
+		RefreshTask task = new RefreshTask(BattleshipActivity.this);
 		// TODO: this will never show up, because its in the same thread. the http request should be in its own thread, so it doesn't hang the UI Thread
 		tv.setText("Pinging server...");
-		try
-		{
-			// this is temporary, and should be moved to the HttpPostTask
-			HttpHandler.sendGetRequest("");
-			// this *should* work, but it doesn't...
-//			task.execute(HttpHandler.connectionURL,"");
-			tv.setText("Server found!");
-		} catch (Exception e)
-		{
-			tv.setText("Server not responding!");
-		}
+		task.execute(HttpHandler.connectionURL,"");
+//		try
+//		{
+//			// this is temporary, and should be moved to the HttpPostTask
+//			HttpHandler.sendGetRequest("");
+//			// this *should* work, but it doesn't...
+////			task.execute(HttpHandler.connectionURL,"");
+//			tv.setText("Server found!");
+//		} catch (Exception e)
+//		{
+//			tv.setText("Server not responding!");
+//		}
 	}
 	
 	private void nextView(View view, Class<? extends Activity> cls)
