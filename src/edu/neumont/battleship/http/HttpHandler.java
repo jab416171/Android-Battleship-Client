@@ -28,6 +28,7 @@ public class HttpHandler {
 	public static final String TAG = BattleshipActivity.TAG;
 	private static final boolean LOCAL_LOGV = false;
 	private static final boolean LOCAL_LOGD = false;
+	private static final int TIMEOUT = 5*1000;
 
 	/**
 	 * Sends an HTTP GET request to a url
@@ -91,54 +92,54 @@ public class HttpHandler {
 	 * 
 	 * @throws Exception
 	 */
-	public static void postData(Reader data, URL endpoint, Writer output)
-			throws Exception {
-		HttpURLConnection urlc = null;
-		try {
-			urlc = (HttpURLConnection) endpoint.openConnection();
-			try {
-				urlc.setRequestMethod("POST");
-			} catch (ProtocolException e) {
-				throw new Exception(
-						"Shouldn't happen: HttpURLConnection doesn't support POST??",
-						e);
-			}
-			urlc.setDoOutput(true);
-			urlc.setDoInput(true);
-			urlc.setUseCaches(false);
-			urlc.setAllowUserInteraction(false);
-			urlc.setRequestProperty("Content-type", "text/xml; charset="
-					+ "UTF-8");
-			OutputStream out = urlc.getOutputStream();
-			try {
-				Writer writer = new OutputStreamWriter(out, "UTF-8");
-				pipe(data, writer);
-				writer.close();
-			} catch (IOException e) {
-				throw new Exception("IOException while posting data", e);
-			} finally {
-				if (out != null)
-					out.close();
-			}
-			InputStream in = urlc.getInputStream();
-			try {
-				Reader reader = new InputStreamReader(in);
-				pipe(reader, output);
-				reader.close();
-			} catch (IOException e) {
-				throw new Exception("IOException while reading response", e);
-			} finally {
-				if (in != null)
-					in.close();
-			}
-		} catch (IOException e) {
-			throw new Exception("Connection error (is server running at "
-					+ endpoint + " ?): " + e);
-		} finally {
-			if (urlc != null)
-				urlc.disconnect();
-		}
-	}
+//	public static void postData(Reader data, URL endpoint, Writer output)
+//			throws Exception {
+//		HttpURLConnection urlc = null;
+//		try {
+//			urlc = (HttpURLConnection) endpoint.openConnection();
+//			try {
+//				urlc.setRequestMethod("POST");
+//			} catch (ProtocolException e) {
+//				throw new Exception(
+//						"Shouldn't happen: HttpURLConnection doesn't support POST??",
+//						e);
+//			}
+//			urlc.setDoOutput(true);
+//			urlc.setDoInput(true);
+//			urlc.setUseCaches(false);
+//			urlc.setAllowUserInteraction(false);
+//			urlc.setRequestProperty("Content-type", "text/xml; charset="
+//					+ "UTF-8");
+//			OutputStream out = urlc.getOutputStream();
+//			try {
+//				Writer writer = new OutputStreamWriter(out, "UTF-8");
+//				pipe(data, writer);
+//				writer.close();
+//			} catch (IOException e) {
+//				throw new Exception("IOException while posting data", e);
+//			} finally {
+//				if (out != null)
+//					out.close();
+//			}
+//			InputStream in = urlc.getInputStream();
+//			try {
+//				Reader reader = new InputStreamReader(in);
+//				pipe(reader, output);
+//				reader.close();
+//			} catch (IOException e) {
+//				throw new Exception("IOException while reading response", e);
+//			} finally {
+//				if (in != null)
+//					in.close();
+//			}
+//		} catch (IOException e) {
+//			throw new Exception("Connection error (is server running at "
+//					+ endpoint + " ?): " + e);
+//		} finally {
+//			if (urlc != null)
+//				urlc.disconnect();
+//		}
+//	}
 
 	/**
 	 * Pipes everything from the reader to the writer via a buffer
@@ -152,10 +153,10 @@ public class HttpHandler {
 		writer.flush();
 	}
 
-	public static void postData(Reader reader, Writer writer)
-			throws MalformedURLException, Exception {
-		postData(reader, new URL(HttpHandler.connectionURL), writer);
-	}
+//	public static void postData(Reader reader, Writer writer)
+//			throws MalformedURLException, Exception {
+//		postData(reader, new URL(HttpHandler.connectionURL), writer);
+//	}
 
 	public static String sendGetRequest(String requestParameters) {
 		return sendGetRequest(HttpHandler.connectionURL, requestParameters);
@@ -182,6 +183,7 @@ public class HttpHandler {
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
 		conn.setUseCaches(false);
+		conn.setConnectTimeout(HttpHandler.TIMEOUT);
 		// Make server believe we are form data...
 		conn.setRequestProperty("Content-Type", "application/xml");
 		DataOutputStream out = new DataOutputStream(conn.getOutputStream());

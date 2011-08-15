@@ -17,7 +17,8 @@ public class RefreshTask extends AsyncTask<String, Void, String>
 	{
 		try
 		{
-			return HttpHandler.postData(params[0], params[1]);
+			if(!isCancelled())
+				return HttpHandler.postData(params[0], params[1]);
 		} catch (Exception e)
 		{
 			this.cancel(true);
@@ -29,7 +30,10 @@ public class RefreshTask extends AsyncTask<String, Void, String>
 	@Override
 	protected void onPostExecute(String result)
 	{
-		refreshTextView.setText("Server found!");
+		if(!isCancelled())
+			refreshTextView.setText("Server found!");
+		else
+			refreshTextView.setText("Server not found!");
 	}
 	
 	@Override
