@@ -1,5 +1,7 @@
 package edu.neumont.battleship;
 
+import edu.neumont.battleship.http.HttpHandler;
+import edu.neumont.battleship.http.HttpPostTask;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class BattleshipActivity extends Activity
 {
@@ -25,7 +28,8 @@ public class BattleshipActivity extends Activity
 		new SharedPrefsManager(getApplicationContext());
 		EditText ed = (EditText) findViewById(R.id.edentername);
 		ed.setText(SharedPrefsManager.getString(R.string.username, ""));
-		if (LOCAL_LOGV) {
+		if (LOCAL_LOGV)
+		{
 			Log.v(TAG, "in oncreate");
 		}
 		
@@ -41,6 +45,25 @@ public class BattleshipActivity extends Activity
 		nextView(view, BattleshipJoinGame.class);
 	}
 	
+	public void ping(View view)
+	{
+		TextView tv = (TextView) findViewById(R.id.tvPing);
+//		HttpPostTask task = new HttpPostTask();
+		// TODO: this will never show up, because its in the same thread. the http request should be in its own thread, so it doesn't hang the UI Thread
+		tv.setText("Pinging server...");
+		try
+		{
+			// this is temporary, and should be moved to the HttpPostTask
+			HttpHandler.sendGetRequest("");
+			// this *should* work, but it doesn't...
+//			task.execute(HttpHandler.connectionURL,"");
+			tv.setText("Server found!");
+		} catch (Exception e)
+		{
+			tv.setText("Server not responding!");
+		}
+	}
+	
 	private void nextView(View view, Class<? extends Activity> cls)
 	{
 		EditText tv = (EditText) findViewById(R.id.edentername);
@@ -51,16 +74,16 @@ public class BattleshipActivity extends Activity
 			startActivity(intent);
 		} else
 		{
-			new AlertDialog.Builder(BattleshipActivity.this)
-		    .setTitle(R.string.entername)
-		    .setPositiveButton("OK", new OnClickListener() {
-			public void onClick(DialogInterface dialog, int which)
-			{
-				dialog.dismiss();
-			}
-		    }).show();
-		    
-//			Toast.makeText(BattleshipActivity.this, R.string.entername, Toast.LENGTH_SHORT).show();
+			new AlertDialog.Builder(BattleshipActivity.this).setTitle(R.string.entername)
+					.setPositiveButton("OK", new OnClickListener() {
+						public void onClick(DialogInterface dialog, int which)
+						{
+							dialog.dismiss();
+						}
+					}).show();
+			
+			// Toast.makeText(BattleshipActivity.this, R.string.entername,
+			// Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -69,7 +92,8 @@ public class BattleshipActivity extends Activity
 	{
 		// TODO Auto-generated method stub
 		super.onPause();
-		if (LOCAL_LOGV) {
+		if (LOCAL_LOGV)
+		{
 			Log.v(TAG, "I was paused!");
 		}
 	}
@@ -78,7 +102,8 @@ public class BattleshipActivity extends Activity
 	protected void onDestroy()
 	{
 		super.onDestroy();
-		if (LOCAL_LOGV) {
+		if (LOCAL_LOGV)
+		{
 			Log.v(TAG, "I was killed!");
 		}
 	}

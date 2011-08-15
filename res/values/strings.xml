@@ -20,5 +20,6 @@
     <string name="username">username</string>
     <string name="selectedgame">selectedgame</string>
     <string name="opponenttype">opponenttype</string>
+    <string name="ping">Ping the server</string>
     
 </resources>

@@ -9,6 +9,21 @@
 		android:layout_width="fill_parent" android:inputType="text"
 		android:layout_below="@+id/textView1" android:layout_alignParentLeft="true"
 		android:layout_marginTop="25dp"></EditText>
-	<Button android:onClick="newgame" android:layout_height="wrap_content" android:text="@string/newgamebutton" android:layout_width="wrap_content" android:id="@+id/newgame" android:layout_alignBaseline="@+id/joingame" android:layout_alignBottom="@+id/joingame" android:layout_alignParentLeft="true" android:layout_marginLeft="45dp"></Button>
-	<Button android:onClick="joingame" android:layout_height="wrap_content" android:text="@string/joingamebutton" android:layout_width="wrap_content" android:id="@+id/joingame" android:layout_below="@+id/edentername" android:layout_alignParentRight="true" android:layout_marginRight="48dp" android:layout_marginTop="80dp"></Button>
+	<Button android:onClick="newgame" android:layout_height="wrap_content"
+		android:text="@string/newgamebutton" android:layout_width="wrap_content"
+		android:id="@+id/newgame" android:layout_alignBaseline="@+id/joingame"
+		android:layout_alignBottom="@+id/joingame"
+		android:layout_alignParentLeft="true" android:layout_marginLeft="45dp"></Button>
+	<Button android:onClick="joingame" android:layout_height="wrap_content"
+		android:text="@string/joingamebutton" android:layout_width="wrap_content"
+		android:id="@+id/joingame" android:layout_below="@+id/edentername"
+		android:layout_alignParentRight="true" android:layout_marginRight="48dp"
+		android:layout_marginTop="80dp"></Button>
+	<Button android:onClick="ping" android:text="@string/ping"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/btnPing" android:layout_below="@+id/newgame"
+		android:layout_alignLeft="@+id/newgame" android:layout_marginTop="73dp"></Button>
+	<TextView android:layout_width="wrap_content" android:id="@+id/tvPing"
+		android:layout_height="wrap_content" android:text=""
+		android:layout_alignTop="@+id/btnPing" android:layout_alignLeft="@+id/joingame"></TextView>
 </RelativeLayout>
