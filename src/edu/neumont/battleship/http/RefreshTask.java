@@ -7,9 +7,11 @@ import edu.neumont.battleship.R;
 
 public class RefreshTask extends AsyncTask<String, Void, String>
 {
-	TextView refreshTextView;
+	private final TextView refreshTextView;
+	private final Activity activity;
 	public RefreshTask(Activity activity)
 	{
+		this.activity = activity;
 		refreshTextView = (TextView) activity.findViewById(R.id.tvPing);
 	}
 	@Override
@@ -17,6 +19,7 @@ public class RefreshTask extends AsyncTask<String, Void, String>
 	{
 		try
 		{
+			this.publishProgress();
 			if(!isCancelled())
 				return HttpHandler.postData(params[0], params[1]);
 		} catch (Exception e)
@@ -25,7 +28,12 @@ public class RefreshTask extends AsyncTask<String, Void, String>
 		}
 		return null;
 	}
-	
+
+	@Override
+	protected void onPreExecute()
+	{
+		activity.setProgressBarIndeterminateVisibility(true);
+	}
 	
 	@Override
 	protected void onPostExecute(String result)
@@ -34,6 +42,7 @@ public class RefreshTask extends AsyncTask<String, Void, String>
 			refreshTextView.setText("Server found!");
 		else
 			refreshTextView.setText("Server not found!");
+		activity.setProgressBarIndeterminateVisibility(false);
 	}
 	
 	@Override
