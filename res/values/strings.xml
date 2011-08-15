@@ -9,6 +9,7 @@
     <string name="entername">Enter your name</string>
     <string name="submit">Submit</string>
     <string name="chooseopponent">Choose your opponent:</string>
+    <string name="servernotfound">Server not found!</string>
     
     <!-- AI names -->
     <string name="human">Human</string>
