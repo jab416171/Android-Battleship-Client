@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class HardCodedXML implements GameLogic
 {
-	
+	private final static String contentType = "application/xml";
 	public HardCodedXML()
 	{
 		
@@ -29,7 +29,7 @@ public class HardCodedXML implements GameLogic
 		request.append("</playerID>");
 		request.append(robotString);
 		request.append("</request>");
-		String response = ServerComm.call(RequestType.NewGame,request.toString());
+		String response = ServerComm.call(RequestType.NewGame.toString(),request.toString(),contentType);
 		// System.out.println(result);
 		
 		int start = response.indexOf("<gameID>") + "<gameID>".length();
@@ -45,8 +45,8 @@ public class HardCodedXML implements GameLogic
 	 */
 	public String gameList() throws IOException
 	{
-		String response = ServerComm.call(RequestType.GameList,
-				"<request><type>game list</type></request>");
+		String response = ServerComm.call(RequestType.GameList.toString(),
+				"<request><type>game list</type></request>",contentType);
 		return response;
 	}
 	
@@ -73,7 +73,7 @@ public class HardCodedXML implements GameLogic
 		request.append(ship);
 		request.append("</ship></request>");
 		
-		String response = ServerComm.call(RequestType.PlaceShip,request.toString());
+		String response = ServerComm.call(RequestType.PlaceShip.toString(),request.toString(),contentType);
 		return response;
 	}
 	
@@ -93,7 +93,7 @@ public class HardCodedXML implements GameLogic
 		request.append("</playerID><coordinates>");
 		request.append(coords);
 		request.append("</coordinates></request>");
-		String response = ServerComm.call(RequestType.Fire,request.toString());
+		String response = ServerComm.call(RequestType.Fire.toString(),request.toString(),contentType);
 		return response;
 	}
 	
@@ -111,7 +111,7 @@ public class HardCodedXML implements GameLogic
 		request.append("</gameID><playerID>");
 		request.append(playerName);
 		request.append("</playerID></request>");
-		String response = ServerComm.call(RequestType.Update,request.toString());
+		String response = ServerComm.call(RequestType.Update.toString(),request.toString(),contentType);
 		return response;
 	}
 	
@@ -129,7 +129,7 @@ public class HardCodedXML implements GameLogic
 		request.append("</playerID><gameID>");
 		request.append(game_Id);
 		request.append("</gameID></request>");
-		String response = ServerComm.call(RequestType.Join,request.toString());
+		String response = ServerComm.call(RequestType.Join.toString(),request.toString(),contentType);
 		return response;
 	}
 	
@@ -147,7 +147,7 @@ public class HardCodedXML implements GameLogic
 		request.append("</gameID><playerID>");
 		request.append(playerName);
 		request.append("</playerID></request>");
-		String response = ServerComm.call(RequestType.Forfeit,request.toString());
+		String response = ServerComm.call(RequestType.Forfeit.toString(),request.toString(),contentType);
 		return response;
 	}
 }

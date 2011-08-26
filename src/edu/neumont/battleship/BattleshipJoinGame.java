@@ -33,7 +33,6 @@ public class BattleshipJoinGame extends ListActivity
 
 	private String[] getGames()
 	{
-		// TODO Auto-generated method stub
 		// TODO This should actually get the list of games from the server
 		return new String[]{"fake game", "fake game 2", "fake game 3"};
 	}
@@ -62,7 +61,7 @@ public class BattleshipJoinGame extends ListActivity
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
 		Intent intent = new Intent(BattleshipJoinGame.this,BattleshipGameBoard.class);
-		SharedPrefsManager.setString(getString(R.string.selectedgame), l.getItemAtPosition(position).toString());
+		intent.putExtra(getString(R.string.selectedgame), l.getItemAtPosition(position).toString());
 		startActivity(intent);
 	}
 }

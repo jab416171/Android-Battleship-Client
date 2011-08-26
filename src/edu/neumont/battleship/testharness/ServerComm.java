@@ -18,14 +18,14 @@ import java.util.Map;
  * result = ServerComm.call( "NewGame",
  * "<request><playerID>[[Your Name]]</playerID><robot>Edison</robot></request>"
  * ); // process the xml result here
- */
-/**
  * @author gwatson
  * 
  */
 public class ServerComm
 {
+	//TODO: remove this
 	private static final String HOST = "http://joe-bass.com:8800/BattleshipServer";
+	public static int TIMEOUT = 5*1000;
 	private Map<String, List<Cookie>> allDomainsCookies = new HashMap<String, List<Cookie>>();
 	private static final char DOT = '.';
 	private static ServerComm instance = new ServerComm();
@@ -42,32 +42,32 @@ public class ServerComm
 		// restore();
 	}
 	
-	public static String call(RequestType requestType) throws IOException
+	public static String call(RequestType requestType, String contentType) throws IOException
 	{
-		return call(requestType, null);
+		return call(requestType.toString(), null, contentType);
 	}
 	
 	/**
-	 * @param requestType
+	 * @param target
 	 *            the URL to send to
 	 * @param requestBody
 	 *            the message to put in the HTTP body
 	 * @return the response body
 	 * @throws IOException
 	 */
-	public static String call(RequestType requestType, String requestBody) throws IOException
+	public static String call(String target, String requestBody, String contentType) throws IOException
 	{
-		URLConnection conn = getConnection(requestType.toString());
+		URLConnection conn = getConnection(target.toString(), contentType);
 		instance.setCookies(conn);
 		
 		// write the body
 		writeToConn(requestBody, conn);
 		
 		// read the response
-		String sb = readFromConn(conn);
+		String response = readAndCloseConn(conn);
 		
 		instance.storeCookies(conn);
-		return sb;
+		return response;
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class ServerComm
 	 * @return a StringBuilder with the response
 	 * @throws IOException
 	 */
-	private static String readFromConn(URLConnection conn) throws IOException
+	private static String readAndCloseConn(URLConnection conn) throws IOException
 	{
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		StringBuilder sb = new StringBuilder(conn.getContentLength());
@@ -109,17 +109,22 @@ public class ServerComm
 	}
 	
 	/**
-	 * @param requestType
+	 * @param target
 	 *            the path to append to the URL.<br/>
 	 *            prepended with the 'HOST' and '/GameRequest/'
 	 * @return
 	 * @throws IOException
 	 */
-	private static URLConnection getConnection(String requestType) throws IOException
+	private static URLConnection getConnection(String target, String contentType) throws IOException
 	{
-		URL url = new URL(HOST + "/GameRequest/" + requestType);
+		//TODO: make it only target
+		URL url = new URL(HOST + "/GameRequest/" + target);
 		URLConnection conn = url.openConnection();
+		conn.setDoInput(true);
 		conn.setDoOutput(true);
+		conn.setUseCaches(false);
+		conn.setRequestProperty("Content-Type", contentType);
+		conn.setConnectTimeout(ServerComm.TIMEOUT);
 		return conn;
 	}
 	

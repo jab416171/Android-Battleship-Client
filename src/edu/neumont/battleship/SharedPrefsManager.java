@@ -21,7 +21,8 @@ public class SharedPrefsManager
 		SharedPrefsManager.context=context;
 	}
 	
-	public static String getString(final int id, final String defValue) {
+	public static String getString(final int id, final String defValue) 
+	{
 		return getString(context.getString(id), defValue);
 	}
 	

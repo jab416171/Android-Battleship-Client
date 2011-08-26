@@ -3,6 +3,7 @@ package edu.neumont.battleship;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,7 +48,11 @@ public class BattleshipGameBoard extends Activity
 	{
 		GameLogic logic = new HardCodedXML();
 		String playerName = SharedPrefsManager.getString(R.string.username, "Player1");
-		String selectedGame = SharedPrefsManager.getString(R.string.selectedgame, null);
+		//The intent for this activity
+		Intent i = getIntent();
+		//gets the extra data from the bundle, from intent. 
+		//Gets the R.string.selectedgame value after the selected game has been looked up.
+		String selectedGame = i.getExtras().getString(getString(R.string.selectedgame));
 		
 		if (selectedGame != null) // we're joining a game
 		{
@@ -83,5 +88,17 @@ public class BattleshipGameBoard extends Activity
 			
 			Log.e(TAG, "Exception in GameBoard", e);
 		}
+	}
+	@Override
+	protected void onDestroy()
+	{
+		// TODO Save game state
+		super.onDestroy();
+	}
+	@Override
+	protected void onPause()
+	{
+		// TODO Auto-generated method stub
+		super.onPause();
 	}
 }

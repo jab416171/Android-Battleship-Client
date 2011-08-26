@@ -24,16 +24,16 @@ public class BattleshipActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		if (LOCAL_LOGV)
+		{
+			Log.v(TAG, "in oncreate");
+		}
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.main);
 		TAG = getText(R.string.app_name).toString();
 		new SharedPrefsManager(getApplicationContext());
 		EditText ed = (EditText) findViewById(R.id.edentername);
 		ed.setText(SharedPrefsManager.getString(R.string.username, ""));
-		if (LOCAL_LOGV)
-		{
-			Log.v(TAG, "in oncreate");
-		}
 		
 	}
 	
@@ -66,22 +66,18 @@ public class BattleshipActivity extends Activity
 		} else
 		{
 			new AlertDialog.Builder(BattleshipActivity.this).setTitle(R.string.entername)
-					.setPositiveButton("OK", new OnClickListener() {
-						public void onClick(DialogInterface dialog, int which)
-						{
-							dialog.dismiss();
-						}
-					}).show();
-			
-			// Toast.makeText(BattleshipActivity.this, R.string.entername,
-			// Toast.LENGTH_SHORT).show();
+				.setPositiveButton("OK", new OnClickListener() {
+					public void onClick(DialogInterface dialog, int which)
+					{
+						dialog.dismiss();
+					}
+				}).show();
 		}
 	}
 	
 	@Override
 	protected void onPause()
 	{
-		// TODO Auto-generated method stub
 		super.onPause();
 		if (LOCAL_LOGV)
 		{

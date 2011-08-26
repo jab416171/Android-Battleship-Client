@@ -13,6 +13,7 @@ import edu.neumont.battleship.model.ShipType;
 public class ModelGeneratedXML implements GameLogic
 {
 	private Game game;
+	private static final String contentType = "application/xml";
 	public ModelGeneratedXML()
 	{
 		game = new Game();
@@ -34,7 +35,7 @@ public class ModelGeneratedXML implements GameLogic
 		request.append("</playerID><robot>");
 		request.append(robot);
 		request.append("</robot></request>");
-		String response = ServerComm.call(RequestType.NewGame,request.toString());
+		String response = ServerComm.call(RequestType.NewGame.toString(),request.toString(),contentType);
 		// System.out.println(result);
 		
 		int start = response.indexOf("<gameID>") + "<gameID>".length();
@@ -44,7 +45,7 @@ public class ModelGeneratedXML implements GameLogic
 	
 	public String gameList() throws IOException
 	{
-		String response = ServerComm.call(RequestType.GameList,"<request><type>game list</type></request>");
+		String response = ServerComm.call(RequestType.GameList.toString(),"<request><type>game list</type></request>",contentType);
 		return response;
 		
 	}
@@ -69,7 +70,7 @@ public class ModelGeneratedXML implements GameLogic
 		request.append(s.toXML());
 		request.append("</request>");
 		
-		String response = ServerComm.call(RequestType.PlaceShip,request.toString());
+		String response = ServerComm.call(RequestType.PlaceShip.toString(),request.toString(),contentType);
 		
 		return response;
 	}
@@ -86,7 +87,7 @@ public class ModelGeneratedXML implements GameLogic
 		request.append(coords);
 		request.append("</coordinates></request>");
 		
-		String response = ServerComm.call(RequestType.Fire,request.toString());
+		String response = ServerComm.call(RequestType.Fire.toString(),request.toString(),contentType);
 		return response;
 		
 	}
