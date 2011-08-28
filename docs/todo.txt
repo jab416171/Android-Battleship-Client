@@ -4,7 +4,6 @@ moving XML logic away from our model; maybe make a xml package
 
 
 Joe
-Make BattleshipException and subclasses
 
 Brent
 
