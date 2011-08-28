@@ -1,11 +1,11 @@
 package edu.neumont.battleship.http;
 
+import android.util.Log;
 import edu.neumont.battleship.BattleshipActivity;
 import edu.neumont.battleship.model.Coordinate;
 import edu.neumont.battleship.model.Direction;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.model.ShipType;
-import android.util.Log;
 
 public class BattleshipServerConnector {
 	public static final String TAG = BattleshipActivity.TAG;
