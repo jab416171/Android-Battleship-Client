@@ -2,18 +2,23 @@ package edu.neumont.battleship.testharness;
 
 import java.util.Scanner;
 
+import edu.neumont.battleship.model.Coordinate;
+import edu.neumont.battleship.model.Direction;
+import edu.neumont.battleship.model.PlayerType;
+import edu.neumont.battleship.model.ShipType;
+
 public class CLUI
 {
 
 	private GameLogic logic;
 	private Scanner scan = new Scanner(System.in);
-	private String gameId;
+	private int gameId;
 	private String playerName;
 
 	public static void main(String[] args)
 	{
 		//changed this --v to change the logic
-		new CLUI(new HardCodedXML()).RunGame();
+		new CLUI(new NetworkLogic()).RunGame();
 	}
 
 	public CLUI(GameLogic logic)
@@ -48,7 +53,7 @@ public class CLUI
 
 				if (input.equals("1"))
 				{
-					gameId = logic.newGame(playerName, "Edison");
+					gameId = logic.newGame(playerName, PlayerType.Edison);
 				} else if (input.equals("2"))
 				{
 					logic.join(gameId, playerName);
@@ -66,7 +71,7 @@ public class CLUI
 					logic.forfeit(gameId, playerName);
 				} else if (input.equals("7"))
 				{
-					logic.gameList();
+					System.out.println(logic.getGameList());
 				} else if (input.equals("8"))
 				{
 					play = false;
@@ -75,7 +80,6 @@ public class CLUI
 					System.out.println("Didn't understand input");
 				}
 			}
-
 			catch (Exception e)
 			{
 				e.printStackTrace();
@@ -84,7 +88,7 @@ public class CLUI
 		}
 	}
 
-	private String getCoords()
+	private Coordinate getCoords()
 	{
 		String ans;
 		do
@@ -93,10 +97,10 @@ public class CLUI
 			ans = scan.nextLine();
 			// System.out.println();
 		} while (ans.length() < 2 || ans.toCharArray()[0] < 97 || ans.toCharArray()[0] > 106 || ans.toCharArray()[1] < 49 || ans.toCharArray()[1] > 57);
-		return ans;
+		return new Coordinate(Integer.parseInt(ans.charAt(0)+""), Integer.parseInt(ans.charAt(1)+""));
 	}
 
-	private String getDirection() throws Exception
+	private Direction getDirection() throws Exception
 	{
 		String ans;
 		do
@@ -106,17 +110,17 @@ public class CLUI
 			// System.out.println();
 		} while (!ans.equalsIgnoreCase("d") && !ans.equalsIgnoreCase("u") && !ans.equalsIgnoreCase("r") && !ans.equalsIgnoreCase("l"));
 		if (ans.equalsIgnoreCase("d"))
-			return "DOWN";
+			return Direction.DOWN;
 		else if (ans.equalsIgnoreCase("u"))
-			return "UP";
+			return Direction.UP;
 		else if (ans.equalsIgnoreCase("r"))
-			return "RIGHT";
+			return Direction.RIGHT;
 		else if (ans.equalsIgnoreCase("l"))
-			return "LEFT";
+			return Direction.LEFT;
 		throw new Exception("All directions should be accounted for");
 	}
 
-	private String getShip() throws Exception
+	private ShipType getShip() throws Exception
 	{
 		String ans;
 		do
@@ -127,15 +131,15 @@ public class CLUI
 			// System.out.println();
 		} while (!ans.equalsIgnoreCase("c") && !ans.equalsIgnoreCase("b") && !ans.equalsIgnoreCase("s") && !ans.equalsIgnoreCase("r") && !ans.equalsIgnoreCase("p"));
 		if (ans.equalsIgnoreCase("c"))
-			return "Carrier";
+			return ShipType.Carrier;
 		else if (ans.equalsIgnoreCase("b"))
-			return "Battleship";
+			return ShipType.Battleship;
 		else if (ans.equalsIgnoreCase("s"))
-			return "Submarine";
+			return ShipType.Submarine;
 		else if (ans.equalsIgnoreCase("r"))
-			return "Cruiser";
+			return ShipType.Cruiser;
 		else if (ans.equalsIgnoreCase("p"))
-			return "PatrolBoat";
+			return ShipType.PatrolBoat;
 		throw new Exception("All ships should be accounted for");
 	}
 }

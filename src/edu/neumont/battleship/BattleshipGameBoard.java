@@ -13,7 +13,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.testharness.GameLogic;
-import edu.neumont.battleship.testharness.HardCodedXML;
+import edu.neumont.battleship.testharness.NetworkLogic;
 
 public class BattleshipGameBoard extends Activity
 {
@@ -46,16 +46,17 @@ public class BattleshipGameBoard extends Activity
 	
 	private void joingame()
 	{
-		GameLogic logic = new HardCodedXML();
+		GameLogic logic = new NetworkLogic();
 		String playerName = SharedPrefsManager.getString(R.string.username, "Player1");
 		//The intent for this activity
 		Intent i = getIntent();
 		//gets the extra data from the bundle, from intent. 
 		//Gets the R.string.selectedgame value after the selected game has been looked up.
-		String selectedGame = i.getExtras().getString(getString(R.string.selectedgame));
-		
-		if (selectedGame != null) // we're joining a game
+		String strSelectedGame = i.getExtras().getString(getString(R.string.selectedgame));
+		int selectedGame;
+		if (strSelectedGame != null) // we're joining a game
 		{
+			selectedGame = Integer.parseInt(strSelectedGame);
 			try
 			{
 				logic.join(selectedGame, playerName);
@@ -70,7 +71,7 @@ public class BattleshipGameBoard extends Activity
 					R.string.opponenttype, "Human"));
 			try
 			{
-				selectedGame = logic.newGame(playerName, opponent.toString());
+				selectedGame = logic.newGame(playerName, opponent);
 			} catch (IOException e)
 			{
 				Log.e(TAG, "Exception in GameBoard", e);
