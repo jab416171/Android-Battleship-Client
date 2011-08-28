@@ -1,7 +1,6 @@
 v0.4
 Glen
-working on test harness (edu.neumont.battleship.testharness)
-getting XML to be generated from our model
+moving XML logic away from our model; maybe make a xml package
 
 
 Joe
