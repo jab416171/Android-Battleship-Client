@@ -37,8 +37,18 @@ public class XMLStringBuilder {
 		return emptyRequest();
 	}
 
-	public static String requestGameState() {
-		return emptyRequest();
+	public static String requestGameState(String gameId, String playerName) {
+		StringBuilder xml = new StringBuilder();
+		xml.append("<request>");
+		xml.append("<type>Update</type>");
+		xml.append("<gameID>");
+		xml.append(gameId);
+		xml.append("</gameID>");
+		xml.append("<playerID>");
+		xml.append(playerName);
+		xml.append("</playerID>");
+		xml.append("</request>");
+		return xml.toString();
 	}
 
 	public static String joinGame(String playerID, String gameID) {
@@ -79,6 +89,11 @@ public class XMLStringBuilder {
 		xml.append("</coordinates>");
 		xml.append("</request>");
 		return xml.toString();
+	}
+	
+	public static String gameList() 
+	{
+		return "<request><type>game list</type></request>";
 	}
 
 }

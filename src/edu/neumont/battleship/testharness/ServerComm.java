@@ -12,24 +12,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The ServerComm class is a helper class for communicating with the
- * battleship server. The only method you need to worry about is
- * <code>call</code>. As an example, you could write the following code: String
- * result = ServerComm.call( "NewGame",
- * "<request><playerID>[[Your Name]]</playerID><robot>Edison</robot></request>"
- * ); // process the xml result here
+ * The ServerComm class is a helper class for communicating with a server. 
+ * The only method you need to worry about is <code>call</code>. 
+ * 
  * @author gwatson
  * 
  */
 public class ServerComm
 {
-	//TODO: remove this
-	private static final String HOST = "http://joe-bass.com:8800/BattleshipServer";
 	public static int TIMEOUT = 5*1000;
 	private Map<String, List<Cookie>> allDomainsCookies = new HashMap<String, List<Cookie>>();
 	private static final char DOT = '.';
-	private static ServerComm instance = new ServerComm();
-	// private boolean save = true;
+	private static ServerComm instance = new ServerComm(); //singleton
 	
 	private ServerComm()
 	{
@@ -42,10 +36,6 @@ public class ServerComm
 		// restore();
 	}
 	
-	public static String call(RequestType requestType, String contentType) throws IOException
-	{
-		return call(requestType.toString(), null, contentType);
-	}
 	
 	/**
 	 * @param target
@@ -117,8 +107,7 @@ public class ServerComm
 	 */
 	private static URLConnection getConnection(String target, String contentType) throws IOException
 	{
-		//TODO: make it only target
-		URL url = new URL(HOST + "/GameRequest/" + target);
+		URL url = new URL(target);
 		URLConnection conn = url.openConnection();
 		conn.setDoInput(true);
 		conn.setDoOutput(true);

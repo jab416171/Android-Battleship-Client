@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import edu.neumont.battleship.R;
+import edu.neumont.battleship.testharness.ServerComm;
 
 public class HttpPostTask extends AsyncTask<String, Void, String>
 {
@@ -26,7 +27,8 @@ public class HttpPostTask extends AsyncTask<String, Void, String>
 		this.publishProgress();
 		try
 		{
-			return HttpHandler.postData(params[0], params[1]);
+			//TODO: can we make this use BattleshipServerConnector?
+			return ServerComm.call(params[0], params[1], "application/xml");
 		} catch (Exception e)
 		{
 			this.cancel(true);

@@ -21,7 +21,7 @@ public class RefreshTask extends AsyncTask<String, Void, String>
 		{
 			this.publishProgress();
 			if(!isCancelled())
-				return HttpHandler.postData(params[0], params[1]);
+				return BattleshipServerConnector.getGameList();
 		} catch (Exception e)
 		{
 			this.cancel(true);

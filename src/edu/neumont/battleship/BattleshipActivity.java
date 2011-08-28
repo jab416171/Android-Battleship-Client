@@ -1,6 +1,5 @@
 package edu.neumont.battleship;
 
-import edu.neumont.battleship.http.HttpHandler;
 import edu.neumont.battleship.http.RefreshTask;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -52,7 +51,7 @@ public class BattleshipActivity extends Activity
 		TextView tv = (TextView) findViewById(R.id.tvPing);
 		RefreshTask task = new RefreshTask(BattleshipActivity.this);
 		tv.setText("Pinging server...");
-		task.execute(HttpHandler.connectionURL,"");
+		task.execute();
 	}
 	
 	private void nextView(View view, Class<? extends Activity> cls)
