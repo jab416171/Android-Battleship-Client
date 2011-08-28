@@ -9,6 +9,7 @@ public class RefreshTask extends AsyncTask<String, Void, Void>
 {
 	private final TextView refreshTextView;
 	private final Activity activity;
+	private boolean pingSucceeded;
 	public RefreshTask(Activity activity)
 	{
 		this.activity = activity;
@@ -18,7 +19,7 @@ public class RefreshTask extends AsyncTask<String, Void, Void>
 	protected Void doInBackground(String... params)
 	{
 			this.publishProgress();
-			this.cancel(!isCancelled() && BattleshipServerConnector.ping());
+			this.pingSucceeded = BattleshipServerConnector.ping();
 			return null;
 	}
 
@@ -31,7 +32,7 @@ public class RefreshTask extends AsyncTask<String, Void, Void>
 	@Override
 	protected void onPostExecute(Void result)
 	{
-		if(!isCancelled())
+		if(pingSucceeded)
 			refreshTextView.setText("Server found!");
 		else
 			refreshTextView.setText("Server not found!");

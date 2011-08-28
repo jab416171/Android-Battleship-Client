@@ -1,6 +1,7 @@
 package edu.neumont.battleship.http;
 
-import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 
 import android.util.Log;
 import edu.neumont.battleship.BattleshipActivity;
@@ -67,11 +68,16 @@ public class BattleshipServerConnector {
 	{
 		try
 		{
-			ServerComm.call(HOST, "", contentType);
+			URL url = new URL(HOST);
+			URLConnection conn = url.openConnection();
+			conn.setConnectTimeout(5000);
+			conn.connect();
+			Log.v(TAG,"Call worked");
 			return true;
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
+			Log.e(TAG,"Call failed", e);
 			return false;
 		}
 	}
