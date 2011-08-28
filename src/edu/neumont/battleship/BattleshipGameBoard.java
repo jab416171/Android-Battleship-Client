@@ -52,7 +52,10 @@ public class BattleshipGameBoard extends Activity
 		Intent i = getIntent();
 		//gets the extra data from the bundle, from intent. 
 		//Gets the R.string.selectedgame value after the selected game has been looked up.
-		String strSelectedGame = i.getExtras().getString(getString(R.string.selectedgame));
+		String strSelectedGame = i
+				.getExtras()
+				.getString(
+				getString(R.string.selectedgame));
 		int selectedGame;
 		if (strSelectedGame != null) // we're joining a game
 		{

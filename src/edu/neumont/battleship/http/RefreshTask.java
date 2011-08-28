@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 import edu.neumont.battleship.R;
 
-public class RefreshTask extends AsyncTask<String, Void, String>
+public class RefreshTask extends AsyncTask<String, Void, Void>
 {
 	private final TextView refreshTextView;
 	private final Activity activity;
@@ -15,18 +15,11 @@ public class RefreshTask extends AsyncTask<String, Void, String>
 		refreshTextView = (TextView) activity.findViewById(R.id.tvPing);
 	}
 	@Override
-	protected String doInBackground(String... params)
+	protected Void doInBackground(String... params)
 	{
-		try
-		{
 			this.publishProgress();
-			if(!isCancelled())
-				return BattleshipServerConnector.getGameList();
-		} catch (Exception e)
-		{
-			this.cancel(true);
-		}
-		return null;
+			this.cancel(!isCancelled() && BattleshipServerConnector.ping());
+			return null;
 	}
 
 	@Override
@@ -36,7 +29,7 @@ public class RefreshTask extends AsyncTask<String, Void, String>
 	}
 	
 	@Override
-	protected void onPostExecute(String result)
+	protected void onPostExecute(Void result)
 	{
 		if(!isCancelled())
 			refreshTextView.setText("Server found!");

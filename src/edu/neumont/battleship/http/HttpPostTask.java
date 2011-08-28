@@ -36,6 +36,12 @@ public class HttpPostTask extends AsyncTask<String, Void, String>
 	}
 	
 	@Override
+	protected void onPreExecute()
+	{
+		pd.show();
+	}
+	
+	@Override
 	protected void onPostExecute(String result)
 	{
 		pd.dismiss();

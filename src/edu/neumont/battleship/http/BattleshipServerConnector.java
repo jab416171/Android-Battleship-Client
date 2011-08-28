@@ -1,5 +1,7 @@
 package edu.neumont.battleship.http;
 
+import java.io.IOException;
+
 import android.util.Log;
 import edu.neumont.battleship.BattleshipActivity;
 import edu.neumont.battleship.model.Coordinate;
@@ -65,13 +67,10 @@ public class BattleshipServerConnector {
 	{
 		try
 		{
-			//TODO: find out what a bad call looks like
-			if(ServerComm.call(HOST, "", contentType).equals(""))
-				return false;
-			else
-				return true;
+			ServerComm.call(HOST, "", contentType);
+			return true;
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
 			return false;
 		}
