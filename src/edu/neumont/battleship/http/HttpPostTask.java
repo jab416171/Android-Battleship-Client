@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import edu.neumont.battleship.R;
-import edu.neumont.battleship.testharness.ServerComm;
 
 public class HttpPostTask extends AsyncTask<String, Void, String>
 {

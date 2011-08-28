@@ -1,4 +1,4 @@
-package edu.neumont.battleship.testharness;
+package edu.neumont.battleship.http;
 
 import java.text.DateFormat;
 import java.text.ParseException;

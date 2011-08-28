@@ -5,7 +5,6 @@ import edu.neumont.battleship.model.Coordinate;
 import edu.neumont.battleship.model.Direction;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.model.ShipType;
-import edu.neumont.battleship.testharness.ServerComm;
 import android.util.Log;
 
 public class BattleshipServerConnector {

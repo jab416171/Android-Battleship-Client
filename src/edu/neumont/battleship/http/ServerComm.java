@@ -1,4 +1,4 @@
-package edu.neumont.battleship.testharness;
+package edu.neumont.battleship.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * The ServerComm class is a helper class for communicating with a server. 
