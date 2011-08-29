@@ -16,7 +16,7 @@ Game board is set up so that the letters are on the top and the numbers are alon
 
 The string in parenthesis is the URL
 
-New Game:
+--------------------New Game--------------------
 	Request (NewGame)
 	To wait for another person to join your game
 		<request>
@@ -30,7 +30,7 @@ New Game:
 		</request>
 	Response: <response><gameID>1679618673</gameID></response>
 	
-Game List:
+--------------------Game List--------------------
 	Request (GameList):
 		<request></request>
 	Response: 
@@ -42,7 +42,7 @@ Game List:
 			</game>
 		</response>
 		
-Join Game:
+--------------------Join Game--------------------
 	Request (Join):
 		<request>
 			<playerID>Aaron</playerID>
@@ -54,7 +54,7 @@ Join Game:
 			<result>Aaron Successfully Joined</result>
 		</response>
 
-Place Ship:
+--------------------Place Ship--------------------
 	Request (PlaceShip):
 		<request>
 			<coordinates>B1</coordinates>
@@ -67,7 +67,7 @@ Place Ship:
 			<result>Successfully placed ship Aircraft Carrier</result>
 		</response>
 		
-Requesting Game State:
+--------------------Requesting Game State--------------------
 	Request (Update):
 		<request></request>
 	Response: 
@@ -115,7 +115,7 @@ Requesting Game State:
 
 
 
-Firing:
+--------------------Firing--------------------
 	Request (Fire):
 		<request>
 			<coordinates>F8</coordinates>
@@ -140,7 +140,7 @@ Firing:
 			<ship>Cruiser</ship>
 		</response>
 		
-Forfeit:
+--------------------Forfeit--------------------
 	Request (Forfeit)
 		<request></request>
 	Response:
@@ -149,7 +149,7 @@ Forfeit:
 			<result>Player Aaron has forfeited.</result>
 		</response>
 		
-Errors:
+--------------------Errors--------------------
 If you send a request that the server doesn’t understand, you will get this response:
 	<response>
 		<error>I'm sorry, I didn't understand your request.</error>
