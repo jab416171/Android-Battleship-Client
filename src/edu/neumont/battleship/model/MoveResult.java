@@ -1,7 +1,5 @@
 package edu.neumont.battleship.model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class MoveResult {
 	private Coordinate coordinate;
 	private FireStatus status;
@@ -9,13 +7,6 @@ public class MoveResult {
 
 	public MoveResult() {
 		// TODO Auto-generated constructor stub
-	}
-	public MoveResult(String xml)
-	{
-		coordinate = new Coordinate(xml);
-		status = FireStatus.fromXml(xml);
-//		playerId = ;
-		throw new NotImplementedException();
 	}
 
 	public int getPlayerId() {

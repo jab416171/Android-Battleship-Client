@@ -1,7 +1,5 @@
 package edu.neumont.battleship;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
+import edu.neumont.battleship.http.BattleshipException;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.testharness.GameLogic;
 import edu.neumont.battleship.testharness.NetworkLogic;
@@ -33,15 +32,18 @@ public class BattleshipGameBoard extends Activity
 	
 	private void setupUI()
 	{
-		GridView gridview = (GridView) findViewById(R.id.gvboard);
+		final GridView gridview = (GridView) findViewById(R.id.gvboard);
 		gridview.setAdapter(new BoardImageAdapter(this));
 		
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 			{
 				Toast.makeText(BattleshipGameBoard.this, "" + position, Toast.LENGTH_SHORT).show();
+				Log.v(TAG,"Width: " + gridview.getWidth());
+				Log.v(TAG,"Height: " + gridview.getHeight());
 			}
 		});
+		
 	}
 	
 	private void joingame()
@@ -63,7 +65,7 @@ public class BattleshipGameBoard extends Activity
 			try
 			{
 				logic.join(selectedGame, playerName);
-			} catch (IOException e)
+			} catch (BattleshipException e)
 			{
 				Log.e(TAG, "Exception in GameBoard", e);
 			}
@@ -75,7 +77,7 @@ public class BattleshipGameBoard extends Activity
 			try
 			{
 				selectedGame = logic.newGame(playerName, opponent);
-			} catch (IOException e)
+			} catch (BattleshipException e)
 			{
 				Log.e(TAG, "Exception in GameBoard", e);
 			}
@@ -87,7 +89,7 @@ public class BattleshipGameBoard extends Activity
 			{
 				Log.d(TAG, logic.update(selectedGame, playerName));
 			}
-		} catch (IOException e)
+		} catch (BattleshipException e)
 		{
 			
 			Log.e(TAG, "Exception in GameBoard", e);

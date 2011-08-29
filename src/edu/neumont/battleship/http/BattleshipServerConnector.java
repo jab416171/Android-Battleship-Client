@@ -7,53 +7,55 @@ import android.util.Log;
 import edu.neumont.battleship.BattleshipActivity;
 import edu.neumont.battleship.model.Coordinate;
 import edu.neumont.battleship.model.Direction;
+import edu.neumont.battleship.model.FireResult;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.model.ShipType;
+import edu.neumont.battleship.xml.XMLStringBuilder;
 
 public class BattleshipServerConnector {
 	public static final String TAG = BattleshipActivity.TAG;
 	private final static String contentType = "application/xml";
 	private static final String HOST = "http://joe-bass.com:8800/BattleshipServer/";
 	
-	public static XMLResponse newGame(String playerID, PlayerType opponent) throws Exception {
-			return new XMLResponse(ServerComm.call(
+	public static String newGame(String playerID, PlayerType opponent) throws Exception {
+			return XMLResponse.getResultType(ServerComm.call(
 					HOST + "NewGame",
 					XMLStringBuilder.newGame(playerID, opponent), 
-					contentType));
+					contentType), String.class);
 	}
 
-	public static XMLResponse joinGame(String playerID, String gameID) {
+	public static boolean joinGame(String playerID, String gameID) {
 		try {
-			return new XMLResponse(ServerComm.call(
+			return XMLResponse.getResultType(ServerComm.call(
 					HOST + "Join",
 					XMLStringBuilder.joinGame(playerID, gameID), 
-					contentType));
+					contentType), boolean.class);
 		} catch (Exception e) {
 			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 		}
-		return null;
+		return false;
 	}
 
-	public static XMLResponse placeShip(Coordinate coordinates, 
+	public static boolean placeShip(Coordinate coordinates, 
 			Direction direction, ShipType ship) 
 	{
 		try {
-			return new XMLResponse(ServerComm.call(
+			return XMLResponse.getResultType(ServerComm.call(
 					HOST + "PlaceShip", 
 					XMLStringBuilder.placeShip(coordinates.toString(), direction, ship), 
-					contentType));
+					contentType), boolean.class);
 		} catch (Exception e) {
 			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 		}
-		return null;
+		return false;
 	}
 
-	public static XMLResponse fire(Coordinate coordinates) {
+	public static FireResult fire(Coordinate coordinates) {
 		try {
-			return new XMLResponse(ServerComm.call(
+			return XMLResponse.getResultType(ServerComm.call(
 					HOST + "Fire",
 					XMLStringBuilder.fire(coordinates.toString()), 
-					contentType));
+					contentType), FireResult.class);
 		} catch (Exception e) {
 			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 		}

@@ -2,8 +2,10 @@ package edu.neumont.battleship.testharness;
 
 import java.io.IOException;
 
+import edu.neumont.battleship.http.BattleshipException;
 import edu.neumont.battleship.model.Coordinate;
 import edu.neumont.battleship.model.Direction;
+import edu.neumont.battleship.model.FireResult;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.model.ShipType;
 
@@ -18,29 +20,31 @@ public interface GameLogic
 	//bad gameId
 	//game is over
 	
-	public abstract int newGame(String playerName, PlayerType robot) throws IOException;
+	public abstract int newGame(String playerName, PlayerType robot) throws BattleshipException;
 	
 	public abstract int[] getGameList() throws IOException;
 	
 	// successful
 	// unsuccessful
-	//  off board
-	//  overlaps
-	//  already placed that ship
-	public abstract String placeShip(int gameId, String playerName, Coordinate coords, Direction direction, ShipType ship) throws Exception;
+	//  Exception:off board
+	//  Exception:overlaps
+	//  Exception:already placed that ship
+	public abstract boolean placeShip(int gameId, String playerName, Coordinate coords, Direction direction, ShipType ship) throws BattleshipException;
 	
 	//miss
 	//hit
-	//not your turn
-	public abstract String fire(int gameId, String playerName, Coordinate coords) throws IOException;
+	//sunk
+	//unknown
+	//Exception:not your turn
+	public abstract FireResult fire(int gameId, String playerName, Coordinate coords) throws BattleshipException;
 	
 	// TODO: complicated
-	public abstract String update(int gameId, String playerName) throws IOException;
+	public abstract String update(int gameId, String playerName) throws BattleshipException;
 	
 	//successful
 	//unsuccessful
-	public abstract String join(int gameId, String playerName) throws IOException;
+	public abstract boolean join(int gameId, String playerName) throws BattleshipException;
 	
-	public abstract String forfeit(int gameId, String playerName) throws IOException;
+	public abstract void forfeit(int gameId, String playerName) throws BattleshipException;
 	
 }

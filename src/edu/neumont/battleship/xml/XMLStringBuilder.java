@@ -1,15 +1,12 @@
-package edu.neumont.battleship.http;
+package edu.neumont.battleship.xml;
 
+import edu.neumont.battleship.model.Coordinate;
 import edu.neumont.battleship.model.Direction;
 import edu.neumont.battleship.model.PlayerType;
+import edu.neumont.battleship.model.Ship;
 import edu.neumont.battleship.model.ShipType;
 
 public class XMLStringBuilder {
-	// public static String methodName() {
-	// StringBuilder xml = new StringBuilder();
-	//
-	// return xml.toString();
-	// }
 
 	public static String newGame(String playerID, PlayerType opponent) {
 		StringBuilder xml = new StringBuilder();
@@ -94,6 +91,28 @@ public class XMLStringBuilder {
 	public static String gameList() 
 	{
 		return "<request><type>game list</type></request>";
+	}
+	
+	public String shipToXML(Ship ship)
+	{
+		return coordinateToXml(ship.getCoordinate()) +"\r\n" + 
+				directionToXML(ship.getDirection()) +"\r\n" +
+				shipTypeToXml(ship.getShipType());
+	}
+	
+	public static String directionToXML(Direction dir)
+	{
+		return "<direction>"+dir+"</direction>";
+	}
+	
+	public static String coordinateToXml(Coordinate coord)
+	{
+		return "<coordinates>"+coord.getLetter()+coord.getRow()+"</coordinates>";
+	}
+	
+	public static String shipTypeToXml(ShipType type)
+	{
+		return "<ship>"+type+"</ship>";
 	}
 
 }

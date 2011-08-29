@@ -1,6 +1,6 @@
 package edu.neumont.battleship.http;
 
-public class BattleshipException extends RuntimeException {
+public class BattleshipException extends Exception {
 
 	/**
 	 * 

@@ -1,8 +1,7 @@
 package edu.neumont.battleship.model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Coordinate implements XmlWritable
+public class Coordinate
 {
 	private int row;
 	private int col;
@@ -20,15 +19,6 @@ public class Coordinate implements XmlWritable
 		if(col < 0)
 			throw new IllegalArgumentException("col must be greater that 0");
 		this.col = col;
-	}
-	
-	public String toXML()
-	{
-		return "<coordinates>"+getLetter()+row+"</coordinates>";
-	}
-	public Coordinate(String xml)
-	{
-		throw new NotImplementedException();
 	}
 	
 	public char getLetter()

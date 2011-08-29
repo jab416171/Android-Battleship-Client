@@ -1,9 +1,11 @@
 package edu.neumont.battleship.model;
 
+import edu.neumont.battleship.http.BattleshipCookie;
 
 public class Game {
 	private int gameId;
-	private Cookie cookie;
+	//Game shouldn't worry about the cookie, only the game state
+	private BattleshipCookie cookie;
 	private Player localPlayer;
 	private Player remotePlayer;
 	private GameState state;
@@ -21,11 +23,11 @@ public class Game {
 		this.gameId = gameId;
 	}
 
-	public Cookie getCookie() {
+	public BattleshipCookie getCookie() {
 		return cookie;
 	}
 
-	public void setCookie(Cookie cookie) {
+	public void setCookie(BattleshipCookie cookie) {
 		this.cookie = cookie;
 	}
 

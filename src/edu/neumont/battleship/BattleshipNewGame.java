@@ -55,7 +55,7 @@ public class BattleshipNewGame extends Activity
 		if (opponent != null)
 		{
 			Intent intent = new Intent(BattleshipNewGame.this, BattleshipGameBoard.class);
-			SharedPrefsManager.setString(getString(R.string.opponenttype), opponent.toString());
+			intent.putExtra(getString(R.string.opponenttype), opponent.toString());
 			startActivity(intent);
 			
 		} else

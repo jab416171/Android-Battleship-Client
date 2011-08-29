@@ -2,9 +2,11 @@ package edu.neumont.battleship.testharness;
 
 import java.io.IOException;
 
+import edu.neumont.battleship.http.BattleshipException;
 import edu.neumont.battleship.http.BattleshipServerConnector;
 import edu.neumont.battleship.model.Coordinate;
 import edu.neumont.battleship.model.Direction;
+import edu.neumont.battleship.model.FireResult;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.model.ShipType;
 
@@ -15,7 +17,7 @@ import edu.neumont.battleship.model.ShipType;
 public class NetworkLogic implements GameLogic
 {
 
-	public int newGame(String playerName, PlayerType robot)
+	public int newGame(String playerName, PlayerType robot) throws BattleshipException
 	{
 		try
 		{
@@ -34,35 +36,34 @@ public class NetworkLogic implements GameLogic
 		return new int[] {-1};
 	}
 
-	public String placeShip(int gameId, String playerName, Coordinate coords, Direction direction,
-			ShipType ship) throws Exception
+	public boolean placeShip(int gameId, String playerName, Coordinate coords, Direction direction,
+			ShipType ship) throws BattleshipException
 	{
 		BattleshipServerConnector.placeShip(coords, direction, ship);
-		return "";
+		return false;
 	}
 
-	public String fire(int gameId, String playerName, Coordinate coords) throws IOException
+	public FireResult fire(int gameId, String playerName, Coordinate coords) throws BattleshipException
 	{
 		BattleshipServerConnector.fire(coords);
-		return "";
+		return null;
 	}
 
-	public String update(int gameId, String playerName) throws IOException
+	public String update(int gameId, String playerName) throws BattleshipException
 	{
 		BattleshipServerConnector.update(Integer.toString(gameId));
 		return "";
 	}
 
-	public String join(int gameId, String playerName) throws IOException
+	public boolean join(int gameId, String playerName) throws BattleshipException
 	{
 		BattleshipServerConnector.joinGame(playerName, Integer.toString(gameId));
-		return "";
+		return false;
 	}
 
-	public String forfeit(int gameId, String playerName) throws IOException
+	public void forfeit(int gameId, String playerName) throws BattleshipException
 	{
 		BattleshipServerConnector.forfeit();
-		return "";
 	}
 	
 }

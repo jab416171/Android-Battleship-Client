@@ -1,9 +1,9 @@
-package edu.neumont.battleship.model;
+package edu.neumont.battleship.http;
 
-public class Cookie {
+public class BattleshipCookie {
 	private String jSessionId;
 
-	public Cookie() {
+	public BattleshipCookie() {
 		// TODO Auto-generated constructor stub
 	}
 

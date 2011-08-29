@@ -1,6 +1,6 @@
 package edu.neumont.battleship.model;
 
-public class Ship implements XmlWritable 
+public class Ship
 {
 	private ShipType shipType;
 	private Coordinate coordinate;
@@ -8,13 +8,6 @@ public class Ship implements XmlWritable
 
 	public Ship() {
 		// TODO Auto-generated constructor stub
-	}
-	
-	public String toXML()
-	{
-		return coordinate.toXML() +"\r\n" + 
-			direction.toXML() +"\r\n" +
-			shipType.toXML();
 	}
 	
 	public ShipType getShipType() {
