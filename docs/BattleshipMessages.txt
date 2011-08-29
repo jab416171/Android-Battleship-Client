@@ -17,7 +17,7 @@ Game board is set up so that the letters are on the top and the numbers are alon
 The string in parenthesis is the URL
 
 --------------------New Game--------------------
-	Request (NewGame)
+Request (NewGame)
 	To wait for another person to join your game
 		<request>
 			<playerID>King</playerID>
@@ -28,12 +28,14 @@ The string in parenthesis is the URL
 			<playerID>King</playerID>
 			<robot>Edison</robot>
 		</request>
-	Response: <response><gameID>1679618673</gameID></response>
+		
+Response: <response><gameID>1679618673</gameID></response>
 	
 --------------------Game List--------------------
-	Request (GameList):
+Request (GameList):
 		<request></request>
-	Response: 
+		
+Response: 
 		<response>
 			<game>
 				<gameID>1679618673</gameID>
@@ -43,34 +45,37 @@ The string in parenthesis is the URL
 		</response>
 		
 --------------------Join Game--------------------
-	Request (Join):
+Request (Join):
 		<request>
 			<playerID>Aaron</playerID>
 			<gameID>1679618673</gameID>
 		</request>
-	Response:
+
+Response:
 		<response>
 			<gameID>1679618673</gameID>
 			<result>Aaron Successfully Joined</result>
 		</response>
 
 --------------------Place Ship--------------------
-	Request (PlaceShip):
+Request (PlaceShip):
 		<request>
 			<coordinates>B1</coordinates>
 			<direction>DOWN</direction>
 			<ship>Carrier</ship>
 		</request>
-	Response:
+		
+Response:
 		<response>
 			<gameID>1679618673</gameID>
 			<result>Successfully placed ship Aircraft Carrier</result>
 		</response>
 		
 --------------------Requesting Game State--------------------
-	Request (Update):
+Request (Update):
 		<request></request>
-	Response: 
+		
+Response: 
 	Before anyone has actually fired
 		<response>
 			<gameID>1679618673</gameID>
@@ -80,7 +85,7 @@ The string in parenthesis is the URL
 				<state>InProgress</state>
 			</game>
 		</response>
-	-or-
+	---or---
 	If the result is a hit or a miss (not sunk)
 		<response>
 			<gameID>1679618673</gameID>
@@ -95,7 +100,7 @@ The string in parenthesis is the URL
 				</last>
 			</game>
 		</response>
-	-or-
+	---or---
 	If the result is a hit, sunk a ship, and the game is now over
 		<response>
 			<gameID>1679618673</gameID>
@@ -114,25 +119,25 @@ The string in parenthesis is the URL
 		</response>
 
 
-
 --------------------Firing--------------------
-	Request (Fire):
+Request (Fire):
 		<request>
 			<coordinates>F8</coordinates>
 		</request>
-	Response:
+		
+Response:
 	If you missed
 		<response>
 			<gameID>1679618673</gameID>
 			<result>Miss</result>
 		</response>
-	- or -
+	---or---
 	If you hit
 		<response>
 			<gameID>1679618673</gameID>
 			<result>Hit</result>
 		</response>
-	- or -
+	---or---
 	If you sunk a ship
 		<response>
 			<gameID>1679618673</gameID>
@@ -141,9 +146,10 @@ The string in parenthesis is the URL
 		</response>
 		
 --------------------Forfeit--------------------
-	Request (Forfeit)
+Request (Forfeit)
 		<request></request>
-	Response:
+		
+Response:
 		<response>
 			<gameID>815307830</gameID>
 			<result>Player Aaron has forfeited.</result>
