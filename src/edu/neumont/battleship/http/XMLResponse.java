@@ -48,14 +48,29 @@ public class XMLResponse
 			InputStream is = new ByteArrayInputStream(xml.getBytes());
 			
 			Node responseBody = (Node) xpath.evaluate("//response",is,XPathConstants.NODE);
-			Node fireResultNode = (Node) xpath.evaluate("//FireResult", responseBody, XPathConstants.NODE);
-			if(fireResultNode != null) {
-				return parseFireResult(is);
-			} else if(is.equals(null)) {
-				return 0;
-			}
-			else {
-				return null;
+			// forfeit
+			// join
+			// place ship
+			// fire
+			Node resultNode = (Node) xpath.evaluate("//result", responseBody, XPathConstants.NODE);
+			if (resultNode != null)
+			{
+				String nodeValue = resultNode.getNodeValue();
+				if (isFireResult(nodeValue))
+				{
+					return parseFireResult(is);
+				} else if (isForfeitResult(nodeValue))
+				{
+					return parseForfeitResponse(is);
+				} else if (isJoinResult(nodeValue))
+				{
+					return parseJoinResponse(is);
+				} else if(isPlaceShipResult(nodeValue))
+				{
+					return parsePlaceShipResponse(is);
+				}
+				else
+					throw new RuntimeException("could not parse response " + xml);
 			}
 			
 		} catch (XPathExpressionException e)
@@ -66,6 +81,54 @@ public class XMLResponse
 		return null;
 	}
 	
+	private static Object parsePlaceShipResponse(InputStream is)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static boolean isPlaceShipResult(String nodeValue)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private static Object parseJoinResponse(InputStream is)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static boolean isJoinResult(String nodeValue)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private static Object parseForfeitResponse(InputStream is)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static boolean isForfeitResult(String nodeValue)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private static boolean isFireResult(String nodeValue)
+	{
+		try
+		{
+			Enum.valueOf(FireStatus.class, nodeValue);
+			return true;
+		} catch (Exception e)
+		{
+			return false;
+		}
+	}
+
 	private static FireResult parseFireResult(InputStream is)
 	{
 		// get an input stream from the xml
@@ -84,8 +147,8 @@ public class XMLResponse
 		} catch (Exception e)
 		{
 			Log.e(TAG, "Exception in FireResult", e);
+			throw new IllegalArgumentException("Invalid Fire Response");
 		}
-		return null;
 	}
 	
 	private static ShipType getShipType(String shipType)
