@@ -13,7 +13,14 @@ import org.w3c.dom.Node;
 
 import android.util.Log;
 import edu.neumont.battleship.BattleshipActivity;
-import edu.neumont.battleship.model.FireResult;
+import edu.neumont.battleship.http.results.ActionResult;
+import edu.neumont.battleship.http.results.FireResult;
+import edu.neumont.battleship.http.results.ForfeitResult;
+import edu.neumont.battleship.http.results.GameListResult;
+import edu.neumont.battleship.http.results.GameStateResult;
+import edu.neumont.battleship.http.results.JoinResult;
+import edu.neumont.battleship.http.results.NewGameResult;
+import edu.neumont.battleship.http.results.PlaceShipResult;
 import edu.neumont.battleship.model.FireStatus;
 import edu.neumont.battleship.model.ShipType;
 import edu.neumont.battleship.xml.XMLDOMHelper;

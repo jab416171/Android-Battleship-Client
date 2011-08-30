@@ -2,11 +2,11 @@ package edu.neumont.battleship.testharness;
 
 import java.io.IOException;
 
-import edu.neumont.battleship.http.BattleshipException;
+import edu.neumont.battleship.exceptions.BattleshipException;
 import edu.neumont.battleship.http.BattleshipServerConnector;
+import edu.neumont.battleship.http.results.FireResult;
 import edu.neumont.battleship.model.Coordinate;
 import edu.neumont.battleship.model.Direction;
-import edu.neumont.battleship.model.FireResult;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.model.ShipType;
 

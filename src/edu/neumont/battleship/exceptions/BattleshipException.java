@@ -1,4 +1,4 @@
-package edu.neumont.battleship.http;
+package edu.neumont.battleship.exceptions;
 
 public class BattleshipException extends Exception {
 

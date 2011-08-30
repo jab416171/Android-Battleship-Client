@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
-import edu.neumont.battleship.http.BattleshipException;
+import edu.neumont.battleship.exceptions.BattleshipException;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.testharness.GameLogic;
 import edu.neumont.battleship.testharness.NetworkLogic;

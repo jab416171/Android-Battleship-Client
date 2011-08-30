@@ -1,5 +1,7 @@
 package edu.neumont.battleship.http;
 
+import edu.neumont.battleship.exceptions.BattleshipException;
+
 public class InvalidXMLException extends BattleshipException {
 
 	/**

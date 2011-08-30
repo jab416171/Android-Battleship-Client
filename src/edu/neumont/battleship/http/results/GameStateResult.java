@@ -1,4 +1,4 @@
-package edu.neumont.battleship.http;
+package edu.neumont.battleship.http.results;
 
 public class GameStateResult extends ActionResult
 {
