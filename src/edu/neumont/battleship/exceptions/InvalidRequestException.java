@@ -1,6 +1,5 @@
-package edu.neumont.battleship.http;
+package edu.neumont.battleship.exceptions;
 
-import edu.neumont.battleship.exceptions.BattleshipException;
 
 public class InvalidRequestException extends BattleshipException {
 
