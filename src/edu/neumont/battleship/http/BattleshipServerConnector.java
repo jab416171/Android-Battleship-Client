@@ -35,7 +35,7 @@ public class BattleshipServerConnector
 			return XMLResponse.getResultType(response, NewGameResult.class);
 		} catch (IOException e)
 		{
-			// TODO log
+			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 			throw new BattleshipIOException(e.getMessage());
 		}
 	}
@@ -49,7 +49,7 @@ public class BattleshipServerConnector
 			return XMLResponse.getResultType(response, JoinResult.class);
 		} catch (IOException e)
 		{
-			// TODO log
+			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 			throw new BattleshipIOException(e.getMessage());
 		}
 	}
@@ -65,7 +65,7 @@ public class BattleshipServerConnector
 			return XMLResponse.getResultType(response, PlaceShipResult.class);
 		} catch (IOException e)
 		{
-			// TODO log
+			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 			throw new BattleshipIOException(e.getMessage());
 		}
 	}
@@ -78,7 +78,7 @@ public class BattleshipServerConnector
 					XMLStringBuilder.fire(coordinates.toString()), contentType), FireResult.class);
 		} catch (IOException e)
 		{
-			// TODO log
+			Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 			throw new BattleshipIOException(e.getMessage());
 		}
 	}
