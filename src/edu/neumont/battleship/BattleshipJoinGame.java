@@ -27,14 +27,17 @@ public class BattleshipJoinGame extends ListActivity
 		if (LOCAL_LOGV) {
 			Log.v(TAG,"Menu Item Refresh was clicked!");
 		}
-		String[] games = getGames();
-		this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, games));
+		int[] games = getGames();
+		String[] strGames = new String[games.length];
+		for(int i=0; i<games.length; i++)
+			strGames[i] = Integer.toString(games[i]);
+		this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strGames));
 	}
 
-	private String[] getGames()
+	private int[] getGames()
 	{
 		// TODO This should actually get the list of games from the server
-		return new String[]{"fake game", "fake game 2", "fake game 3"};
+		return new int[]{0, 1, 2};
 	}
 
 	@Override

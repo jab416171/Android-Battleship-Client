@@ -36,7 +36,7 @@ public class CLUI
 		System.out.print("Name?: ");
 		playerName = scan.nextLine();
 		System.out.println();
-
+		
 		while (play == true)
 		{
 			try

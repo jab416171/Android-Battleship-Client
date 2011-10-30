@@ -24,7 +24,6 @@ public class BattleshipNewGame extends Activity
 		// the default radio button selected
 		selectedRadioButton = R.id.radioH;
 		
-		
 	}
 	
 	public void submit(View view)

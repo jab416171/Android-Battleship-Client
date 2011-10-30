@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/gvboard" android:orientation="vertical"
-	android:layout_width="330dp" android:layout_height="330dp"
+	android:layout_width="500dp" android:layout_height="fill_parent"
 	android:numColumns="10" android:stretchMode="spacingWidthUniform"
 	android:horizontalSpacing="0px" android:verticalSpacing="0px"
-	android:gravity="center"
-	>
+	android:gravity="center" >
+	<!-- <ZoomControls android:id="@+id/zcZoom"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" /> -->
+	
 </GridView>

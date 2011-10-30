@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
+import android.widget.ZoomControls;
 import edu.neumont.battleship.exceptions.BattleshipException;
 import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.testharness.GameLogic;
@@ -23,6 +25,9 @@ public class BattleshipGameBoard extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		Log.v(TAG, R.layout.gameboard+"");
+		View view = findViewById(R.layout.gameboard);
+		Log.v(TAG, view == null ? "null" : view.toString());
 		setContentView(R.layout.gameboard);
 		
 		setupUI();
@@ -33,8 +38,8 @@ public class BattleshipGameBoard extends Activity
 	private void setupUI()
 	{
 		final GridView gridview = (GridView) findViewById(R.id.gvboard);
-		gridview.setAdapter(new BoardImageAdapter(this));
 		
+		gridview.setAdapter(new BoardImageAdapter(this));
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 			{
@@ -43,7 +48,23 @@ public class BattleshipGameBoard extends Activity
 				Log.v(TAG,"Height: " + gridview.getHeight());
 			}
 		});
-		
+		/*
+		final ZoomControls zoomControl = (ZoomControls) findViewById(R.id.zcZoom);
+		zoomControl.setOnZoomInClickListener(new OnClickListener()
+		{
+			public void onClick(View arg0)
+			{
+				Log.v(TAG, "Zoom in");
+			}
+		});
+		zoomControl.setOnZoomOutClickListener(new OnClickListener()
+		{
+			public void onClick(View arg0)
+			{
+				Log.v(TAG, "Zoom out");
+			}
+		});
+		*/
 	}
 	
 	private void joingame()

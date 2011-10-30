@@ -16,13 +16,17 @@ import org.xml.sax.SAXException;
 
 public class XMLDOMHelper
 {
-	private XMLDOMHelper(){}
+	private XMLDOMHelper()
+	{
+	}
 	
-	public static XPath getXPath() {
+	public static XPath getXPath()
+	{
 		return XPathFactory.newInstance().newXPath();
 	}
-
-	public static Document getDocument(InputStream is) throws ParserConfigurationException, SAXException, IOException
+	
+	public static Document getDocument(InputStream is) throws ParserConfigurationException,
+			SAXException, IOException
 	{
 		DocumentBuilderFactory domfactory = DocumentBuilderFactory.newInstance();
 		domfactory.setNamespaceAware(true); // never forget this!
@@ -30,11 +34,10 @@ public class XMLDOMHelper
 		Document doc = builder.parse(is);
 		return doc;
 	}
-
+	
 	public static XPathExpression getXpathExpression(String s) throws XPathExpressionException
 	{
 		return getXPath().compile(s);
 	}
-	
 	
 }
