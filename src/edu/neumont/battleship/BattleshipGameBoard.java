@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
+import android.view.View.OnTouchListener;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 import edu.neumont.battleship.exceptions.BattleshipException;
@@ -16,69 +18,95 @@ import edu.neumont.battleship.model.PlayerType;
 import edu.neumont.battleship.testharness.GameLogic;
 import edu.neumont.battleship.testharness.NetworkLogic;
 
-public class BattleshipGameBoard extends Activity
+public class BattleshipGameBoard extends Activity implements OnTouchListener
 {
 	public static final String TAG = BattleshipActivity.TAG;
 	private static final boolean LOCAL_LOGD = false;
+	private TouchMode mode = TouchMode.NONE;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		Log.d(TAG, "in BattleshipGameBoard onCreate()");
 		super.onCreate(savedInstanceState);
-		Log.v(TAG, R.layout.gameboard+"");
-		View view = findViewById(R.layout.gameboard);
-		Log.v(TAG, view == null ? "null" : view.toString());
+		Log.d(TAG, "super called");
 		setContentView(R.layout.gameboard);
+		Log.d(TAG, "setContentView called");
+		
+		// This doesn't work for some reason, so
+		// I add the listener to every ImageView
+		View view = findViewById(R.id.tblBoard);
+		view.setOnTouchListener(this);
 		
 		setupUI();
 		
-		joingame();
+		// joingame();
+		
 	}
 	
 	private void setupUI()
 	{
-		final GridView gridview = (GridView) findViewById(R.id.gvboard);
+		final TableLayout table = (TableLayout) findViewById(R.id.tblBoard);
 		
-		gridview.setAdapter(new BoardImageAdapter(this));
-		gridview.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+		for (int row = 0; row < table.getChildCount(); row++)
+		{
+			View view = table.getChildAt(row);
+			if (view instanceof TableRow)
 			{
-				Toast.makeText(BattleshipGameBoard.this, "" + position, Toast.LENGTH_SHORT).show();
-				Log.v(TAG,"Width: " + gridview.getWidth());
-				Log.v(TAG,"Height: " + gridview.getHeight());
+				TableRow tableRow = (TableRow) table.getChildAt(row);
+				for (int col = 0; col < tableRow.getChildCount(); col++)
+				{
+					ImageView imageView = (ImageView) tableRow.getChildAt(col);
+					imageView.setOnClickListener(new ImageViewClickListener(row, col));
+					imageView.setOnTouchListener(this);
+				}
 			}
-		});
-		/*
+		}
+		
 		final ZoomControls zoomControl = (ZoomControls) findViewById(R.id.zcZoom);
-		zoomControl.setOnZoomInClickListener(new OnClickListener()
-		{
+		zoomControl.show();
+		zoomControl.setOnZoomInClickListener(new OnClickListener() {
 			public void onClick(View arg0)
 			{
-				Log.v(TAG, "Zoom in");
+				Log.d(TAG, "Zoom in");
 			}
 		});
-		zoomControl.setOnZoomOutClickListener(new OnClickListener()
-		{
+		zoomControl.setOnZoomOutClickListener(new OnClickListener() {
 			public void onClick(View arg0)
 			{
-				Log.v(TAG, "Zoom out");
+				Log.d(TAG, "Zoom out");
 			}
 		});
-		*/
+	}
+	
+	class ImageViewClickListener implements OnClickListener
+	{
+		private int row = -1;
+		private int col = -1;
+		
+		public ImageViewClickListener(int row, int column)
+		{
+			this.row = row;
+			this.col = column;
+		}
+		
+		public void onClick(View v)
+		{
+			Toast.makeText(BattleshipGameBoard.this, row + " " + col, Toast.LENGTH_SHORT).show();
+			Log.d(TAG, row + " " + col);
+		}
 	}
 	
 	private void joingame()
 	{
 		GameLogic logic = new NetworkLogic();
 		String playerName = SharedPrefsManager.getString(R.string.username, "Player1");
-		//The intent for this activity
+		// The intent for this activity
 		Intent i = getIntent();
-		//gets the extra data from the bundle, from intent. 
-		//Gets the R.string.selectedgame value after the selected game has been looked up.
-		String strSelectedGame = i
-				.getExtras()
-				.getString(
-				getString(R.string.selectedgame));
+		// gets the extra data from the bundle, from intent.
+		// Gets the R.string.selectedgame value after the selected game has been
+		// looked up.
+		String strSelectedGame = i.getExtras().getString(getString(R.string.selectedgame));
 		int selectedGame;
 		if (strSelectedGame != null) // we're joining a game
 		{
@@ -116,16 +144,104 @@ public class BattleshipGameBoard extends Activity
 			Log.e(TAG, "Exception in GameBoard", e);
 		}
 	}
+	
 	@Override
 	protected void onDestroy()
 	{
 		// TODO Save game state
 		super.onDestroy();
 	}
+	
 	@Override
 	protected void onPause()
 	{
 		// TODO Auto-generated method stub
 		super.onPause();
+	}
+	
+	public boolean onTouch(View view, MotionEvent event)
+	{
+		// dumpEvent(event);
+		switch (event.getAction() & MotionEvent.ACTION_MASK)
+		{
+		case MotionEvent.ACTION_DOWN:
+		case MotionEvent.ACTION_UP:
+		case MotionEvent.ACTION_POINTER_UP:
+			TouchAddedRemoved(view, event);
+			break;
+		case MotionEvent.ACTION_MOVE:
+			TouchMove(view, event);
+			break;
+		default:
+			Log.d(TAG, "Unknown Touch action: "+(event.getAction() & MotionEvent.ACTION_MASK));
+		}
+		
+		return false;
+	}
+	
+	private void TouchAddedRemoved(View view, MotionEvent event)
+	{
+		if (event.getPointerCount() == 0)
+		{
+			mode = TouchMode.NONE;
+			Log.d(TAG, "mode=NONE");
+		} else if (event.getPointerCount() == 1)
+		{
+			mode = TouchMode.DRAG;
+			Log.d(TAG, "mode=DRAG");
+		} else
+		{
+			mode = TouchMode.PINCH;
+			Log.d(TAG, "mode=PINCH");
+		}
+	}
+	
+	private void TouchMove(View view, MotionEvent event)
+	{
+		switch (mode)
+		{
+		case DRAG:
+			Log.d(TAG, "dragging");
+			break;
+		case PINCH:
+			Log.d(TAG, "pinching");
+			break;
+		default:
+			Log.w(TAG, "We didn't know there was a finger down");
+		}
+	}
+	
+	enum TouchMode
+	{
+		NONE, DRAG, PINCH,
+	}
+	
+	/** Show an event in the LogCat view, for debugging */
+	private void dumpEvent(MotionEvent event)
+	{
+		String names[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "POINTER_DOWN", "POINTER_UP",
+				"7?", "8?", "9?" };
+		StringBuilder sb = new StringBuilder();
+		int action = event.getAction();
+		int actionCode = action & MotionEvent.ACTION_MASK;
+		sb.append("event ACTION_").append(names[actionCode]);
+		if (actionCode == MotionEvent.ACTION_POINTER_DOWN
+				|| actionCode == MotionEvent.ACTION_POINTER_UP)
+		{
+			sb.append("(pid ").append(action >> MotionEvent.ACTION_POINTER_ID_SHIFT);
+			sb.append(")");
+		}
+		sb.append("[");
+		for (int i = 0; i < event.getPointerCount(); i++)
+		{
+			sb.append("#").append(i);
+			sb.append("(pid ").append(event.getPointerId(i));
+			sb.append(")=").append((int) event.getX(i));
+			sb.append(",").append((int) event.getY(i));
+			if (i + 1 < event.getPointerCount())
+				sb.append(";");
+		}
+		sb.append("]");
+		Log.d(TAG, sb.toString());
 	}
 }
