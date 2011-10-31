@@ -13,7 +13,21 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/tblBoard" 
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<TableRow android:id="@+id/rowLabels1">
+		<TextView android:text=" " android:textSize="35dp" />
+		<TextView android:text="1" android:textSize="35dp" />
+		<TextView android:text="2" android:textSize="35dp" />
+		<TextView android:text="3" android:textSize="35dp" />
+		<TextView android:text="4" android:textSize="35dp" />
+		<TextView android:text="5" android:textSize="35dp" />
+		<TextView android:text="6" android:textSize="35dp" />
+		<TextView android:text="7" android:textSize="35dp" />
+		<TextView android:text="8" android:textSize="35dp" />
+		<TextView android:text="9" android:textSize="35dp" />
+		<TextView android:text="10" android:textSize="35dp" />
+	</TableRow>
 	<TableRow android:id="@+id/row1">
+		<TextView android:text="A" android:textSize="35dp" />
 		<ImageView android:id="@+id/row1col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row1col2"
@@ -25,7 +39,7 @@
 		<ImageView android:id="@+id/row1col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row1col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row1col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row1col8"
@@ -34,8 +48,10 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row1col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="A" android:textSize="35dp" />
 	</TableRow>
 	<TableRow android:id="@+id/row2">
+	<TextView android:text="B" android:textSize="35dp" />
 		<ImageView android:id="@+id/row2col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row2col2"
@@ -47,7 +63,7 @@
 		<ImageView android:id="@+id/row2col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row2col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row2col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row2col8"
@@ -56,8 +72,10 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row2col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="B" android:textSize="35dp" />
 	</TableRow>
 	<TableRow android:id="@+id/row3">
+	<TextView android:text="C" android:textSize="35dp" />
 		<ImageView android:id="@+id/row3col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row3col2"
@@ -69,7 +87,7 @@
 		<ImageView android:id="@+id/row3col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row3col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row3col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row3col8"
@@ -78,8 +96,10 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row3col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="C" android:textSize="35dp" />
 	</TableRow>
 	<TableRow android:id="@+id/row4">
+		<TextView android:text="D" android:textSize="35dp" />
 		<ImageView android:id="@+id/row4col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row4col2"
@@ -91,7 +111,7 @@
 		<ImageView android:id="@+id/row4col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row4col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row4col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row4col8"
@@ -100,8 +120,10 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row4col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="D" android:textSize="35dp" />
 	</TableRow>
 	<TableRow android:id="@+id/row5">
+		<TextView android:text="E" android:textSize="35dp" />
 		<ImageView android:id="@+id/row5col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row5col2"
@@ -113,7 +135,7 @@
 		<ImageView android:id="@+id/row5col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row5col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row5col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row5col8"
@@ -122,8 +144,10 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row5col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="E" android:textSize="35dp" />
 	</TableRow>
 	<TableRow android:id="@+id/row6">
+		<TextView android:text="F" android:textSize="35dp" />
 		<ImageView android:id="@+id/row6col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row6col2"
@@ -135,7 +159,7 @@
 		<ImageView android:id="@+id/row6col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row6col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row6col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row6col8"
@@ -144,8 +168,10 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row6col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="F" android:textSize="35dp" />
 	</TableRow>
 	<TableRow android:id="@+id/row7">
+	<TextView android:text="G" android:textSize="35dp" />
 		<ImageView android:id="@+id/row7col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row7col2"
@@ -157,7 +183,7 @@
 		<ImageView android:id="@+id/row7col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row7col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row7col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row7col8"
@@ -166,8 +192,10 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row7col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="G" android:textSize="35dp" />
 	</TableRow>
 	<TableRow android:id="@+id/row8">
+		<TextView android:text="H" android:textSize="35dp" />
 		<ImageView android:id="@+id/row8col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row8col2"
@@ -179,7 +207,7 @@
 		<ImageView android:id="@+id/row8col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row8col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row8col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row8col8"
@@ -188,8 +216,10 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row8col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="H" android:textSize="35dp" />
 	</TableRow>
 	<TableRow android:id="@+id/row9">
+		<TextView android:text="I" android:textSize="35dp" />
 		<ImageView android:id="@+id/row9col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row9col2"
@@ -201,7 +231,7 @@
 		<ImageView android:id="@+id/row9col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row9col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row9col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row9col8"
@@ -210,9 +240,11 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row9col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="I" android:textSize="35dp" />
 	</TableRow>
 	<TableRow android:id="@+id/row10">
-	<ImageView android:id="@+id/row10col1"
+		<TextView android:text="J" android:textSize="35dp" />
+		<ImageView android:id="@+id/row10col1"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row10col2"
 			android:src="@drawable/battleshiptile1"/>
@@ -223,7 +255,7 @@
 		<ImageView android:id="@+id/row10col5"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row10col6"
-		android:src="@drawable/battleshiptile1"/>
+			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row10col7"
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row10col8"
@@ -232,6 +264,20 @@
 			android:src="@drawable/battleshiptile1"/>
 		<ImageView android:id="@+id/row10col10"
 			android:src="@drawable/battleshiptile1"/>
+		<TextView android:text="J" android:textSize="35dp" />
+	</TableRow>
+	<TableRow android:id="@+id/rowLabels1">
+		<TextView android:text=" " android:textSize="35dp" />
+		<TextView android:text="1" android:textSize="35dp" />
+		<TextView android:text="2" android:textSize="35dp" />
+		<TextView android:text="3" android:textSize="35dp" />
+		<TextView android:text="4" android:textSize="35dp" />
+		<TextView android:text="5" android:textSize="35dp" />
+		<TextView android:text="6" android:textSize="35dp" />
+		<TextView android:text="7" android:textSize="35dp" />
+		<TextView android:text="8" android:textSize="35dp" />
+		<TextView android:text="9" android:textSize="35dp" />
+		<TextView android:text="10" android:textSize="35dp" />
 	</TableRow>
 	<ZoomControls android:id="@+id/zcZoom"/>
 </TableLayout>

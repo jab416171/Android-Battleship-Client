@@ -27,11 +27,11 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		Log.d(TAG, "in BattleshipGameBoard onCreate()");
+		Log.v(TAG, "in BattleshipGameBoard onCreate()");
 		super.onCreate(savedInstanceState);
-		Log.d(TAG, "super called");
+		Log.v(TAG, "super called");
 		setContentView(R.layout.gameboard);
-		Log.d(TAG, "setContentView called");
+		Log.v(TAG, "setContentView called");
 		
 		// This doesn't work for some reason, so
 		// I add the listener to every ImageView
@@ -46,6 +46,7 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 	
 	private void setupUI()
 	{
+		Log.v(TAG, "in setupUI()");
 		final TableLayout table = (TableLayout) findViewById(R.id.tblBoard);
 		
 		for (int row = 0; row < table.getChildCount(); row++)
@@ -56,27 +57,31 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 				TableRow tableRow = (TableRow) table.getChildAt(row);
 				for (int col = 0; col < tableRow.getChildCount(); col++)
 				{
-					ImageView imageView = (ImageView) tableRow.getChildAt(col);
-					imageView.setOnClickListener(new ImageViewClickListener(row, col));
-					imageView.setOnTouchListener(this);
+					if (tableRow.getChildAt(col) instanceof ImageView)
+					{
+						View cellView = tableRow.getChildAt(col);
+						cellView.setOnClickListener(new ImageViewClickListener(row, col));
+						cellView.setOnTouchListener(this);
+					}
 				}
 			}
 		}
-		
+		Log.v(TAG, "after TableRows, before Zoomcontrols");
 		final ZoomControls zoomControl = (ZoomControls) findViewById(R.id.zcZoom);
 		zoomControl.show();
 		zoomControl.setOnZoomInClickListener(new OnClickListener() {
 			public void onClick(View arg0)
 			{
-				Log.d(TAG, "Zoom in");
+				Log.v(TAG, "Zoom in");
 			}
 		});
 		zoomControl.setOnZoomOutClickListener(new OnClickListener() {
 			public void onClick(View arg0)
 			{
-				Log.d(TAG, "Zoom out");
+				Log.v(TAG, "Zoom out");
 			}
 		});
+		Log.v(TAG, "after Zoomcontrols");
 	}
 	
 	class ImageViewClickListener implements OnClickListener
@@ -93,7 +98,7 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 		public void onClick(View v)
 		{
 			Toast.makeText(BattleshipGameBoard.this, row + " " + col, Toast.LENGTH_SHORT).show();
-			Log.d(TAG, row + " " + col);
+			Log.v(TAG, row + " " + col);
 		}
 	}
 	
@@ -136,7 +141,7 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 		{
 			if (LOCAL_LOGD)
 			{
-				Log.d(TAG, logic.update(selectedGame, playerName));
+				Log.v(TAG, logic.update(selectedGame, playerName));
 			}
 		} catch (BattleshipException e)
 		{
@@ -173,7 +178,7 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 			TouchMove(view, event);
 			break;
 		default:
-			Log.d(TAG, "Unknown Touch action: "+(event.getAction() & MotionEvent.ACTION_MASK));
+			Log.v(TAG, "Unknown Touch action: " + (event.getAction() & MotionEvent.ACTION_MASK));
 		}
 		
 		return false;
@@ -184,15 +189,15 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 		if (event.getPointerCount() == 0)
 		{
 			mode = TouchMode.NONE;
-			Log.d(TAG, "mode=NONE");
+			Log.v(TAG, "mode=NONE");
 		} else if (event.getPointerCount() == 1)
 		{
 			mode = TouchMode.DRAG;
-			Log.d(TAG, "mode=DRAG");
+			Log.v(TAG, "mode=DRAG");
 		} else
 		{
 			mode = TouchMode.PINCH;
-			Log.d(TAG, "mode=PINCH");
+			Log.v(TAG, "mode=PINCH");
 		}
 	}
 	
@@ -201,10 +206,10 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 		switch (mode)
 		{
 		case DRAG:
-			Log.d(TAG, "dragging");
+			Log.v(TAG, "dragging");
 			break;
 		case PINCH:
-			Log.d(TAG, "pinching");
+			Log.v(TAG, "pinching");
 			break;
 		default:
 			Log.w(TAG, "We didn't know there was a finger down");
@@ -242,6 +247,6 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 				sb.append(";");
 		}
 		sb.append("]");
-		Log.d(TAG, sb.toString());
+		Log.v(TAG, sb.toString());
 	}
 }
