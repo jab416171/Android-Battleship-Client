@@ -172,13 +172,14 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 		case MotionEvent.ACTION_DOWN:
 		case MotionEvent.ACTION_UP:
 		case MotionEvent.ACTION_POINTER_UP:
+		case MotionEvent.ACTION_POINTER_DOWN:
 			TouchAddedRemoved(view, event);
 			break;
 		case MotionEvent.ACTION_MOVE:
 			TouchMove(view, event);
 			break;
 		default:
-			Log.v(TAG, "Unknown Touch action: " + (event.getAction() & MotionEvent.ACTION_MASK));
+			Log.v(TAG, "Unknown Touch action: " + event.getAction());//(event.getAction() & MotionEvent.ACTION_MASK));
 		}
 		
 		return false;
@@ -186,15 +187,11 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 	
 	private void TouchAddedRemoved(View view, MotionEvent event)
 	{
-		if (event.getPointerCount() == 0)
-		{
-			mode = TouchMode.NONE;
-			Log.v(TAG, "mode=NONE");
-		} else if (event.getPointerCount() == 1)
+		if (event.getPointerCount() == 1)
 		{
 			mode = TouchMode.DRAG;
 			Log.v(TAG, "mode=DRAG");
-		} else
+		} else if (event.getPointerCount() == 2)
 		{
 			mode = TouchMode.PINCH;
 			Log.v(TAG, "mode=PINCH");
@@ -207,6 +204,21 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 		{
 		case DRAG:
 			Log.v(TAG, "dragging");
+			float x = event.getX();
+			float y = event.getY();
+			int histSize = event.getHistorySize();
+			float oldX = event.getHistoricalX(histSize-1);
+			float oldY = event.getHistoricalY(histSize-1);
+			
+			float deltaX = x-oldX;
+			float deltaY = y-oldY;
+			
+			View tableLayout = findViewById(R.id.tblBoard);
+			tableLayout.layout(
+					(int)(tableLayout.getLeft()+deltaX), 
+					(int)(tableLayout.getTop()+deltaY), 
+					(int)(tableLayout.getRight()-deltaX), 
+					(int)(tableLayout.getBottom()-deltaY));
 			break;
 		case PINCH:
 			Log.v(TAG, "pinching");

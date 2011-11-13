@@ -1,8 +1,10 @@
 package edu.neumont.battleship.http;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 
 import android.util.Log;
 import edu.neumont.battleship.BattleshipActivity;
@@ -23,14 +25,18 @@ public class BattleshipServerConnector
 {
 	public static final String TAG = BattleshipActivity.TAG;
 	private final static String contentType = "application/xml";
-	private static final String HOST = "http://joe-bass.com:8800/BattleshipServer/";
+	private final static String DOMAIN = "joe-bass.com";
+	private final static int PORT = 8800;
+	private final static String PROTOCOL = "http";
+	private final static String PATH = "BattleshipServer";
+	private static final String URL = PROTOCOL+"://"+DOMAIN+":"+PORT+"/"+PATH+"/";
 	
 	public static NewGameResult newGame(String playerID, PlayerType opponent)
 			throws BattleshipException
 	{
 		try
 		{
-			String response = ServerComm.call(HOST + "NewGame",
+			String response = ServerComm.call(URL + "NewGame",
 					XMLStringBuilder.newGame(playerID, opponent), contentType);
 			return XMLResponse.getResultType(response, NewGameResult.class);
 		} catch (IOException e)
@@ -44,7 +50,7 @@ public class BattleshipServerConnector
 	{
 		try
 		{
-			String response = ServerComm.call(HOST + "Join",
+			String response = ServerComm.call(URL + "Join",
 					XMLStringBuilder.joinGame(playerID, gameID), contentType);
 			return XMLResponse.getResultType(response, JoinResult.class);
 		} catch (IOException e)
@@ -59,7 +65,7 @@ public class BattleshipServerConnector
 	{
 		try
 		{
-			String response = ServerComm.call(HOST + "PlaceShip",
+			String response = ServerComm.call(URL + "PlaceShip",
 					XMLStringBuilder.placeShip(coordinates.toString(), direction, ship),
 					contentType);
 			return XMLResponse.getResultType(response, PlaceShipResult.class);
@@ -74,7 +80,7 @@ public class BattleshipServerConnector
 	{
 		try
 		{
-			return XMLResponse.getResultType(ServerComm.call(HOST + "Fire",
+			return XMLResponse.getResultType(ServerComm.call(URL + "Fire",
 					XMLStringBuilder.fire(coordinates.toString()), contentType), FireResult.class);
 		} catch (IOException e)
 		{
@@ -90,20 +96,19 @@ public class BattleshipServerConnector
 	 */
 	public static boolean ping()
 	{
-		try
+		try 
 		{
-			URL url = new URL(HOST);
-			URLConnection conn = url.openConnection();
-			conn.setConnectTimeout(5000);
-			conn.connect();
-			Log.v(TAG, "Call worked");
-			return true;
-		} catch (Exception e)
-		{
-			Log.e(TAG, "Call failed", e);
-			return false;
-		}
+            InetAddress.getByName(DOMAIN).isReachable(2000);
+            return true;
+        } catch (UnknownHostException e)
+        {
+            return false;
+        } catch (IOException e)
+        {
+            return false;
+        }
 	}
+
 	
 	/**
 	 * Gets the list of games
