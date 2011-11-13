@@ -24,3 +24,6 @@ http://developer.android.com/resources/articles/painless-threading.html
 
 Common Android icons can be found in:
 android-sdk-windows\platforms\android-7\data\res
+
+Restart the server
+http://joe-bass.com/battleshipglen/
