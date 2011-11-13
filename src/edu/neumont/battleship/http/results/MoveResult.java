@@ -1,4 +1,7 @@
-package edu.neumont.battleship.model;
+package edu.neumont.battleship.http.results;
+
+import edu.neumont.battleship.model.Coordinate;
+import edu.neumont.battleship.model.FireStatus;
 
 public class MoveResult {
 	private Coordinate coordinate;

@@ -6,9 +6,17 @@ import edu.neumont.battleship.xml.XMLGame;
 
 public class GameListResult extends ActionResult
 {
-	List<XMLGame> gameList;
+	private final List<XMLGame> gameList;
+	public List<XMLGame> getGameList()
+	{
+		return gameList;
+	}
 	public GameListResult(List<XMLGame> gameList)
 	{
 		this.gameList = gameList;
+	}
+	public int NumOfGames()
+	{
+		return gameList.size();
 	}
 }

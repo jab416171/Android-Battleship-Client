@@ -8,7 +8,7 @@ public class Game {
 	private BattleshipCookie cookie;
 	private Player localPlayer;
 	private Player remotePlayer;
-	private GameState state;
+	private GameStatus state;
 	private Player winner;
 
 	public Game() {
@@ -47,11 +47,11 @@ public class Game {
 		this.remotePlayer = remotePlayer;
 	}
 
-	public GameState getState() {
+	public GameStatus getState() {
 		return state;
 	}
 
-	public void setState(GameState state) {
+	public void setState(GameStatus state) {
 		this.state = state;
 	}
 

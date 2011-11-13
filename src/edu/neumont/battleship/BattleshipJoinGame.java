@@ -1,5 +1,7 @@
 package edu.neumont.battleship;
 
+import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import edu.neumont.battleship.exceptions.BattleshipIOException;
 import edu.neumont.battleship.exceptions.InvalidXMLException;
 import edu.neumont.battleship.http.BattleshipServerConnector;
 import edu.neumont.battleship.http.results.ActionResult;
 import edu.neumont.battleship.http.results.GameListResult;
+import edu.neumont.battleship.xml.XMLGame;
 
 public class BattleshipJoinGame extends ListActivity
 {
@@ -33,10 +37,17 @@ public class BattleshipJoinGame extends ListActivity
 			Log.v(TAG,"Menu Item Refresh was clicked!");
 		}
 		int[] games = getGames();
-		String[] strGames = new String[games.length];
-		for(int i=0; i<games.length; i++)
-			strGames[i] = Integer.toString(games[i]);
-		this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strGames));
+		if(games.length == 0)
+		{
+			Toast.makeText(BattleshipJoinGame.this, "No games found!", Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			String[] strGames = new String[games.length];
+			for(int i=0; i<games.length; i++)
+				strGames[i] = Integer.toString(games[i]);
+			this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strGames));
+		}
 	}
 
 	private int[] getGames()
@@ -44,12 +55,19 @@ public class BattleshipJoinGame extends ListActivity
 		try
 		{
 			GameListResult result = BattleshipServerConnector.getGameList();
-		} catch (InvalidXMLException e)
+			//select the gameIds
+			List<XMLGame> games = result.getGameList();
+			int[] gameIds = new int[result.NumOfGames()];
+			for (int i=0; i<gameIds.length; i++)
+			{
+				gameIds[i] = games.get(i).getGameId();
+			}
+			return gameIds;
+		} catch (Exception e)
 		{
 			Log.e(TAG, "Error getting game list from server", e);
 		}
-		// TODO This should actually get the list of games from the server
-		return new int[]{0, 1, 2};
+		return new int[0];
 	}
 
 	@Override

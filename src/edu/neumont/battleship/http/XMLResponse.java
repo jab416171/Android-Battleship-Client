@@ -1,12 +1,8 @@
 package edu.neumont.battleship.http;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-
-import javax.xml.xpath.XPathConstants;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -25,7 +21,7 @@ import edu.neumont.battleship.http.results.JoinResult;
 import edu.neumont.battleship.http.results.NewGameResult;
 import edu.neumont.battleship.http.results.PlaceShipResult;
 import edu.neumont.battleship.model.FireStatus;
-import edu.neumont.battleship.model.GameStatus;
+import edu.neumont.battleship.model.GameState;
 import edu.neumont.battleship.model.ShipType;
 import edu.neumont.battleship.xml.XMLGame;
 
@@ -41,7 +37,7 @@ public class XMLResponse
 			throws InvalidXMLException
 	{
 		T returnedResult = null;
-		Object result = parseXML(xml);
+		ActionResult result = parseXML(xml);
 		
 		returnedResult = (T) result;
 		return returnedResult;
@@ -49,42 +45,37 @@ public class XMLResponse
 	
 	private static ActionResult parseXML(String xml) throws InvalidXMLException
 	{
-			InputStream is = new ByteArrayInputStream(xml.getBytes());
-			
-			if (isNewGameResult(xml))
-			{
-				return parseNewGameResponse(xml);
-			} else if (isGameListResult(xml))
-			{
-				return parseGameListResponse(xml);
-			} else if (isGameStateResult(xml))
-			{
-				return parseGameStateResponse(xml);
-			}
-			// forfeit
-			// join
-			// place ship
-			// fire
-			if (xml != null)
-			{
-				if (isFireResult(xml))
-				{
-					return parseFireResponse(xml);
-				} else if (isForfeitResult(xml))
-				{
-					return parseForfeitResponse(xml);
-				} else if (isJoinResult(xml))
-				{
-					return parseJoinResponse(xml);
-				} else if (isPlaceShipResult(xml))
-				{
-					return parsePlaceShipResponse(xml);
-				} else
-					throw new RuntimeException("could not parse response " + xml);
-			}
-			
+		return parseGameListResponse(xml);
 		
-		return null;
+//		if (xml != null)
+//		{
+//			if (isNewGameResult(xml))
+//			{
+//				return parseNewGameResponse(xml);
+//			} else if (isGameListResult(xml))
+//			{
+//				return parseGameListResponse(xml);
+//			} else if (isGameStateResult(xml))
+//			{
+//				return parseGameStateResponse(xml);
+//			} else if (isFireResult(xml))
+//			{
+//				return parseFireResponse(xml);
+//			} else if (isForfeitResult(xml))
+//			{
+//				return parseForfeitResponse(xml);
+//			} else if (isJoinResult(xml))
+//			{
+//				return parseJoinResponse(xml);
+//			} else if (isPlaceShipResult(xml))
+//			{
+//				return parsePlaceShipResponse(xml);
+//			} else
+//				throw new InvalidXMLException("Could not parse response " + xml);
+//		}
+//			
+//		
+//		return null;
 	}
 	
 	private static NewGameResult parseNewGameResponse(String xml)
@@ -95,7 +86,7 @@ public class XMLResponse
 	
 	private static GameListResult parseGameListResponse(String xml) throws InvalidXMLException
 	{
-		class XmlGameListContentHandler extends DefaultHandler
+		class GameListContentHandler extends DefaultHandler
 		{
 			private Stack<String> stack = new Stack<String>();
 			private XMLGame game;
@@ -125,14 +116,14 @@ public class XMLResponse
 			{
 				if (!stack.pop().equals(localName))
 				{
-					throw new SAXException("We done goofed!");
+					throw new SAXException("Ended on an element we didn't know we started");
 				}
 				if (localName.equals("game"))
 				{
 					gameList.add(game);
 					game = null;
 				}
-				stack.notify();
+//				stack.notify();
 			}
 			
 			/**
@@ -145,10 +136,12 @@ public class XMLResponse
 				String topOfStack = stack.peek();
 				if (topOfStack.equals("response"))
 				{
-					throw new SAXException("We done goofed!");
+					//throw new SAXException("There should be no characters in <response>");
+					Log.w(TAG, "characters in <response>: "+new String(ch, start, length));
 				} else if (topOfStack.equals("game"))
 				{
-					throw new SAXException("We done goofed!");
+//					throw new SAXException("There should be no characters in <game>");
+					Log.w(TAG, "characters in <game>: "+new String(ch, start, length));
 				} else if (topOfStack.equals("gameID"))
 				{
 					game.setGameId(Integer.parseInt(new String(ch, start, length)));
@@ -163,21 +156,21 @@ public class XMLResponse
 			
 			public List<XMLGame> getGameList()
 			{
-				try
-				{
-					stack.wait();
+//				try
+//				{
+//					stack.wait();
 					return gameList;
-				} catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-				return null;
+//				} catch (InterruptedException e)
+//				{
+//					e.printStackTrace();
+//				}
+//				return null;
 			}
 		}
 		
 		try
 		{
-			XmlGameListContentHandler handler = new XmlGameListContentHandler();
+			GameListContentHandler handler = new GameListContentHandler();
 			Xml.parse(xml, handler);
 			return new GameListResult(handler.getGameList());
 		} catch (SAXException e)
@@ -302,26 +295,26 @@ public class XMLResponse
 		return Enum.valueOf(FireStatus.class, fireStatus);
 	}
 	
-	public static GameStatus parseGameState(String str)
+	public static GameState parseGameState(String str)
 	{
 		if (str.equals("WaitingFor2nd"))
 		{
-			return GameStatus.WaitingFor2nd;
+			return GameState.WaitingFor2nd;
 		} else if (str.equals("WaitingForShips"))
 		{
-			return GameStatus.WaitingForShips;
+			return GameState.WaitingForShips;
 		} else if (str.equals("InProgress"))
 		{
-			return GameStatus.InProgress;
+			return GameState.InProgress;
 		} else if (str.equals("Finished"))
 		{
-			return GameStatus.Finished;
+			return GameState.Finished;
 		} else if (str.equals("Forfeited"))
 		{
-			return GameStatus.Forfeited;
+			return GameState.Forfeited;
 		} else
 		{
-			return GameStatus.TimedOut;
+			return GameState.TimedOut;
 		}
 		
 	}

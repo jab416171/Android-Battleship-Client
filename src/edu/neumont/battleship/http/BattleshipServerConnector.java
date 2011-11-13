@@ -25,11 +25,14 @@ public class BattleshipServerConnector
 {
 	public static final String TAG = BattleshipActivity.TAG;
 	private final static String contentType = "application/xml";
-	
+	/**
+	 * The amount of time to wait for a response from the server in milliseconds
+	 */
+	private final static int TIMEOUT = 10 * 1000;
 	private final static String DOMAIN = "joe-bass.com";
 	private final static int PORT = 8800;
 	private final static String PROTOCOL = "http";
-	private final static String PATH = "BattleshipServer/";
+	private final static String PATH = "BattleshipServer/GameRequest/";
 	private static final String URL = PROTOCOL+"://"+DOMAIN+":"+PORT+"/"+PATH;
 	
 	public static NewGameResult newGame(String playerID, PlayerType opponent)
@@ -99,7 +102,7 @@ public class BattleshipServerConnector
 	{
 		try 
 		{
-            InetAddress.getByName(DOMAIN).isReachable(2000);
+            InetAddress.getByName(DOMAIN).isReachable(TIMEOUT);
             return true;
         } catch (UnknownHostException e)
         {
@@ -116,46 +119,55 @@ public class BattleshipServerConnector
 	 * 
 	 * @return the body of the HTTP request
 	 * @throws InvalidXMLException 
+	 * @throws BattleshipIOException 
 	 */
-	public static GameListResult getGameList() throws InvalidXMLException
+	public static GameListResult getGameList() throws InvalidXMLException, BattleshipIOException
 	{
-//			String response = ServerComm.call(URL + "GameList",
-//					"<request></request>",
-//					contentType);
-			String response = "<response>"+
-					"	<game>"+
-					"		<gameID>1679618673</gameID>"+
-					"		<turn>Glen</turn>"+
-					"		<state>WaitingFor2nd</state>"+
-					"	</game>"+
-					"	<game>"+
-					"		<gameID>1679618674</gameID>"+
-					"		<turn>King0</turn>"+
-					"		<state>WaitingFor2nd</state>"+
-					"	</game>"+
-					"	<game>"+
-					"		<gameID>1679618675</gameID>"+
-					"		<turn>King1</turn>"+
-					"		<state>WaitingFor2nd</state>"+
-					"	</game>"+
-					"	<game>"+
-					"		<gameID>1679618676</gameID>"+
-					"		<turn>King2</turn>"+
-					"		<state>WaitingFor2nd</state>"+
-					"	</game>"+
-					"	<game>"+
-					"		<gameID>1679618677</gameID>"+
-					"		<turn>King3</turn>"+
-					"		<state>WaitingFor2nd</state>"+
-					"	</game>"+
-					"	<game>"+
-					"		<gameID>1679618678</gameID>"+
-					"		<turn>King4</turn>"+
-					"		<state>WaitingFor2nd</state>"+
-					"	</game>"+
-					""+
-					"</response>";
-			return XMLResponse.getResultType(response, GameListResult.class);
+			String response = "";
+			try
+			{
+				response = ServerComm.call(URL + "GameList",
+						"<request></request>",
+						contentType);
+				return XMLResponse.getResultType(response, GameListResult.class);
+			} catch (IOException e)
+			{
+				Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
+				throw new BattleshipIOException(e.getMessage());
+			}
+//			String response = "<response>"+
+//					"	<game>"+
+//					"		<gameID>1679618673</gameID>"+
+//					"		<turn>Glen</turn>"+
+//					"		<state>WaitingFor2nd</state>"+
+//					"	</game>"+
+//					"	<game>"+
+//					"		<gameID>1679618674</gameID>"+
+//					"		<turn>King0</turn>"+
+//					"		<state>WaitingFor2nd</state>"+
+//					"	</game>"+
+//					"	<game>"+
+//					"		<gameID>1679618675</gameID>"+
+//					"		<turn>King1</turn>"+
+//					"		<state>WaitingFor2nd</state>"+
+//					"	</game>"+
+//					"	<game>"+
+//					"		<gameID>1679618676</gameID>"+
+//					"		<turn>King2</turn>"+
+//					"		<state>WaitingFor2nd</state>"+
+//					"	</game>"+
+//					"	<game>"+
+//					"		<gameID>1679618677</gameID>"+
+//					"		<turn>King3</turn>"+
+//					"		<state>WaitingFor2nd</state>"+
+//					"	</game>"+
+//					"	<game>"+
+//					"		<gameID>1679618678</gameID>"+
+//					"		<turn>King4</turn>"+
+//					"		<state>WaitingFor2nd</state>"+
+//					"	</game>"+
+//					""+
+//					"</response>";
 	}
 	
 	/**
