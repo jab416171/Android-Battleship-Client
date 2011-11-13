@@ -3,6 +3,7 @@ package edu.neumont.battleship.testharness;
 import java.io.IOException;
 
 import edu.neumont.battleship.exceptions.BattleshipException;
+import edu.neumont.battleship.exceptions.BattleshipIOException;
 import edu.neumont.battleship.http.results.FireResult;
 import edu.neumont.battleship.model.Coordinate;
 import edu.neumont.battleship.model.Direction;
@@ -22,7 +23,7 @@ public interface GameLogic
 	
 	public abstract int newGame(String playerName, PlayerType robot) throws BattleshipException;
 	
-	public abstract int[] getGameList() throws IOException;
+	public abstract int[] getGameList() throws IOException, BattleshipIOException;
 	
 	// successful
 	// unsuccessful

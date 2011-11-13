@@ -10,6 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import edu.neumont.battleship.exceptions.BattleshipIOException;
+import edu.neumont.battleship.exceptions.InvalidXMLException;
+import edu.neumont.battleship.http.BattleshipServerConnector;
+import edu.neumont.battleship.http.results.ActionResult;
+import edu.neumont.battleship.http.results.GameListResult;
 
 public class BattleshipJoinGame extends ListActivity
 {
@@ -36,6 +41,13 @@ public class BattleshipJoinGame extends ListActivity
 
 	private int[] getGames()
 	{
+		try
+		{
+			GameListResult result = BattleshipServerConnector.getGameList();
+		} catch (InvalidXMLException e)
+		{
+			Log.e(TAG, "Error getting game list from server", e);
+		}
 		// TODO This should actually get the list of games from the server
 		return new int[]{0, 1, 2};
 	}

@@ -4,10 +4,6 @@ public class GameState {
 	private boolean turn;
 	private GameStatus state;
 	private MoveResult move;
-	
-	public GameState() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public boolean isTurn() {
 		return turn;

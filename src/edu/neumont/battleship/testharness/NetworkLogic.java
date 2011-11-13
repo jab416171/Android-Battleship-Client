@@ -3,6 +3,8 @@ package edu.neumont.battleship.testharness;
 import java.io.IOException;
 
 import edu.neumont.battleship.exceptions.BattleshipException;
+import edu.neumont.battleship.exceptions.BattleshipIOException;
+import edu.neumont.battleship.exceptions.InvalidXMLException;
 import edu.neumont.battleship.http.BattleshipServerConnector;
 import edu.neumont.battleship.http.results.FireResult;
 import edu.neumont.battleship.model.Coordinate;
@@ -30,9 +32,9 @@ public class NetworkLogic implements GameLogic
 		return -1;
 	}
 
-	public int[] getGameList() throws IOException
+	public int[] getGameList()
 	{
-		BattleshipServerConnector.getGameList();
+		//BattleshipServerConnector.getGameList();
 		return new int[] {-1};
 	}
 

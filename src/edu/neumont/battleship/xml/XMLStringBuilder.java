@@ -90,7 +90,8 @@ public class XMLStringBuilder {
 	
 	public static String gameList() 
 	{
-		return "<request><type>game list</type></request>";
+		//return "<request><type>game list</type></request>";
+		return "<request></request>";
 	}
 	
 	public String shipToXML(Ship ship)

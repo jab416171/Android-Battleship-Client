@@ -8,8 +8,10 @@ import android.util.Log;
 import edu.neumont.battleship.BattleshipActivity;
 import edu.neumont.battleship.exceptions.BattleshipException;
 import edu.neumont.battleship.exceptions.BattleshipIOException;
+import edu.neumont.battleship.exceptions.InvalidXMLException;
 import edu.neumont.battleship.http.results.ActionResult;
 import edu.neumont.battleship.http.results.FireResult;
+import edu.neumont.battleship.http.results.GameListResult;
 import edu.neumont.battleship.http.results.JoinResult;
 import edu.neumont.battleship.http.results.NewGameResult;
 import edu.neumont.battleship.http.results.PlaceShipResult;
@@ -23,11 +25,12 @@ public class BattleshipServerConnector
 {
 	public static final String TAG = BattleshipActivity.TAG;
 	private final static String contentType = "application/xml";
+	
 	private final static String DOMAIN = "joe-bass.com";
 	private final static int PORT = 8800;
 	private final static String PROTOCOL = "http";
-	private final static String PATH = "BattleshipServer";
-	private static final String URL = PROTOCOL+"://"+DOMAIN+":"+PORT+"/"+PATH+"/";
+	private final static String PATH = "BattleshipServer/";
+	private static final String URL = PROTOCOL+"://"+DOMAIN+":"+PORT+"/"+PATH;
 	
 	public static NewGameResult newGame(String playerID, PlayerType opponent)
 			throws BattleshipException
@@ -112,11 +115,47 @@ public class BattleshipServerConnector
 	 * Gets the list of games
 	 * 
 	 * @return the body of the HTTP request
+	 * @throws InvalidXMLException 
 	 */
-	public static ActionResult getGameList()
+	public static GameListResult getGameList() throws InvalidXMLException
 	{
-		// TODO Auto-generated method stub
-		return null;
+//			String response = ServerComm.call(URL + "GameList",
+//					"<request></request>",
+//					contentType);
+			String response = "<response>"+
+					"	<game>"+
+					"		<gameID>1679618673</gameID>"+
+					"		<turn>Glen</turn>"+
+					"		<state>WaitingFor2nd</state>"+
+					"	</game>"+
+					"	<game>"+
+					"		<gameID>1679618674</gameID>"+
+					"		<turn>King0</turn>"+
+					"		<state>WaitingFor2nd</state>"+
+					"	</game>"+
+					"	<game>"+
+					"		<gameID>1679618675</gameID>"+
+					"		<turn>King1</turn>"+
+					"		<state>WaitingFor2nd</state>"+
+					"	</game>"+
+					"	<game>"+
+					"		<gameID>1679618676</gameID>"+
+					"		<turn>King2</turn>"+
+					"		<state>WaitingFor2nd</state>"+
+					"	</game>"+
+					"	<game>"+
+					"		<gameID>1679618677</gameID>"+
+					"		<turn>King3</turn>"+
+					"		<state>WaitingFor2nd</state>"+
+					"	</game>"+
+					"	<game>"+
+					"		<gameID>1679618678</gameID>"+
+					"		<turn>King4</turn>"+
+					"		<state>WaitingFor2nd</state>"+
+					"	</game>"+
+					""+
+					"</response>";
+			return XMLResponse.getResultType(response, GameListResult.class);
 	}
 	
 	/**
