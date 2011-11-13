@@ -41,7 +41,7 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 		
 		setupUI();
 		
-		// joingame();
+		joingame();
 		
 	}
 	
@@ -69,7 +69,6 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 		}
 		Log.v(TAG, "after TableRows, before Zoomcontrols");
 		final ZoomControls zoomControl = (ZoomControls) findViewById(R.id.zcZoom);
-		zoomControl.show();
 		zoomControl.setOnZoomInClickListener(new OnClickListener() {
 			public void onClick(View arg0)
 			{
@@ -82,6 +81,8 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 				Log.v(TAG, "Zoom out");
 			}
 		});
+		zoomControl.show();
+		zoomControl.scrollBy(0, 0);
 		Log.v(TAG, "after Zoomcontrols");
 	}
 	
@@ -235,6 +236,7 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 	}
 	
 	/** Show an event in the LogCat view, for debugging */
+	@SuppressWarnings("unused")
 	private void dumpEvent(MotionEvent event)
 	{
 		String names[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "POINTER_DOWN", "POINTER_UP",
