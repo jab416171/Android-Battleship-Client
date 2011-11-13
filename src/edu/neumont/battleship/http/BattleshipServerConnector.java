@@ -2,8 +2,6 @@ package edu.neumont.battleship.http;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.URL;
-import java.net.URLConnection;
 import java.net.UnknownHostException;
 
 import android.util.Log;

@@ -22,6 +22,7 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 {
 	public static final String TAG = BattleshipActivity.TAG;
 	private static final boolean LOCAL_LOGD = false;
+	private static final float SCROLL_SCALE = 5f;//2.5f;
 	private TouchMode mode = TouchMode.NONE;
 	
 	@Override
@@ -210,8 +211,8 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 			float oldX = event.getHistoricalX(histSize-1);
 			float oldY = event.getHistoricalY(histSize-1);
 			
-			float deltaX = x-oldX;
-			float deltaY = y-oldY;
+			float deltaX = (x-oldX)*SCROLL_SCALE;
+			float deltaY = (y-oldY)*SCROLL_SCALE;
 			
 			View tableLayout = findViewById(R.id.tblBoard);
 			tableLayout.layout(

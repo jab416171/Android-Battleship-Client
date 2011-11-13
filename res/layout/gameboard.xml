@@ -12,8 +12,9 @@
 </RealGridView>-->
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/tblBoard" 
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
-	<TableRow android:id="@+id/rowLabels1">
+	android:layout_width="550dp" android:layout_height="550dp">
+	<!-- TODO: find out the real width/height of our TableLayout -->
+	<TableRow android:id="@+id/rowLabels0">
 		<TextView android:text=" " android:textSize="35dp" />
 		<TextView android:text="1" android:textSize="35dp" />
 		<TextView android:text="2" android:textSize="35dp" />
@@ -266,7 +267,7 @@
 			android:src="@drawable/battleshiptile1"/>
 		<TextView android:text="J" android:textSize="35dp" />
 	</TableRow>
-	<TableRow android:id="@+id/rowLabels1">
+	<TableRow android:id="@+id/rowLabels11">
 		<TextView android:text=" " android:textSize="35dp" />
 		<TextView android:text="1" android:textSize="35dp" />
 		<TextView android:text="2" android:textSize="35dp" />
