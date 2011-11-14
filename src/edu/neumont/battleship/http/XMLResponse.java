@@ -45,7 +45,6 @@ public class XMLResponse
 	
 	private static ActionResult parseXML(String xml) throws InvalidXMLException
 	{
-		return parseGameListResponse(xml);
 		
 //		if (xml != null)
 //		{
@@ -86,50 +85,31 @@ public class XMLResponse
 	
 	private static GameListResult parseGameListResponse(String xml) throws InvalidXMLException
 	{
-		class GameListContentHandler extends DefaultHandler
+		class GameListContentHandler extends GenericContentHandler
 		{
-			private Stack<String> stack = new Stack<String>();
 			private XMLGame game;
 			private List<XMLGame> gameList = new ArrayList<XMLGame>();
 			
-			/**
-			 * Called when tag starts ( ex:- <name>AndroidPeople</name> --
-			 * <name> )
-			 */
 			@Override
 			public void startElement(String uri, String localName, String qName,
 					Attributes attributes) throws SAXException
 			{
-				stack.push(localName);
 				if (localName.equals("game"))
 				{
 					game = new XMLGame();
 				}
 			}
 			
-			/**
-			 * Called when tag closing ( ex:- <name>AndroidPeople</name> --
-			 * </name> )
-			 */
 			@Override
 			public void endElement(String uri, String localName, String qName) throws SAXException
 			{
-				if (!stack.pop().equals(localName))
-				{
-					throw new SAXException("Ended on an element we didn't know we started");
-				}
 				if (localName.equals("game"))
 				{
 					gameList.add(game);
 					game = null;
 				}
-//				stack.notify();
 			}
 			
-			/**
-			 * Called to get tag characters ( ex:- <name>AndroidPeople</name> --
-			 * to get AndroidPeople Character )
-			 */
 			@Override
 			public void characters(char[] ch, int start, int length) throws SAXException
 			{
@@ -156,15 +136,7 @@ public class XMLResponse
 			
 			public List<XMLGame> getGameList()
 			{
-//				try
-//				{
-//					stack.wait();
-					return gameList;
-//				} catch (InterruptedException e)
-//				{
-//					e.printStackTrace();
-//				}
-//				return null;
+				return gameList;
 			}
 		}
 		
@@ -324,5 +296,40 @@ public class XMLResponse
 enum ResponseType
 {
 	error, simpleResult, fireResult, gameListResult,
+}
+class GenericContentHandler extends DefaultHandler
+{
+	protected Stack<String> stack = new Stack<String>();
 	
+	/**
+	 * Called when tag starts ( ex:- <name>AndroidPeople</name> --
+	 * <name> )
+	 */
+	@Override
+	public void startElement(String uri, String localName, String qName,
+			Attributes attributes) throws SAXException
+	{
+		stack.push(localName);
+	}
+	
+	/**
+	 * Called when tag closing ( ex:- <name>AndroidPeople</name> --
+	 * </name> )
+	 */
+	@Override
+	public void endElement(String uri, String localName, String qName) throws SAXException
+	{
+		if (!stack.pop().equals(localName))
+			throw new SAXException("Ended on an element we didn't know we started");
+	}
+	
+	/**
+	 * Called to get tag characters ( ex:- <name>AndroidPeople</name> --
+	 * to get AndroidPeople Character )
+	 */
+	@Override
+	public void characters(char[] ch, int start, int length) throws SAXException
+	{
+		
+	}
 }

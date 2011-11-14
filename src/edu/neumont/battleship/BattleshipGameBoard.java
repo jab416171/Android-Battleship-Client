@@ -30,9 +30,7 @@ public class BattleshipGameBoard extends Activity implements OnTouchListener
 	{
 		Log.v(TAG, "in BattleshipGameBoard onCreate()");
 		super.onCreate(savedInstanceState);
-		Log.v(TAG, "super called");
 		setContentView(R.layout.gameboard);
-		Log.v(TAG, "setContentView called");
 		
 		// This doesn't work for some reason, so
 		// I add the listener to every ImageView

@@ -135,39 +135,6 @@ public class BattleshipServerConnector
 				Log.e(TAG, "Exception in BattleshipServerConnector: ", e);
 				throw new BattleshipIOException(e.getMessage());
 			}
-//			String response = "<response>"+
-//					"	<game>"+
-//					"		<gameID>1679618673</gameID>"+
-//					"		<turn>Glen</turn>"+
-//					"		<state>WaitingFor2nd</state>"+
-//					"	</game>"+
-//					"	<game>"+
-//					"		<gameID>1679618674</gameID>"+
-//					"		<turn>King0</turn>"+
-//					"		<state>WaitingFor2nd</state>"+
-//					"	</game>"+
-//					"	<game>"+
-//					"		<gameID>1679618675</gameID>"+
-//					"		<turn>King1</turn>"+
-//					"		<state>WaitingFor2nd</state>"+
-//					"	</game>"+
-//					"	<game>"+
-//					"		<gameID>1679618676</gameID>"+
-//					"		<turn>King2</turn>"+
-//					"		<state>WaitingFor2nd</state>"+
-//					"	</game>"+
-//					"	<game>"+
-//					"		<gameID>1679618677</gameID>"+
-//					"		<turn>King3</turn>"+
-//					"		<state>WaitingFor2nd</state>"+
-//					"	</game>"+
-//					"	<game>"+
-//					"		<gameID>1679618678</gameID>"+
-//					"		<turn>King4</turn>"+
-//					"		<state>WaitingFor2nd</state>"+
-//					"	</game>"+
-//					""+
-//					"</response>";
 	}
 	
 	/**
